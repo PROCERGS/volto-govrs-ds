@@ -1,0 +1,104 @@
+
+.headers {
+  /* helper to layout label + measurement inline */
+  &-demo {
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    gap: 8px 16px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+
+  &-container {
+    padding: 16px;
+    max-width: 720px;
+  }
+}
+
+/* Top-level grouped selectors: these allow using the class on the wrapper or
+   directly on the element (e.g. <h1 class="headers--12">) */
+.headers--12 h1,
+h1.headers--12 {
+  font-size: 41px;
+  line-height: 58px;
+  font-weight: 400;
+  margin: 0 0 12px 0;
+}
+
+.headers--12 h2,
+h2.headers--12 {
+  font-size: 36px;
+  line-height: 52px;
+  font-weight: 400;
+  margin: 0 0 10px 0;
+}
+
+.headers--12 h3,
+h3.headers--12 {
+  font-size: 30px;
+  line-height: 42px;
+  font-weight: 400;
+  margin: 0 0 8px 0;
+}
+
+.headers--12 h4,
+h4.headers--12 {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 400;
+  margin: 0 0 6px 0;
+}
+
+.headers--4 h1,
+h1.headers--4 {
+  font-size: 30px;
+  line-height: 42px;
+  font-weight: 400;
+  margin: 0 0 12px 0;
+}
+
+.headers--4 h2,
+h2.headers--4 {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 400;
+  margin: 0 0 10px 0;
+}
+
+.headers--4 h3,
+h3.headers--4 {
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 400;
+  margin: 0 0 8px 0;
+}
+
+.headers--4 h4,
+h4.headers--4 {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  margin: 0 0 6px 0;
+}
+/* helper to layout label + measurement inline */
+.headers-demo {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  gap: 8px 16px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.headers-container {
+  padding: 16px;
+  max-width: 720px;
+}
+
+/* Small responsive tweak: on very small viewports, stack demo grid */
+@media (max-width: 420px) {
+  .headers-demo { grid-template-columns: 1fr; }
+}
+
+/* Note: direct-per-header utilities (e.g. .h1-12) were removed in favor of a
+  single `.headers--12` / `.headers--4` strategy that works when applied to a
+  wrapper or directly on a header tag (see story). */
