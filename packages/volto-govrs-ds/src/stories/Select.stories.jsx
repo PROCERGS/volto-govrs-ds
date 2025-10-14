@@ -3,7 +3,7 @@ import '../theme/Formularios/Select.scss';
 import Select from '../components/Utilidades/Select';
 
 export default {
-  title: 'Forms/br-select',
+  title: 'Forms/Select',
   parameters: {
     layout: 'padded',
   },
@@ -37,6 +37,12 @@ export const SelectDocumentacao = () => (
       <p>
         Este componente substitui o elemento nativo <code>&lt;select&gt;</code>{' '}
         para permitir estilização consistente.
+      </p>
+      <p style={{ marginTop: 6 }}>
+        Você pode fornecer <code>id</code> e <code>name</code> nas props do
+        componente para controle explícito; caso não sejam informados, o
+        componente irá gerar ids e names únicos automaticamente (o comportamento
+        e a ordem de precedência são explicados mais abaixo).
       </p>
 
       <div style={{ marginTop: 12 }}>
@@ -208,6 +214,73 @@ const [v, setV] = useState('1');
             replicando o comportamento de um &lt;select&gt; nativo.
           </li>
         </ul>
+        <h4 style={{ margin: '4px 0' }}>Garantia de Unicidade</h4>
+
+        {/* Explicação curta (fora do snippet): problema e solução */}
+        <div style={{ marginTop: 12 }}>
+          <p style={{ marginBottom: 8 }}>
+            O componente resolve o atributo <code>name</code> usado nos inputs
+            hidden do formulário da seguinte forma (ordem de precedência):
+          </p>
+          <ol style={{ marginTop: 8 }}>
+            <li>
+              <strong>
+                Prop <code>name</code> explicita
+              </strong>
+              : se o consumidor passou <code>name</code>, esse valor é usado nos
+              inputs hidden.
+            </li>
+            <li>
+              <strong>
+                Prop <code>id</code> fornecida
+              </strong>
+              : se <code>id</code>
+              foi passada mas <code>name</code> não, o componente deriva um nome
+              previsível como <code>{`<id>-name`}</code>.
+            </li>
+            <li>
+              <strong>Fallback gerado por instância</strong>: caso contrário,
+              usamos um nome único baseado num id gerado por instância (ex.:{' '}
+              <code>br-select-xxxxx-name</code>), evitando colisões entre
+              múltiplas instâncias na mesma página.
+            </li>
+          </ol>
+          <p style={{ marginTop: 8 }}>
+            Observação: os atributos <code>id</code> (control/list/option) são
+            usados para acessibilidade e associação (aria-controls, role, etc.)
+            — o que determina o nome submetido no formulário é o atributo{' '}
+            <code>name</code> dos inputs hidden, que o componente preenche
+            conforme acima.
+          </p>
+
+          <pre
+            style={{
+              background: '#f7f7f7',
+              padding: 12,
+              borderRadius: 4,
+              overflowX: 'auto',
+            }}
+          >
+            <code>{`// Exemplo mínimo: duas instâncias sem id/name (ids/names gerados automaticamente)
+<div>
+  <Select options={[{ value: '1', label: 'A' }]} placeholder="Auto 1" />
+  <Select options={[{ value: '2', label: 'B' }]} placeholder="Auto 2" />
+</div>`}</code>
+          </pre>
+
+          <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+            <Select
+              ariaLabel="Auto 1"
+              placeholder="Auto 1"
+              options={[{ value: 'a', label: 'Auto A' }]}
+            />
+            <Select
+              ariaLabel="Auto 2"
+              placeholder="Auto 2"
+              options={[{ value: 'b', label: 'Auto B' }]}
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -332,3 +405,65 @@ SelectInterativo.argTypes = {
 };
 
 SelectInterativo.story = { name: 'Select Interativo' };
+
+export const SelectEmFormulario = () => {
+  const [submitted, setSubmitted] = React.useState(null);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    // collect entries into an object; supports multiple values for same name
+    const result = {};
+    for (const [k, v] of data.entries()) {
+      if (result[k] === undefined) result[k] = v;
+      else if (Array.isArray(result[k])) result[k].push(v);
+      else result[k] = [result[k], v];
+    }
+    setSubmitted(result);
+  }
+
+  const optionsA = [
+    { value: 'a1', label: 'A1' },
+    { value: 'a2', label: 'A2' },
+  ];
+  const optionsB = [
+    { value: 'b1', label: 'B1' },
+    { value: 'b2', label: 'B2' },
+  ];
+
+  return (
+    <div style={{ padding: 16, maxWidth: 720 }}>
+      <form onSubmit={handleSubmit}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: 6 }}>
+              Select A
+            </label>
+            <Select placeholder="Selecione A" options={optionsA} />
+          </div>
+
+          <div>
+            <label style={{ display: 'block', marginBottom: 6 }}>
+              Select B
+            </label>
+            <Select placeholder="Selecione B" options={optionsB} />
+          </div>
+
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+
+      <div style={{ marginTop: 16 }}>
+        <h5>Submitted values</h5>
+        <pre style={{ background: '#f7f7f7', padding: 12, borderRadius: 4 }}>
+          {submitted ? JSON.stringify(submitted, null, 2) : '—'}
+        </pre>
+      </div>
+    </div>
+  );
+};
+
+SelectEmFormulario.story = { name: 'Select em Formulário (exemplo)' };

@@ -18,6 +18,7 @@ export default function Select({
   multiple = false,
   className = '',
   name,
+  id,
 }) {
   const [open, setOpen] = useState(false);
   const optionValues = useMemo(() => options.map((o) => o.value), [options]);
@@ -42,6 +43,10 @@ export default function Select({
   const listRef = useRef(null);
   const controlRef = useRef(null);
   const baseId = useRef(`br-select-${Math.random().toString(36).slice(2, 9)}`);
+
+  const controlId = id || `${baseId.current}-control`;
+  const listId = `${baseId.current}-list`;
+  const resolvedName = name || (id ? `${id}-name` : `${baseId.current}-name`);
 
   useEffect(() => {
     if (controlledValue !== undefined) setValue(sanitizeValue(controlledValue));
@@ -140,6 +145,7 @@ export default function Select({
     >
       <div
         className="br-select__control"
+        id={controlId}
         role="button"
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -148,6 +154,7 @@ export default function Select({
         onKeyDown={onKeyDown}
         ref={controlRef}
         aria-label={ariaLabel}
+        aria-controls={listId}
       >
         <div className="br-select__content">
           <span>
@@ -164,7 +171,7 @@ export default function Select({
 
       {open && (
         <div
-          id={`${baseId.current}-list`}
+          id={listId}
           className="br-select__list"
           role="listbox"
           ref={listRef}
@@ -228,13 +235,18 @@ export default function Select({
         </div>
       )}
 
-      {name && !multiple && (
-        <input type="hidden" name={name} value={value != null ? value : ''} />
+      {!multiple && (
+        <input
+          type="hidden"
+          name={resolvedName}
+          value={value != null ? value : ''}
+        />
       )}
-      {name &&
-        multiple &&
+      {multiple &&
         Array.isArray(value) &&
-        value.map((v) => <input key={v} type="hidden" name={name} value={v} />)}
+        value.map((v) => (
+          <input key={v} type="hidden" name={resolvedName} value={v} />
+        ))}
     </div>
   );
 }
