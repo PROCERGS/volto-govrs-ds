@@ -1,0 +1,294 @@
+import { Canvas, Meta, Story, Controls, ArgTypes } from '@storybook/blocks';
+import * as TextareaStories from './CustomTextarea.stories';
+
+<Meta of={TextareaStories} />
+
+# CustomTextarea
+
+O componente `CustomTextarea` é um campo de entrada de texto multilinha totalmente estilizado e acessível, seguindo as diretrizes do Design System do Governo do Rio Grande do Sul. Ele oferece suporte a validação, estados visuais, feedback contextual e múltiplas variantes de tamanho e layout.
+
+## Características Principais
+
+- ✅ **Acessibilidade**: Implementa ARIA labels e descrições adequadas
+- 🎨 **Estados Visuais**: Suporte para success, error, warning e info
+- 📏 **Variantes de Tamanho**: Small, medium (padrão) e large
+- 🌓 **Modo Escuro**: Otimizado para fundos escuros
+- ⌨️ **Validação**: Limite de caracteres com feedback visual
+- 🎯 **Flexível**: Layout vertical ou horizontal do rótulo
+
+## Uso Básico
+
+O exemplo mais simples requer apenas as propriedades obrigatórias: `id`, `title`, `value`, e `onChange`.
+
+<Canvas of={TextareaStories.Default} />
+
+## Propriedades
+
+<ArgTypes of={TextareaStories} />
+
+---
+
+## Exemplos
+
+### Com Valor Inicial
+
+Útil para edição de conteúdo existente:
+
+<Canvas of={TextareaStories.WithValue} />
+
+### Com Descrição
+
+Adicione contexto e orientações ao usuário:
+
+<Canvas of={TextareaStories.WithDescription} />
+
+### Limite de Caracteres
+
+Valide o comprimento do texto automaticamente:
+
+<Canvas of={TextareaStories.WithMaxLength} />
+
+---
+
+## Variantes de Tamanho
+
+### Pequeno
+
+Ideal para interfaces compactas e formulários com múltiplos campos:
+
+<Canvas of={TextareaStories.Small} />
+
+### Grande
+
+Perfeito para entrada de textos longos e detalhados:
+
+<Canvas of={TextareaStories.Large} />
+
+---
+
+## Estados Visuais
+
+O componente oferece quatro estados visuais com feedback automático.
+
+### Sucesso
+
+Indica validação bem-sucedida:
+
+<Canvas of={TextareaStories.Success} />
+
+### Erro
+
+Alerta sobre problemas de validação:
+
+<Canvas of={TextareaStories.Error} />
+
+### Aviso
+
+Para situações que requerem atenção:
+
+<Canvas of={TextareaStories.Warning} />
+
+### Informativo
+
+Fornece contexto adicional:
+
+<Canvas of={TextareaStories.Info} />
+
+---
+
+## Variantes de Layout
+
+### Layout Horizontal
+
+Rótulo posicionado à esquerda do campo:
+
+<Canvas of={TextareaStories.Left} />
+
+### Modo Escuro
+
+Otimizado para fundos escuros:
+
+<Canvas of={TextareaStories.DarkMode} />
+
+---
+
+## Estados Especiais
+
+### Desabilitado
+
+Campo não editável:
+
+<Canvas of={TextareaStories.Disabled} />
+
+### Campo Obrigatório
+
+Convenção visual com asterisco:
+
+<Canvas of={TextareaStories.Required} />
+
+---
+
+## Casos de Uso
+
+### Texto Longo
+
+Comportamento com múltiplas linhas:
+
+<Canvas of={TextareaStories.LongText} />
+
+### Validação de Limite
+
+Feedback quando o limite é excedido:
+
+<Canvas of={TextareaStories.MaxLengthWithError} />
+
+---
+
+## Playground Interativo
+
+Experimente todas as propriedades do componente:
+
+<Canvas of={TextareaStories.Playground} />
+
+<Controls of={TextareaStories.Playground} />
+
+---
+
+## Boas Práticas
+
+### ✅ Faça
+
+- Use `description` para orientar o usuário sobre o formato esperado
+- Combine `maxLength` com mensagens claras sobre o limite
+- Utilize estados visuais para feedback imediato após validação
+- Adicione `placeholder` com exemplos concretos do que deve ser digitado
+- Use a variante `large` para campos que esperam textos longos
+- Implemente o modo escuro quando o componente estiver em fundos escuros
+
+### ❌ Evite
+
+- Não use apenas o placeholder como substituto do label
+- Evite descrições longas demais - mantenha-as concisas e objetivas
+- Não abuse de estados visuais - use apenas quando houver validação real
+- Evite limites de caracteres muito restritivos sem justificativa clara
+- Não use tamanhos pequenos para textos que naturalmente são longos
+
+---
+
+## Acessibilidade
+
+O componente implementa as seguintes práticas de acessibilidade:
+
+- **`htmlFor` e `id`**: Associação correta entre label e textarea
+- **`aria-describedby`**: Vincula descrições ao campo para leitores de tela
+- **`role="alert"`**: Mensagens de feedback são anunciadas adequadamente
+- **`disabled`**: Estado desabilitado é comunicado corretamente
+- **Feedback Visual**: Ícones complementam mensagens de texto
+
+---
+
+## Integração com Formulários
+
+```tsx
+import CustomTextarea from '@plone/components/CustomTextarea';
+import { useState } from 'react';
+
+function MyForm() {
+  const [comment, setComment] = useState('');
+  const [error, setError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (comment.length < 10) {
+      setError(true);
+    } else {
+      // Enviar formulário
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <CustomTextarea
+        id="comment"
+        title="Comentário"
+        value={comment}
+        onChange={setComment}
+        maxLength={500}
+        State={error ? 'error' : undefined}
+        description="Descreva sua experiência (mínimo 10 caracteres)"
+        placeholder="Digite seu comentário..."
+      />
+      <button type="submit">Enviar</button>
+    </form>
+  );
+}
+```
+
+---
+
+## API Reference
+
+### Props
+
+| Prop | Tipo | Padrão | Descrição |
+|------|------|--------|-----------|
+| `id` | `string` | - | **Obrigatório**. Identificador único do textarea |
+| `title` | `string` | - | **Obrigatório**. Texto do rótulo (label) |
+| `value` | `string` | - | **Obrigatório**. Valor atual do textarea |
+| `onChange` | `(value: string) => void` | - | **Obrigatório**. Callback quando o valor muda |
+| `description` | `string` | `undefined` | Texto descritivo exibido abaixo do campo |
+| `placeholder` | `string` | `undefined` | Texto de dica quando o campo está vazio |
+| `maxLength` | `number` | `undefined` | Número máximo de caracteres permitidos |
+| `isDisabled` | `boolean` | `false` | Desabilita o campo quando true |
+| `size` | `'small' \| 'large'` | `undefined` | Variante de tamanho do campo |
+| `State` | `'success' \| 'error' \| 'warning' \| 'info'` | `undefined` | Estado visual com feedback |
+| `darkMode` | `boolean` | `false` | Ativa estilo para fundos escuros |
+| `left` | `boolean` | `false` | Posiciona rótulo à esquerda |
+
+---
+
+## Dependências CSS
+
+O componente requer os estilos do Design System GovRS. Certifique-se de importar:
+
+```css
+@import '@govbr-ds/core/dist/core.css';
+```
+
+As classes CSS utilizadas:
+- `.br-textarea`
+- `.br-textarea.small`
+- `.br-textarea.large`
+- `.br-textarea.dark-mode`
+- `.br-textarea.left`
+- `.br-textarea.danger` (para erro)
+- `.br-textarea.success`
+- `.br-textarea.warning`
+- `.br-textarea.info`
+
+---
+
+## Changelog
+
+### Versão Atual
+
+- ✨ Implementação inicial do componente
+- ✅ Suporte a todos os estados visuais (success, error, warning, info)
+- ✅ Validação de limite de caracteres
+- ✅ Variantes de tamanho (small, large)
+- ✅ Modo escuro
+- ✅ Layout horizontal e vertical
+- ✅ Acessibilidade completa
+- ✅ Ícones de feedback integrados
+
+---
+
+## Suporte e Contribuição
+
+Para reportar bugs ou solicitar funcionalidades, entre em contato com a equipe de desenvolvimento do Design System GovRS.
+
+---
+
+## Licença
+
+Este componente faz parte do Design System do Governo do Rio Grande do Sul e segue suas diretrizes de uso e licenciamento.
