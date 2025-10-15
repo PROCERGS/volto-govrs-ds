@@ -7,7 +7,9 @@ export default {
 };
 
 const Measurements = ({ size, lh, weight }) => (
-  <div style={{ fontSize: 13, color: '#444' }}>{`${size} / ${lh} / ${weight}`}</div>
+  <div
+    style={{ fontSize: 13, color: '#444' }}
+  >{`${size} / ${lh} / ${weight}`}</div>
 );
 
 export const ListsFull = () => (
@@ -28,7 +30,8 @@ export const ListsFull = () => (
       <div style={{ padding: 16, marginTop: 24 }}>
         <h3>Uso</h3>
         <p style={{ color: '#444' }}>
-          Use a classe <code> listas--base </code> para listas que sigam a tipografia do sistema.
+          Use a classe <code> listas--base </code> para listas que sigam a
+          tipografia do sistema.
         </p>
       </div>
     </div>
