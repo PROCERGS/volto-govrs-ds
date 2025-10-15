@@ -24,7 +24,7 @@ export const HeadersFull = () => (
     >
       <div className="headers-container">
         <h3 style={{ marginTop: 0 }}>Headers — 12 col (base)</h3>
-        <div className="headers--12">
+        <div className="headers-12">
           <div className="headers-demo">
             <h1>Header 1</h1>
             <Measurements size="41px" lh="58px" weight="400" />
@@ -46,7 +46,7 @@ export const HeadersFull = () => (
 
       <div className="headers-container">
         <h3 style={{ marginTop: 0 }}>Headers — 4 col (base)</h3>
-        <div className="headers--4">
+        <div className="headers-4">
           <div className="headers-demo">
             <h1>Header 1</h1>
             <Measurements size="30px" lh="42px" weight="400" />
@@ -91,16 +91,16 @@ export const HeadersFull = () => (
             <pre
               style={{ background: '#f7f7f7', padding: 12, borderRadius: 4 }}
             >
-              <code>{`<h1 class="headers--12">Título principal</h1>
-<h2 class="headers--12">Subtítulo</h2>
-<h3 class="headers--12">Seção</h3>
-<h4 class="headers--12">Legenda</h4>`}</code>
+              <code>{`<h1 class="headers-12">Título principal</h1>
+<h2 class="headers-12">Subtítulo</h2>
+<h3 class="headers-12">Seção</h3>
+<h4 class="headers-12">Legenda</h4>`}</code>
             </pre>
             <div style={{ marginTop: 12 }}>
-              <h1 className="headers--12">Título principal</h1>
-              <h2 className="headers--12">Subtítulo</h2>
-              <h3 className="headers--12">Seção</h3>
-              <h4 className="headers--12">Legenda</h4>
+              <h1 className="headers-12">Título principal</h1>
+              <h2 className="headers-12">Subtítulo</h2>
+              <h3 className="headers-12">Seção</h3>
+              <h4 className="headers-12">Legenda</h4>
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@ export const HeadersFull = () => (
         <div style={{ flex: 1, minWidth: 280 }}>
           <h4>Aplicar no wrapper (pai)</h4>
           <pre style={{ background: '#f7f7f7', padding: 12, borderRadius: 4 }}>
-            <code>{`<div class="headers--12">
+            <code>{`<div class="headers-12">
   <h1>Título principal</h1>
   <h2>Subtítulo</h2>
   <h3>Seção</h3>
@@ -118,7 +118,7 @@ export const HeadersFull = () => (
           <div
             style={{ marginTop: 12, border: '1px dashed #ddd', padding: 12 }}
           >
-            <div className="headers--12">
+            <div className="headers-12">
               <h1>Título principal</h1>
               <h2>Subtítulo</h2>
               <h3>Seção</h3>

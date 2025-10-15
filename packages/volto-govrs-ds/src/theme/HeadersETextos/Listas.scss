@@ -15,8 +15,8 @@
   }
 }
 
-.listas--base ul,
-ul.listas--base {
+.listas-base ul,
+ul.listas-base {
   margin: 0 0 16px 24px;
   color: $color-black;
   font-family: $font-family-base;
@@ -25,11 +25,10 @@ ul.listas--base {
   line-height: 32px;
 }
 
-.listas--base li {
+.listas-base li {
   margin: 8px 0;
 }
 
-/* Small responsive tweak: stack demo grid on very small viewports */
 @media (max-width: 420px) {
   .listas-demo {
     grid-template-columns: 1fr;

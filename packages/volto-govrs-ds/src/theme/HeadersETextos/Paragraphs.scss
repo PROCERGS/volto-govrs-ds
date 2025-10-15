@@ -15,7 +15,7 @@
   }
 }
 
-.paragraph--12-short {
+.paragraph-12-short {
   margin: 0 0 16px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -24,7 +24,7 @@
   line-height: 32px;
 }
 
-.paragraph--12-small {
+.paragraph-12-small {
   margin: 0 0 12px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -33,7 +33,7 @@
   line-height: 24px;
 }
 
-.paragraph--12-long {
+.paragraph-12-long {
   margin: 0 0 18px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -42,9 +42,8 @@
   line-height: 32px;
 }
 
-/* 4-column base (short and small are unified) */
-.paragraph--4-short,
-.paragraph--4-small {
+.paragraph-4-short,
+.paragraph-4-small {
   margin: 0 0 12px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -53,7 +52,7 @@
   line-height: 24px;
 }
 
-.paragraph--4-long {
+.paragraph-4-long {
   margin: 0 0 14px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -62,7 +61,6 @@
   line-height: 28px;
 }
 
-/* Small responsive tweak: stack demo grid on very small viewports */
 @media (max-width: 420px) {
   .paragraphs-demo {
     grid-template-columns: 1fr;

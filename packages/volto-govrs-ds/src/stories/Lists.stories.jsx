@@ -16,7 +16,7 @@ export const ListsFull = () => (
   <div>
     <div className="listas-container" style={{ maxWidth: 960 }}>
       <h3 style={{ marginTop: 0 }}>Listas — base</h3>
-      <div className="listas--base">
+      <div className="listas-base">
         <div className="listas-demo">
           <ul>
             <li>Lista 1</li>
@@ -30,9 +30,19 @@ export const ListsFull = () => (
       <div style={{ padding: 16, marginTop: 24 }}>
         <h3>Uso</h3>
         <p style={{ color: '#444' }}>
-          Use a classe <code> listas--base </code> para listas que sigam a
+          Use a classe <code> listas-base </code> para listas que sigam a
           tipografia do sistema.
         </p>
+        <div style={{ marginTop: 12 }}>
+          <h4>Exemplo</h4>
+          <pre style={{ background: '#f7f7f7', padding: 12, borderRadius: 4 }}>
+            <code>{`<ul class="listas-base">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul>`}</code>
+          </pre>
+        </div>
       </div>
     </div>
   </div>

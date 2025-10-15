@@ -1,7 +1,6 @@
 @import '../variables.scss';
 
 .headers {
-  /* helper to layout label + measurement inline */
   &-demo {
     display: grid;
     align-items: center;
@@ -16,10 +15,8 @@
   }
 }
 
-/* Top-level grouped selectors: these allow using the class on the wrapper or
-   directly on the element (e.g. <h1 class="headers--12">) */
-.headers--12 h1,
-h1.headers--12 {
+.headers-12 h1,
+h1.headers-12 {
   margin: 0 0 12px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -28,8 +25,8 @@ h1.headers--12 {
   line-height: 58px;
 }
 
-.headers--12 h2,
-h2.headers--12 {
+.headers-12 h2,
+h2.headers-12 {
   margin: 0 0 10px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -38,8 +35,8 @@ h2.headers--12 {
   line-height: 52px;
 }
 
-.headers--12 h3,
-h3.headers--12 {
+.headers-12 h3,
+h3.headers-12 {
   margin: 0 0 8px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -48,8 +45,8 @@ h3.headers--12 {
   line-height: 42px;
 }
 
-.headers--12 h4,
-h4.headers--12 {
+.headers-12 h4,
+h4.headers-12 {
   margin: 0 0 6px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -58,8 +55,8 @@ h4.headers--12 {
   line-height: 36px;
 }
 
-.headers--4 h1,
-h1.headers--4 {
+.headers-4 h1,
+h1.headers-4 {
   margin: 0 0 12px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -68,8 +65,8 @@ h1.headers--4 {
   line-height: 42px;
 }
 
-.headers--4 h2,
-h2.headers--4 {
+.headers-4 h2,
+h2.headers-4 {
   margin: 0 0 10px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -78,8 +75,8 @@ h2.headers--4 {
   line-height: 36px;
 }
 
-.headers--4 h3,
-h3.headers--4 {
+.headers-4 h3,
+h3.headers-4 {
   margin: 0 0 8px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -88,8 +85,8 @@ h3.headers--4 {
   line-height: 32px;
 }
 
-.headers--4 h4,
-h4.headers--4 {
+.headers-4 h4,
+h4.headers-4 {
   margin: 0 0 6px 0;
   color: $color-black;
   font-family: $font-family-base;
@@ -111,13 +108,8 @@ h4.headers--4 {
   padding: 16px;
 }
 
-/* Small responsive tweak: on very small viewports, stack demo grid */
 @media (max-width: 420px) {
   .headers-demo {
     grid-template-columns: 1fr;
   }
 }
-
-/* Note: direct-per-header utilities (e.g. .h1-12) were removed in favor of a
-  single `.headers--12` / `.headers--4` strategy that works when applied to a
-  wrapper or directly on a header tag (see story). */
