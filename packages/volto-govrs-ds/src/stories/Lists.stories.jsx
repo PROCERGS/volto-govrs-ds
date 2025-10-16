@@ -15,7 +15,7 @@ const Measurements = ({ size, lh, weight }) => (
 export const ListsFull = () => (
   <div>
     <div className="listas-container" style={{ maxWidth: 960 }}>
-      <h3 style={{ marginTop: 0 }}>Listas — base</h3>
+      <h3 style={{ marginTop: 0 }}>Listas</h3>
       <div className="listas-base">
         <div className="listas-demo">
           <ul>
