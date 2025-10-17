@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './Button';
+import Button from './../components/widgets/Button/Button';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
@@ -185,7 +185,6 @@ export const DarkModeSecondary: Story = {
   },
 };
 
-// Interactive Example
 export const Interactive: Story = {
   args: {
     Class: 1,
@@ -197,7 +196,14 @@ export const Interactive: Story = {
 // All Variants Showcase
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '500px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        maxWidth: '500px',
+      }}
+    >
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
         <Button Class={1}>Primary</Button>
         <Button Class={2}>Secondary</Button>
@@ -205,26 +211,46 @@ export const AllVariants: Story = {
       </div>
 
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-        <Button Class={1} Size="small">Small</Button>
+        <Button Class={1} Size="small">
+          Small
+        </Button>
         <Button Class={1}>Normal</Button>
-        <Button Class={1} Size="large">Large</Button>
+        <Button Class={1} Size="large">
+          Large
+        </Button>
       </div>
 
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-        <Button Class={1} State="loading">Loading</Button>
-        <Button Class={1} State="disabled">Disabled</Button>
-        <Button Class={1} State="active">Active</Button>
+        <Button Class={1} State="loading">
+          Loading
+        </Button>
+        <Button Class={1} State="disabled">
+          Disabled
+        </Button>
+        <Button Class={1} State="active">
+          Active
+        </Button>
       </div>
 
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-        <Button Class={1} Circle>+</Button>
-        <Button Class={2} Circle>−</Button>
-        <Button Class={3} Circle>×</Button>
+        <Button Class={1} Circle>
+          +
+        </Button>
+        <Button Class={2} Circle>
+          −
+        </Button>
+        <Button Class={3} Circle>
+          ×
+        </Button>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <Button Class={1} Block>Block Primary</Button>
-        <Button Class={2} Block>Block Secondary</Button>
+        <Button Class={1} Block>
+          Block Primary
+        </Button>
+        <Button Class={2} Block>
+          Block Secondary
+        </Button>
       </div>
     </div>
   ),
