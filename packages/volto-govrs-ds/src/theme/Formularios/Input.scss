@@ -5,7 +5,6 @@
 }
 
 .upload-native {
-  /* visually hide but keep accessible */
   position: absolute;
   overflow: hidden;
   width: 1px;
@@ -39,7 +38,7 @@
 }
 
 .upload-icon svg {
-  color: #279b4a; /* default color for icon via currentColor */
+  color: #279b4a;
   transition:
     color 120ms ease-in-out,
     fill 120ms ease-in-out;
@@ -59,7 +58,6 @@
   display: inline-block;
 }
 
-/* loading */
 .upload-loading {
   display: flex;
   align-items: center;
@@ -87,7 +85,6 @@
   font-size: 14px;
 }
 
-/* feedback badges (copied/adapted from Select styles) */
 .upload-feedback {
   display: inline-flex;
   align-items: center;
@@ -106,26 +103,23 @@
   color: #ffffff;
 }
 
-/* invalid root state: change colors/borders when field invalid */
 .upload-root--invalid {
   .upload-btn {
-    border-color: #e52207; /* dashed border color when invalid */
-    color: #e52207; /* label color */
+    border-color: #e52207;
+    color: #e52207;
   }
 
   .upload-item__remove svg path {
-    fill: #e52207; /* remove icon color when invalid */
+    fill: #e52207;
   }
 
   .upload-feedback--invalid {
     background-color: #e52207;
     color: #ffffff;
   }
-  /* make left upload icon follow invalid color */
   .upload-icon svg {
     color: #e52207;
   }
-  /* keep left icon red even when the button is hovered */
   .upload-btn:hover .upload-icon svg,
   .upload-btn.hover-like .upload-icon svg {
     color: #e52207;
@@ -142,7 +136,6 @@
   color: #222222;
 }
 
-/* sr-only live region styling fallback */
 .upload-live {
   position: absolute;
   left: -9999px;
@@ -151,7 +144,6 @@
   height: 1px;
 }
 
-/* uploaded items list */
 .upload-list {
   display: flex;
   flex-direction: column;
@@ -205,18 +197,17 @@
   .upload-btn {
     border-color: #e0e0e0;
     background-color: #fafafa;
-    color: rgba(39,155,74,0.45); /* #279B4A at 45% opacity for disabled state */
+    color: rgba(39, 155, 74, 0.45);
     cursor: not-allowed;
     pointer-events: none;
   }
 
   .upload-label {
-    color: rgba(39,155,74,0.45);
+    color: rgba(39, 155, 74, 0.45);
   }
 
-  /* make the left upload icon follow disabled color with opacity */
   .upload-icon svg {
-    color: rgba(39,155,74,0.45);
+    color: rgba(39, 155, 74, 0.45);
   }
 
   .upload-feedback--disabled {
@@ -224,7 +215,6 @@
   }
 }
 
-/* remove button (trash) styling */
 .upload-item__remove {
   position: absolute;
   top: 50%;
@@ -237,7 +227,7 @@
   padding: 4px;
   border: none;
   border-radius: 50%;
-  background-color: #ffffff; /* default background */
+  background-color: #ffffff;
   cursor: pointer;
   transform: translateY(-50%);
   transition:
@@ -252,19 +242,19 @@
 }
 
 .upload-item__remove svg path {
-  fill: #279b4a; /* default icon fill */
+  fill: #279b4a;
   transition: fill 120ms ease;
 }
 
 .upload-item__remove:hover,
 .upload-item__remove:focus {
-  background-color: #ddf9e3; /* hover bg */
+  background-color: #ddf9e3;
   outline: none;
 }
 
 .upload-item__remove:hover svg path,
 .upload-item__remove:focus svg path {
-  fill: #1a7235; /* hover icon color */
+  fill: #1a7235;
 }
 
 .upload-item__remove:focus-visible {
