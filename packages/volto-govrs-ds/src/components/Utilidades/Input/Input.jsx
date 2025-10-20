@@ -1,17 +1,7 @@
 import React, { useRef, useState } from 'react';
 import '../../../theme/Formularios/Input.scss';
 
-/*
-		Upload Input component (visual wrapper around native file input)
-		Props:
-		- id, name, multiple (bool), accept, disabled, className
-		- onChange(files) callback receives Array<File>
-		- onUpload(files) optional callback that returns a Promise. When provided,
-		  the component will set an internal loading state while the Promise is pending.
-		- maxFileSize (number, MB) - optional. Pass a number representing megabytes
-		  (e.g. 2 = 2 MB). Internally the value is converted to bytes for validation.
-		- maxFiles (number) - optional
-	*/
+
 const UploadInput = ({
   id,
   name,
@@ -37,9 +27,6 @@ const UploadInput = ({
   const [liveMessage, setLiveMessage] = useState('');
   const [internalLoading, setInternalLoading] = useState(false);
 
-  // note: we display limits in MB (user-facing). Validation converts MB -> bytes.
-
-  // validate whether a File matches the accept string (same format as input.accept)
   const fileMatchesAccept = (file, acceptStr) => {
     if (!acceptStr) return true;
     const parts = acceptStr
@@ -78,13 +65,11 @@ const UploadInput = ({
     setHasFiles(false);
   };
 
-  // track uploaded items (files appended after a valid selection)
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   const handleChange = async (e) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
 
-    // validations
     if (maxFiles && files.length > maxFiles) {
       const msg = `Número máximo de arquivos: ${maxFiles}`;
       setInvalid(true);
@@ -111,7 +96,6 @@ const UploadInput = ({
       }
     }
 
-    // accept/type validation (if accept prop provided)
     if (accept) {
       const bad = files.find((f) => !fileMatchesAccept(f, accept));
       if (bad) {
@@ -126,14 +110,11 @@ const UploadInput = ({
       }
     }
 
-    // success path: either upload via onUpload (Promise) or behave as before
     if (files.length > 0) {
       if (typeof onUpload === 'function') {
         try {
           setInternalLoading(true);
-          // allow onUpload to be sync or return a Promise
           await Promise.resolve(onUpload(files));
-          // after successful upload, append to list and notify
           setUploadedFiles((prev) => [...prev, ...files]);
           setHasFiles(true);
           setValid(true);
@@ -154,11 +135,9 @@ const UploadInput = ({
           if (onChange) onChange([]);
         } finally {
           setInternalLoading(false);
-          // clear native input so user can re-select same file(s) if needed
           clearSelection();
         }
       } else {
-        // no onUpload provided: behave as before
         setUploadedFiles((prev) => [...prev, ...files]);
         setHasFiles(files.length > 0);
         setValid(files.length > 0);
@@ -198,7 +177,6 @@ const UploadInput = ({
         className={`upload-btn ${hasFiles ? 'hover-like' : ''}`}
       >
         <span className="upload-icon" aria-hidden="true">
-          {/* SVG without inline fill: color controlled via CSS */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -212,7 +190,6 @@ const UploadInput = ({
         <span className="upload-label">Selecione o(s) arquivo(s)</span>
       </label>
 
-      {/* loading indicator shown below the button */}
       {internalLoading && (
         <div className="upload-loading" aria-live="polite">
           <span className="upload-spinner" aria-hidden="true"></span>
@@ -220,7 +197,6 @@ const UploadInput = ({
         </div>
       )}
 
-      {/* SR-only live message for more detailed announcements */}
       <div
         className="upload-live"
         aria-live="polite"
@@ -229,7 +205,6 @@ const UploadInput = ({
         {liveMessage}
       </div>
 
-      {/* feedback badge ALWAYS rendered below the button */}
       <div style={{ marginTop: 8 }}>
         <div
           id={feedbackId}
@@ -247,7 +222,6 @@ const UploadInput = ({
         </div>
       </div>
 
-      {/* uploaded items list (shows files that were uploaded so far) */}
       {uploadedFiles && uploadedFiles.length > 0 && (
         <div className="upload-list" aria-live="polite">
           {uploadedFiles.map((f, i) => (
@@ -263,7 +237,6 @@ const UploadInput = ({
                 }}
                 aria-label={`Remover ${f.name}`}
               >
-                {/* trash icon provided by user, scaled to match item size */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 640 640"
@@ -271,7 +244,6 @@ const UploadInput = ({
                   height="16"
                   aria-hidden="true"
                 >
-                  {/* Font Awesome Free 7.1.0 trash icon (kept path only) */}
                   <path d="M232.7 69.9L224 96L128 96C110.3 96 96 110.3 96 128C96 145.7 110.3 160 128 160L512 160C529.7 160 544 145.7 544 128C544 110.3 529.7 96 512 96L416 96L407.3 69.9C402.9 56.8 390.7 48 376.9 48L263.1 48C249.3 48 237.1 56.8 232.7 69.9zM512 208L128 208L149.1 531.1C150.7 556.4 171.7 576 197 576L443 576C468.3 576 489.3 556.4 490.9 531.1L512 208z" />
                 </svg>
               </button>
