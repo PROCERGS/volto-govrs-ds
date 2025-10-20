@@ -185,22 +185,6 @@ export const DarkModeSecondary: Story = {
   },
 };
 
-export const Interactive: Story = {
-  render: () => {
-    const [msg, setMsg] = React.useState('');
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }}>
-        <Button Class={1} OnClick={() => setMsg('Button clicked!')}>
-          Click Me!
-        </Button>
-        <div style={{ minHeight: 20, marginTop: 6, color: msg ? '#111' : '#666', fontSize: 14 }}>
-          {msg || 'Nenhuma ação ainda.'}
-        </div>
-      </div>
-    );
-  },
-};
-
 // All Variants Showcase
 export const AllVariants: Story = {
   render: () => (
@@ -262,4 +246,27 @@ export const AllVariants: Story = {
       </div>
     </div>
   ),
+};
+
+function InteractiveDemoPanel() {
+  const [msg, setMsg] = React.useState('');
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        maxWidth: '320px',
+      }}
+    >
+      <Button Class={1} OnClick={() => setMsg('Button clicked!')}>
+        Click Me!
+      </Button>
+      <div style={{ minHeight: 20, color: '#222', fontSize: 13 }}>{msg}</div>
+    </div>
+  );
+}
+
+export const Interactive: Story = {
+  render: () => <InteractiveDemoPanel />,
 };
