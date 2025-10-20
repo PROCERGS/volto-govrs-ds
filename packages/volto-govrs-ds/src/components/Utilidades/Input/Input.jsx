@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import '../../../theme/Formularios/Input.scss';
 
-
 const UploadInput = ({
   id,
   name,
