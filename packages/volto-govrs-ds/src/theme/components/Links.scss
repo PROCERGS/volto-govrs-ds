@@ -13,12 +13,12 @@ main a:hover {
 }
 
 .external::after {
-  content: '';
   display: inline-block;
   width: 12px;
   height: 12px;
-  background-image: url('../../../public/Vector.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
   margin-left: 4px;
+  background-image: url('../../../public/Vector.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: '';
 }
