@@ -186,10 +186,18 @@ export const DarkModeSecondary: Story = {
 };
 
 export const Interactive: Story = {
-  args: {
-    Class: 1,
-    children: 'Click Me!',
-    OnClick: () => alert('Button clicked!'),
+  render: () => {
+    const [msg, setMsg] = React.useState('');
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }}>
+        <Button Class={1} OnClick={() => setMsg('Button clicked!')}>
+          Click Me!
+        </Button>
+        <div style={{ minHeight: 20, marginTop: 6, color: msg ? '#111' : '#666', fontSize: 14 }}>
+          {msg || 'Nenhuma ação ainda.'}
+        </div>
+      </div>
+    );
   },
 };
 
