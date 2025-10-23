@@ -135,3 +135,61 @@ SwitchInterativo.args = {
 SwitchInterativo.argTypes = {
   disabled: { control: 'boolean' },
 };
+
+export const SwitchEmFormulario = () => {
+  const [checked, setChecked] = React.useState(false);
+  const [submittedValue, setSubmittedValue] = React.useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmittedValue(checked);
+  };
+
+  return (
+    <div style={{ padding: 12, maxWidth: 700 }}>
+      <form onSubmit={handleSubmit}>
+        <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
+          <label
+            className="label-base"
+            style={{ minWidth: 160 }}
+            htmlFor="sw-darkmode"
+          >
+            Ativar modo escuro
+          </label>
+          <div>
+            <input
+              id="sw-darkmode"
+              type="checkbox"
+              role="switch"
+              className="govrs-switch"
+              aria-label="Ativar modo escuro"
+              checked={checked}
+              onChange={(ev) => setChecked(ev.target.checked)}
+            />
+            <div style={{ color: '#666', marginTop: 6, fontSize: 13 }}>
+              Altere para escurecer a interface
+            </div>
+          </div>
+        </div>
+
+        <div style={{ marginTop: 16 }}>
+          <button type="submit" className="btn btn-primary">
+            Enviar
+          </button>
+        </div>
+      </form>
+
+      <div style={{ marginTop: 16 }}>
+        <strong>Valor submetido:</strong>
+        <div style={{ marginTop: 8, color: '#222' }}>
+          {submittedValue === null ? (
+            <em>Nenhum envio ainda</em>
+          ) : (
+            <span>{submittedValue ? 'Ativado' : 'Desativado'}</span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+SwitchEmFormulario.storyName = 'Switch em Formulário';
