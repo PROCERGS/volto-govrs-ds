@@ -1,0 +1,230 @@
+/* Gov.br DS Textarea - Isolated from Plone/Volto styles */
+.br-textarea {
+  --textarea-padding: var(--textarea-medium);
+  --textarea-small: var(--spacing-scale-base);
+  --textarea-medium: var(--spacing-scale-base);
+  --textarea-large: var(--spacing-scale-2x);
+  --border-color-alternative: var(--gray-20, #cccccc);
+  --surface-width-md: 1px;
+  position: relative;
+  box-sizing: border-box !important;
+
+  color: var(--color) !important;
+  font-family: var(--font-family-base) !important;
+
+  /* Ensure this container does not inherit problematic styles */
+  * {
+    box-sizing: border-box !important;
+  }
+}
+
+.br-textarea > label {
+  display: inline-block !important;
+  width: auto !important;
+  max-width: none !important;
+  padding: 0 !important;
+  border: none !important;
+  margin: 0 0 var(--spacing-scale-half) 0 !important;
+  background: none !important;
+  color: var(--color) !important;
+  cursor: default !important;
+  font-family: var(--font-family-base) !important;
+  font-size: var(--font-size-scale-up-01) !important;
+  font-weight: var(--font-weight-medium) !important;
+  letter-spacing: normal !important;
+  line-height: var(--line-height-medium) !important;
+  text-align: left !important;
+  text-transform: none !important;
+}
+
+.br-textarea > div {
+  position: relative;
+}
+
+.br-textarea > div > textarea {
+  display: block !important;
+  width: 100% !important;
+  min-height: 120px !important;
+  max-height: none !important;
+  box-sizing: border-box !important;
+  padding: var(--textarea-padding) !important;
+  border: 1px solid var(--border-color-alternative) !important;
+  border-radius: 6px !important;
+  margin: 0 !important;
+
+  /* Reset any inherited appearances */
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background: var(--background-light) !important;
+  color: var(--color) !important;
+  font-family: var(--font-family-base) !important;
+  font-size: var(--font-size-scale-up-01) !important;
+  font-weight: var(--font-weight-medium) !important;
+  letter-spacing: normal !important;
+  line-height: var(--line-height-medium) !important;
+  overflow-wrap: break-word !important;
+  resize: vertical !important;
+
+  /* Reset inherited text styles */
+  text-align: left !important;
+  text-indent: 0 !important;
+  text-transform: none !important;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease !important;
+
+  /* Ensure proper text wrapping */
+  white-space: pre-wrap !important;
+  word-spacing: normal !important;
+  word-wrap: break-word !important;
+}
+
+.br-textarea.small > div > textarea,
+.br-textarea[data-small] > div > textarea {
+  --textarea-padding: var(--textarea-small);
+  min-height: 5em !important;
+}
+
+.br-textarea.medium > div > textarea,
+.br-textarea[data-medium] > div > textarea {
+  --textarea-padding: var(--textarea-medium);
+}
+
+.br-textarea.large > div > textarea,
+.br-textarea[data-large] > div > textarea {
+  --textarea-padding: var(--textarea-large);
+}
+
+.br-textarea.success > div > textarea,
+.br-textarea[data-success] > div > textarea {
+  border-width: 2px !important;
+  border-color: var(--success) !important;
+}
+
+.br-textarea.danger > div > textarea,
+.br-textarea[data-danger] > div > textarea {
+  border-width: 2px !important;
+  border-color: var(--danger) !important;
+}
+
+.br-textarea.warning > div > textarea,
+.br-textarea[data-warning] > div > textarea {
+  border-width: 2px !important;
+  border-color: var(--warning) !important;
+}
+
+.br-textarea.info > div > textarea,
+.br-textarea[data-info] > div > textarea {
+  border-width: 2px !important;
+  border-color: var(--info) !important;
+}
+
+.br-textarea > div > textarea:focus,
+.br-textarea > div > textarea:focus-visible,
+.br-textarea > div > textarea.focus-visible {
+  border-color: var(--focus) !important;
+  box-shadow: 0 0 0 var(--surface-width-md) var(--focus) !important;
+  outline: none !important;
+}
+
+.br-textarea > div > textarea:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+}
+
+.br-textarea > div > textarea:hover:not(:disabled) {
+  background-image: linear-gradient(
+    rgba(var(--color-rgb), var(--hover)),
+    rgba(var(--color-rgb), var(--hover))
+  ) !important;
+}
+
+.br-textarea.inverted,
+.br-textarea.inverted > label,
+.br-textarea.dark-mode,
+.br-textarea.dark-mode > label {
+  --color: var(--color-light);
+  --focus-color: var(--focus-color-dark);
+}
+
+.br-textarea.inverted > div > textarea,
+.br-textarea.dark-mode > div > textarea {
+  color: var(--color-dark) !important;
+}
+
+/* Helper text styles (for description and errors) */
+.br-textarea > div > small {
+  display: block !important;
+  padding: 0 !important;
+  margin-top: var(--spacing-scale-half) !important;
+  margin-bottom: 0 !important;
+  font-family: var(--font-family-base) !important;
+  font-size: var(--font-size-scale-down-01) !important;
+  line-height: var(--line-height-medium) !important;
+}
+
+.br-textarea .text-danger {
+  color: var(--danger) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+/* Feedback messages */
+.br-textarea .feedback {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 6px 12px !important;
+  border-radius: 4px !important;
+  margin-top: var(--spacing-scale-half) !important;
+  font-size: var(--font-size-scale-down-01) !important;
+  font-style: italic !important;
+  font-weight: var(--font-weight-semi-bold) !important;
+  gap: var(--spacing-scale-half) !important;
+  line-height: var(--line-height-medium) !important;
+}
+
+.br-textarea .feedback.success {
+  background-color: var(--success) !important;
+  color: var(--color-light) !important;
+}
+
+.br-textarea .feedback.danger,
+.br-textarea .feedback.error {
+  background-color: var(--danger) !important;
+  color: var(--color-light) !important;
+}
+
+.br-textarea .feedback.warning {
+  background-color: var(--warning) !important;
+  color: var(--color-dark) !important;
+}
+
+.br-textarea .feedback.info {
+  background-color: var(--info) !important;
+  color: var(--color-light) !important;
+}
+
+.br-textarea .feedback svg {
+  display: inline-block !important;
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Left variant - label positioned on the left side */
+.br-textarea.left {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: var(--spacing-scale-2x) !important;
+}
+
+.br-textarea.left > label {
+  min-width: 150px !important;
+  flex-shrink: 0 !important;
+  margin-top: var(--spacing-scale-base) !important;
+  margin-bottom: 0 !important;
+}
+
+.br-textarea.left > div {
+  flex: 1 !important;
+}
