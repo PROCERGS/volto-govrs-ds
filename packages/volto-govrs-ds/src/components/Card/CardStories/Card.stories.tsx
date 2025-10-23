@@ -40,6 +40,10 @@ const meta = {
       control: 'boolean',
       description: 'Desabilita o card e todas as suas interações',
     },
+    acao: {
+      control: 'object',
+      description: 'Objeto com label e url para o botão de ação',
+    },
   },
 } satisfies Meta<typeof Card>;
 
@@ -54,7 +58,10 @@ export const Post: Story = {
     variant: 'post',
     href: 'https://www.rs.gov.br/',
     children: 'Esta é a área de conteúdo principal do card.',
-    acao: 'Ver mais',
+    acao: {
+      label: 'Ver mais',
+      url: 'https://www.rs.gov.br/'
+    },
   },
 };
 
@@ -109,7 +116,10 @@ export const AllVariants: Story = {
         title="Card de Post"
         description="Card com ações sociais"
         children="Área de conteúdo com texto rolável."
-        acao="Ver mais"
+        acao={{
+          label: 'Ver mais',
+          url: 'https://www.rs.gov.br/'
+        }}
         href="#"
       />
       <Card

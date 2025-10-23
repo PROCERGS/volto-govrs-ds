@@ -9,7 +9,10 @@ type CardTypes = {
     disabled?: boolean;
     href?: string;
     children?: React.ReactNode;
-    acao?: string;
+    acao?: {
+        label: string;
+        url?: string;
+    };
     onLike?: () => void;
     onShare?: () => void;
     itens?: Array<{
@@ -109,7 +112,11 @@ function PostList({title, description, image, size, disabled, href, children, ac
                 </>
             ) : (
                     <div className='govrs-card-footer'>
-                        {acao && <button disabled={disabled}>{acao}</button>}
+                        {acao && (
+                            <div className='govrs-card-footer-action'>
+                                <a href={acao.url}>{acao.label}</a>
+                            </div>
+                        )}
                         <div className='govrs-card-footer-like-share'>
                             <button aria-label="Like" onClick={onLike} disabled={disabled}><LikeIcon /></button>
                             <button aria-label="Share" onClick={onShare} disabled={disabled}><ShareIcon /></button>

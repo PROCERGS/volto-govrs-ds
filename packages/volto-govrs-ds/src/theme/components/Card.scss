@@ -5,7 +5,8 @@
   border-radius: 8px;
   overflow: hidden;
   max-width: 400px;
-  min-height: 175px;
+  min-width: 250px;
+  min-height: 200px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   text-decoration: none;
@@ -238,6 +239,7 @@
 .govrs-card-icon {
   max-width: 175px;
   max-height: 155px;
+  min-width: 175px !important;
 }
 
 .govrs-card-header-placeholder {
@@ -254,6 +256,7 @@
   object-fit: fill;
   align-self: center;
   margin-bottom: auto;
+  margin-top: auto;
 }
 
 .small {
@@ -412,4 +415,19 @@
   margin-top: 12px;
   border-radius: 6px;
   object-fit: cover;
+}
+
+.govrs-card-footer-action > a {
+  color: var(--green-rs-60);
+  background-color: transparent;
+  border: none;
+  border-radius: 60px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: rgba(26, 114, 53, 0.2);
+    color: var(--green-rs-60);
+  }
 }

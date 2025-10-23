@@ -72,41 +72,6 @@ export const Disabled: Story = {
   },
 };
 
-export const Sizes: Story = {
-  render: () => (
-    <div style={{
-      display: 'flex',
-      alignItems: 'flex-start',
-      gap: '1.5rem',
-      padding: '1rem'
-    }}>
-      <Card
-        variant="icon"
-        size="small"
-        image="https://api.iconify.design/mdi/lightbulb-on.svg?color=%231A7235&width=200&height=200"
-        title="Ícone Pequeno"
-        description="Card de ícone compacto"
-        href="#"
-      />
-      <Card
-        variant="icon"
-        image="https://api.iconify.design/mdi/lightbulb-on.svg?color=%231A7235&width=200&height=200"
-        title="Ícone Médio"
-        description="Card de ícone padrão"
-        href="#"
-      />
-      <Card
-        variant="icon"
-        size="large"
-        image="https://api.iconify.design/mdi/lightbulb-on.svg?color=%231A7235&width=200&height=200"
-        title="Ícone Grande"
-        description="Card de ícone expandido"
-        href="#"
-      />
-    </div>
-  ),
-};
-
 export const Services: Story = {
   render: () => (
     <div style={{

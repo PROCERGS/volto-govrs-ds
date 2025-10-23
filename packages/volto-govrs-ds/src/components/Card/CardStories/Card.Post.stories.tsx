@@ -52,7 +52,7 @@ export const Default: Story = {
     variant: 'post',
     href: 'https://www.rs.gov.br/',
     children: 'Esta é a área de conteúdo principal do card. Você pode colocar qualquer nó React aqui, incluindo texto, imagens ou outros componentes.',
-    acao: 'Ver mais',
+    acao: { label: 'Saiba Mais', url: 'https://www.rs.gov.br/'},
   },
 };
 
@@ -60,7 +60,7 @@ export const LongContent: Story = {
   args: {
     image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop',
     title: 'Card com Título e Descrição Longos',
-    acao: 'Saiba Mais',
+    acao: { label: 'Saiba Mais', url: 'https://www.rs.gov.br/' },
     variant: 'post',
     description: 'Este card demonstra como conteúdo mais longo é tratado. A descrição pode ocupar múltiplas linhas e o card ajustará sua altura adequadamente. Isso é útil para cards que precisam exibir informações mais detalhadas aos usuários.',
     children: "Esta é a área de conteúdo principal do card. Pode incluir texto adicional ou elementos conforme necessário. O conteúdo aqui fornece informações mais detalhadas relacionadas ao título e descrição do card. Pode ser tão longo quanto necessário para transmitir a mensagem pretendida ao usuário. O layout se ajustará adequadamente para acomodar o conteúdo. Sinta-se livre para personalizar esta área com qualquer informação relevante ou elementos interativos que melhorem a experiência do usuário. O componente de card foi projetado para ser flexível e adaptável a vários tipos e tamanhos de conteúdo. Seja um resumo breve ou uma explicação detalhada, esta seção pode lidar com tudo. Certifique-se de manter o conteúdo envolvente e informativo para capturar a atenção do usuário de forma eficaz.",
@@ -85,7 +85,7 @@ export const WithoutImage: Story = {
     variant: 'post',
     href: 'https://www.rs.gov.br/',
     children: 'Área de conteúdo sem imagem de perfil.',
-    acao: 'Ver mais',
+    acao: { label: 'Ver mais', url: 'https://www.rs.gov.br/' },
   },
 };
 
@@ -97,7 +97,7 @@ export const Disabled: Story = {
     variant: 'post',
     href: 'https://www.rs.gov.br/',
     children: 'Este card não pode ser interagido.',
-    acao: 'Ver mais',
+    acao: { label: 'Ver mais', url: 'https://www.rs.gov.br/' },
     disabled: true,
   },
 };
@@ -111,7 +111,7 @@ export const WithBodyImage: Story = {
     href: 'https://www.rs.gov.br/',
     children: 'O bodyImg permite adicionar uma imagem destacada no corpo do card, ideal para posts com foto em destaque.',
     bodyImg: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop',
-    acao: 'Ver mais',
+    acao: { label: 'Ver mais', url: 'https://www.rs.gov.br/' },
   },
 };
 
@@ -130,7 +130,7 @@ export const Sizes: Story = {
         title="Post Pequeno"
         description="Tamanho compacto"
         children="Conteúdo do post pequeno."
-        acao="Ver mais"
+        acao={{ label: 'Ver mais', url: '#' }}
         href="#"
       />
       <Card
@@ -139,7 +139,7 @@ export const Sizes: Story = {
         title="Post Médio"
         description="Tamanho padrão"
         children="Conteúdo do post médio (padrão)."
-        acao="Ver mais"
+        acao={{ label: 'Ver mais', url: '#' }}
         href="#"
       />
       <Card
@@ -149,7 +149,7 @@ export const Sizes: Story = {
         title="Post Grande"
         description="Tamanho expandido"
         children="Conteúdo do post grande."
-        acao="Ver mais"
+        acao={{ label: 'Ver mais', url: '#' }}
         href="#"
       />
     </div>
