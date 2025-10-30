@@ -1,0 +1,166 @@
+
+@import '../variables.scss';
+
+.br-input {
+  position: relative;
+  display: block;
+  font-family: $font-family-base;
+
+  > label {
+    display: block;
+    margin-bottom: 4px; 
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid var(--Gray-gray-40, #888);
+    background: var(--Pure-pure, #FFF);
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 4px;
+    height: 40px;
+    
+    .input-icon-left {
+      color: #888;
+      margin-left: 12px;
+      display: flex;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .visibility-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      z-index: 2;
+      
+      svg {
+        fill: #1A7235;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    input {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 0 8px;
+      height: 24px;
+      font-size: 16px;
+      color: #333;
+
+      &.padding-default {
+          padding-left: 12px;
+      }
+      &.padding-default-no-eye {
+          padding-right: 12px;
+      }
+      
+      &::placeholder {
+        font-size: 16px;
+        color: var(--Gray-gray-40, #888);
+      }
+    }
+
+    &:hover{
+      background-color: #E6E6E6;
+    }
+  }
+  
+  &.danger .input-wrapper {
+      border: 2px solid #E52207;
+      padding: 3px;
+  }
+
+  &.success .input-wrapper {
+      border: 2px solid #168821;
+      padding: 3px;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .input-icon-left, .visibility-toggle, label, .input-wrapper {
+        opacity: 0.45;
+    }
+    input {
+        cursor: not-allowed;
+        opacity: 1;
+        background: transparent;
+        &::placeholder {
+            opacity: 0.45;
+        }
+    }
+  }
+
+  &.info .input-wrapper {
+      border: 2px solid #279B4A;
+      padding: 3px;
+  }
+  
+  &.warning .input-wrapper {
+      border: 2px solid#FFCD07;
+      padding: 3px;
+  }
+  
+  .feedback-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white; 
+    width: fit-content;
+
+    svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+    }
+
+    &.danger {
+        background: #E52207;
+    }
+
+    &.success {
+        background: #168821;
+    }
+    
+    &.info {
+        background: #279B4A;
+    }
+    
+    &.warning {
+        background:#FFCD07;
+        color: #333;
+    }
+
+    &.disabled {
+        background:#FFCD07;
+        color: #333;
+    }
+  }
+
+  .auxiliary-text {
+    display: block;
+    margin-top: 8px;
+    font-size: 16px;
+    color: #000; 
+  }
+}
+
+.br-input:focus-within .input-wrapper {
+    border: 2px solid #C2850C;
+    padding: 3px; 
+}
