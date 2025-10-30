@@ -6,7 +6,7 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default {
+const meta = {
   title: 'Forms/Input',
   component: Input,
   parameters: { layout: 'padded' },
@@ -47,6 +47,8 @@ export default {
     },
   },
 };
+
+export default meta;
 
 const CodeSnippet = ({ code }) => (
   <pre
