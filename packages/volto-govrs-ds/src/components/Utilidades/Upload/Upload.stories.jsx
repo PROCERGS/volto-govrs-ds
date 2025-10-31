@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../../theme/Formularios/Input.scss';
-import Upload from './Input';
+import '../../../theme/Formularios/Upload.scss';
+import Upload from './Upload';
 import Badges from '../../Badges/Badges';
 
 export default {

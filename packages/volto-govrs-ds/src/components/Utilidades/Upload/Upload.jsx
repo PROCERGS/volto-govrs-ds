@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import '../../../theme/Formularios/Input.scss';
+import '../../../theme/Formularios/Upload.scss';
 import Badges from '../../Badges/Badges';
 
 const UploadInput = ({
