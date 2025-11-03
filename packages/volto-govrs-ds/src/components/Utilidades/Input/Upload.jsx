@@ -83,26 +83,28 @@ const UploadInput = ({
   const handleChange = async (e) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
 
-    if (
-      maxFiles &&
-      uploadedFiles &&
-      uploadedFiles.length + files.length > maxFiles
-    ) {
-      const remaining = Math.max(
-        0,
-        maxFiles - (uploadedFiles ? uploadedFiles.length : 0),
-      );
-      const msg =
-        remaining > 0
-          ? `Número máximo de arquivos: ${maxFiles} (restam ${remaining})`
-          : `Número máximo de arquivos: ${maxFiles}`;
-      setInvalid(true);
-      setValid(false);
-      setMessage(msg);
-      setLiveMessage(msg);
-      clearSelection();
-      if (onChange) onChange([]);
-      return;
+    if (maxFiles) {
+      const projectedCount = multiple
+        ? (uploadedFiles ? uploadedFiles.length : 0) + files.length
+        : Math.max(uploadedFiles ? uploadedFiles.length : 0, files.length);
+
+      if (projectedCount > maxFiles) {
+        const remaining = Math.max(
+          0,
+          maxFiles - (uploadedFiles ? uploadedFiles.length : 0),
+        );
+        const msg =
+          remaining > 0
+            ? `Número máximo de arquivos: ${maxFiles} (restam ${remaining})`
+            : `Número máximo de arquivos: ${maxFiles}`;
+        setInvalid(true);
+        setValid(false);
+        setMessage(msg);
+        setLiveMessage(msg);
+        clearSelection();
+        if (onChange) onChange([]);
+        return;
+      }
     }
 
     const maxFileSizeBytes = convertMBToBytes(maxFileSize);
@@ -135,17 +137,21 @@ const UploadInput = ({
     }
 
     if (files.length > 0) {
+      const newFiles = multiple ? files : files.slice(0, 1);
+
       if (typeof onUpload === 'function') {
         try {
           setInternalLoading(true);
-          await Promise.resolve(onUpload(files));
-          setUploadedFiles((prev) => [...prev, ...files]);
+          await Promise.resolve(onUpload(newFiles));
+          setUploadedFiles((prev) =>
+            multiple ? [...prev, ...newFiles] : [...newFiles],
+          );
           setValid(true);
           setInvalid(false);
           const okMsg = 'Upload concluído';
           setMessage(okMsg);
           setLiveMessage(okMsg);
-          if (onChange) onChange(files);
+          if (onChange) onChange(newFiles);
         } catch (err) {
           const errMsg =
             err && err.message
@@ -161,13 +167,20 @@ const UploadInput = ({
           clearSelection();
         }
       } else {
-        setUploadedFiles((prev) => [...prev, ...files]);
-        setValid(files.length > 0);
+        setUploadedFiles((prev) =>
+          multiple ? [...prev, ...newFiles] : [...newFiles],
+        );
+        setValid(newFiles.length > 0);
         setInvalid(false);
-        const okMsg = files.length > 0 ? 'Arquivos selecionados' : '';
+        const okMsg =
+          newFiles.length > 0
+            ? multiple
+              ? 'Arquivos selecionados'
+              : 'Arquivo selecionado'
+            : '';
         setMessage(okMsg);
         setLiveMessage(okMsg);
-        if (onChange) onChange(files);
+        if (onChange) onChange(newFiles);
         clearSelection();
       }
     }

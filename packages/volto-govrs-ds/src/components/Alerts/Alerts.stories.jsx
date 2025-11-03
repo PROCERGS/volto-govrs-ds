@@ -3,7 +3,7 @@ import Alerts from './Alerts';
 import './Alerts.scss';
 
 export default {
-  title: 'Components/Alerts',
+  title: 'Widgets/Alerts',
   parameters: { layout: 'padded' },
 };
 

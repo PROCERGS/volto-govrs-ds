@@ -3,7 +3,7 @@ import Badges from './Badges';
 import './Badges.scss';
 
 export default {
-  title: 'Components/Badges',
+  title: 'Widgets/Badges',
   parameters: { layout: 'padded' },
 };
 

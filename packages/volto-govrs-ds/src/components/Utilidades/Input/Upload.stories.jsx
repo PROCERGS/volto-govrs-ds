@@ -3,7 +3,6 @@ import '../../../theme/Formularios/Upload.scss';
 import Upload from './Upload';
 import Badges from '../../Badges/Badges';
 
-
 export default {
   title: 'Forms/Upload',
   parameters: { layout: 'padded' },

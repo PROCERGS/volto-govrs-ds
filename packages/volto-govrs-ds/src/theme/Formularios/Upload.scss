@@ -174,7 +174,6 @@
     box-shadow 120ms ease;
 }
 
-
 .br-input {
   position: relative;
   display: block;
@@ -284,7 +283,7 @@
 
   &.info .input-wrapper {
     padding: 3px;
-    border: 2px solid #279b4a;
+    border: 2px solid #2d86d8;
   }
 
   &.warning .input-wrapper {
@@ -318,7 +317,7 @@
     }
 
     &.info {
-      background: #279b4a;
+      background: #2d86d8;
     }
 
     &.warning {
@@ -337,6 +336,11 @@
     margin-top: 8px;
     color: #000;
     font-size: 16px;
+  }
+
+  .br-input__feedback {
+    padding: 5px;
+    margin-top: 5px;
   }
 }
 
