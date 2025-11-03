@@ -39,7 +39,6 @@ function Input({
 }: InputProps) {
   const [isVisible, setIsVisible] = useState(false);
 
-  // State is a visual hint used only to apply a CSS class that changes the border color
   const finalState: StateType | null = State ?? null;
   const classes = ['br-input', disabled ? 'disabled' : finalState]
     .filter(Boolean)
