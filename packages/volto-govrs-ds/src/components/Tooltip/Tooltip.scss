@@ -1,0 +1,215 @@
+.br-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+@import "../../theme/variables.scss";
+
+.br-tooltip-trigger {
+  background: transparent;
+  border: 0;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #1A7235;
+  font-weight: 600;
+}
+
+.br-tooltip-box {
+  position: absolute;
+  min-width: 160px;
+  max-width: 320px;
+  background: #ffffff;
+  color: #111;
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.06);
+  opacity: 0;
+  /* default small animation offset; visible offset is provided by --br-tooltip-offset */
+  transform: translateY(6px);
+  transition: opacity 160ms ease, transform 160ms ease;
+  pointer-events: none;
+  z-index: 1000;
+  display: block;
+}
+
+/* Tooltip states using the same background colors as Badges */
+.br-tooltip--state-success .br-tooltip-box {
+  background: #168821; /* success */
+  color: #ffffff;
+}
+.br-tooltip--state-error .br-tooltip-box {
+  background: #e52207; /* error */
+  color: #ffffff;
+}
+.br-tooltip--state-warning .br-tooltip-box {
+  background: #ffcd07; /* warning */
+  color: #333333; /* darker text for contrast on yellow */
+}
+.br-tooltip--state-info .br-tooltip-box {
+  background: #2d86d8; /* info */
+  color: #ffffff;
+}
+
+/* arrow must match the box background when in a state */
+.br-tooltip--state-success .br-tooltip-arrow { background: #168821; box-shadow: none; }
+.br-tooltip--state-error .br-tooltip-arrow   { background: #e52207; box-shadow: none; }
+.br-tooltip--state-warning .br-tooltip-arrow { background: #ffcd07; box-shadow: none; }
+.br-tooltip--state-info .br-tooltip-arrow    { background: #2d86d8; box-shadow: none; }
+
+/* header with optional icon and title */
+.br-tooltip-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* default center if no icon */
+  margin-bottom: 8px;
+}
+.br-tooltip-header.has-icon { justify-content: flex-start; }
+
+.br-tooltip-icon {
+  display: inline-flex;
+  margin-right: 8px;
+  align-items: center;
+}
+
+.br-tooltip-title {
+  font-weight: 400;
+  font-size: 16px;
+  font-family: $font-family-base;
+}
+
+/* ensure title/icon contrast when in colored states */
+.br-tooltip--state-warning .br-tooltip-title,
+.br-tooltip--state-warning .br-tooltip-body { color: #333333; }
+.br-tooltip--state-success .br-tooltip-title,
+.br-tooltip--state-success .br-tooltip-body,
+.br-tooltip--state-error .br-tooltip-title,
+.br-tooltip--state-error .br-tooltip-body,
+.br-tooltip--state-info .br-tooltip-title,
+.br-tooltip--state-info .br-tooltip-body { color: #ffffff; }
+
+.br-tooltip-body {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: $font-family-base;
+  line-height: 1.3;
+}
+
+/* When an icon is provided, layout icon (left) + main content (right) vertically stacked */
+.br-tooltip-inner {
+  display: flex;
+  /* vertically center the icon relative to the title+body stack */
+  align-items: center;
+}
+
+.br-tooltip-icon {
+  /* make sure icon area doesn't shrink and keep spacing */
+  margin-right: 12px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+}
+
+.br-tooltip-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.br-tooltip-main .br-tooltip-title {
+  margin-bottom: 6px;
+}
+
+/* When using the icon-left layout, avoid extra margin between header and body (body sits inside main) */
+.br-tooltip-box.has-icon .br-tooltip-header { margin-bottom: 0; }
+
+/* When there is no icon provided, center the text horizontally */
+.br-tooltip-box:not(.has-icon) {
+  text-align: center;
+}
+.br-tooltip-box:not(.has-icon) .br-tooltip-title,
+.br-tooltip-box:not(.has-icon) .br-tooltip-body {
+  text-align: center;
+}
+
+.br-tooltip-arrow {
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  position: absolute;
+  transform: rotate(45deg);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* show on parent hover or focus-within */
+.br-tooltip:hover .br-tooltip-box,
+.br-tooltip:focus-within .br-tooltip-box {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* default position: top */
+.br-tooltip--top .br-tooltip-box {
+  bottom: 100%;
+  left: 50%;
+  transform-origin: center bottom;
+  /* when visible we offset by the trigger size (negative Y); default hidden state animates slightly */
+  transform: translate(-50%, calc(-1 * var(--br-tooltip-offset, 6px) + 6px));
+}
+/* bring the visible box 6px closer to the arrow so the arrow and body appear attached */
+.br-tooltip--top:hover .br-tooltip-box { transform: translate(-50%, calc(-1 * var(--br-tooltip-offset, 6px) + 6px)); }
+.br-tooltip--top .br-tooltip-arrow { bottom: -6px; left: calc(50% - 6px); }
+
+/* bottom */
+.br-tooltip--bottom .br-tooltip-box {
+  top: 100%;
+  left: 50%;
+  transform-origin: center top;
+  /* when visible we offset by the trigger size (positive Y); default hidden state animates slightly */
+  transform: translate(-50%, calc(var(--br-tooltip-offset, 6px) - 6px));
+}
+/* bring the visible box 6px closer to the arrow so the arrow and body appear attached */
+.br-tooltip--bottom:hover .br-tooltip-box { transform: translate(-50%, calc(var(--br-tooltip-offset, 6px) - 6px)); }
+.br-tooltip--bottom .br-tooltip-arrow { top: -6px; left: calc(50% - 6px); }
+
+/* left */
+.br-tooltip--left .br-tooltip-box {
+  right: 100%;
+  top: 50%;
+  /* offset horizontally by trigger width */
+  transform: translate(calc(-1 * var(--br-tooltip-offset, 6px) + 6px), -50%);
+}
+/* bring the visible box 6px closer to the arrow so the arrow and body appear attached */
+.br-tooltip--left:hover .br-tooltip-box { transform: translate(calc(-1 * var(--br-tooltip-offset, 6px) + 6px), -50%); }
+.br-tooltip--left .br-tooltip-arrow { right: -6px; top: calc(50% - 6px); }
+
+/* right */
+.br-tooltip--right .br-tooltip-box {
+  left: 100%;
+  top: 50%;
+  transform: translate(calc(var(--br-tooltip-offset, 6px) - 6px), -50%);
+}
+/* bring the visible box 6px closer to the arrow so the arrow and body appear attached */
+.br-tooltip--right:hover .br-tooltip-box { transform: translate(calc(var(--br-tooltip-offset, 6px) - 6px), -50%); }
+.br-tooltip--right .br-tooltip-arrow { left: -6px; top: calc(50% - 6px); }
+
+/* small styles for trigger icon */
+.br-tooltip-trigger-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e6f4ea;
+  color: #1A7235;
+  font-size: 12px;
+}
+
+/* responsive cap */
+@media (max-width: 420px) {
+  .br-tooltip-box { max-width: 220px; }
+}

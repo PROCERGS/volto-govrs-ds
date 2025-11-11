@@ -1,0 +1,480 @@
+.br-step-horizontal {
+  --step-size: 40px;
+  --label-slot: 24px; /* estimated label height + spacing when positioned above */
+  display: flex;
+  /* align items at start so labels don't affect connector vertical centering */
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* dotted variant: make the step size smaller and hide labels. Using the same --step-size
+   variable keeps connectors aligned dynamically. */
+.br-step-horizontal.variant-dotted {
+  --step-size: 16px;
+}
+
+/* plain variant: tiny 8x8 circular markers, spaced evenly, no connectors, no visible state on marker */
+.br-step-horizontal.variant-plain {
+  --step-size: 8px;
+  justify-content: space-evenly;
+}
+
+.br-step-horizontal.variant-plain .connector {
+  display: none;
+}
+
+.br-step-horizontal.variant-plain .step-status {
+  display: none;
+}
+
+.br-step-horizontal.variant-plain .step-circle {
+  width: var(--step-size);
+  height: var(--step-size);
+  background-color: #CCCCCC; /* gray-20 */
+  border-radius: 50%;
+  border: none;
+  box-shadow: none;
+}
+
+/* Make the plain marker sizing and layout explicit to avoid container/line-height
+   interfering (force it to be a non-flexible inline-flex box). */
+.br-step-horizontal.variant-plain .step-circle {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  min-width: var(--step-size) !important;
+  min-height: var(--step-size) !important;
+  width: var(--step-size) !important;
+  height: var(--step-size) !important;
+  line-height: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* active state visual for plain variant: green background + white 1px border as requested */
+.br-step-horizontal.variant-plain .step-circle.active {
+  background-color: #04290F; /* Green-rs-90 */
+  border: 1px solid #FFFFFF;
+}
+
+/* keep hover behavior to show tooltip (Tooltip wrapping handles the content). Do not change marker on hover beyond cursor */
+.br-step-horizontal.variant-plain .step-circle:hover {
+  cursor: pointer;
+}
+
+.br-step-horizontal.variant-dotted .step-label {
+  display: none;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* wrapper tight to the circle so connectors touch the circle */
+  padding: 0;
+}
+
+/* label left layout */
+.br-step-horizontal.label-left .step-item {
+  flex-direction: row;
+  align-items: center;
+}
+
+/* label right layout */
+.br-step-horizontal.label-right .step-item {
+  flex-direction: row;
+  align-items: center;
+}
+
+.step-circle {
+  width: var(--step-size);
+  height: var(--step-size);
+  border: 1px solid #1A7235; /* Green-rs-60 */
+  border-radius: 50%;
+  background-color: #ffffff; /* Pure */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1A7235; /* number color */
+  font-weight: 500;
+  font-size: 24px; /* number font size as requested */
+  box-sizing: border-box;
+  transition: background-color 120ms ease, color 120ms ease;
+  cursor: default;
+}
+
+/* position the circle as the relative container for the status marker */
+.step-circle {
+  position: relative;
+}
+
+/* Ensure circles sit visually above connectors so opaque backgrounds cover the line */
+.br-step-horizontal .step-circle {
+  z-index: 2;
+}
+
+/* ensure the step has a permanent white base and a separate overlay for hover states
+   so semi-transparent hover colors don't reveal elements behind the step */
+.step-circle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 120ms ease;
+  z-index: 2; /* sits above the white base but below the content */
+}
+
+/* ensure content (number/icon) sits above the overlay */
+.step-circle > * {
+  position: relative;
+  z-index: 3;
+}
+
+/* explicit rule for numeric content inside the circle (text nodes wrapped as .step-number) */
+.step-number {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.br-step-horizontal .connector {
+  position: relative;
+  z-index: 0;
+}
+
+/* Hover overlay: paint the translucent or opaque color on ::after so the underlying
+   page doesn't bleed through (the element background remains white). */
+.step-item:hover .step-circle:not(.active)::after {
+  background-color: rgba(26, 114, 53, 0.16); /* Green-rs-60 with 16% opacity */
+}
+
+/* If the step has a state, use an opaque overlay on hover so connector doesn't show through */
+.step-item.has-state:hover .step-circle:not(.active)::after {
+  background-color: #eaf6ea; /* opaque light green */
+}
+
+/* For dotted variant we don't want translucency over the connector: paint the overlay opaque */
+.br-step-horizontal.variant-dotted .step-item:hover .step-circle:not(.active)::after {
+  background-color: #eaf6ea; /* opaque light green */
+}
+
+/* active circle should not show hover overlay */
+.step-circle.active::after {
+  background: transparent;
+}
+
+.step-circle.active {
+  background-color: #1A7235; /* Green-rs-60 */
+  color: #ffffff; /* Pure */
+}
+
+/* Ensure plain variant active styling overrides defaults (use !important to be safe against order) */
+.br-step-horizontal.variant-plain .step-circle.active {
+  background-color: #04290F !important; /* Green-rs-90 */
+  border: 1px solid #FFFFFF !important;
+}
+
+.step-label {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  max-width: 120px;
+}
+
+.step-label.above {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+/* When labels are positioned above, reserve a consistent label slot height
+   so taller labels don't push individual circles down and misalign with the connector.
+   The container sets --label-slot (measured max height + gap). */
+.br-step-horizontal.label-above .step-label.above {
+  /* Use a fixed height equal to the measured label slot so all labels
+     occupy the same vertical space and circles align horizontally.
+     Use overflow-wrap and allow the label text to wrap inside the fixed
+     slot rather than expanding the container height. The ResizeObserver in
+     the component updates --label-slot when label sizes change. */
+  height: var(--label-slot);
+  display: flex;
+  align-items: flex-end; /* align label text to the bottom of the slot */
+  justify-content: center;
+  box-sizing: border-box;
+  padding-bottom: 4px; /* small gap between label baseline and the circle */
+  overflow: hidden; /* prevent a single large label from growing the slot */
+  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* During measurement we force labels to their natural height so the JS
+   can compute the proper --label-slot value. The measuring class is added
+   temporarily by the component and removed immediately after measuring. */
+.br-step-horizontal.measuring.label-above .step-label.above {
+  height: auto !important;
+  overflow: visible !important;
+  white-space: normal !important;
+}
+
+.step-label.below {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.step-label.left {
+  margin-right: 8px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.step-label.right {
+  margin-left: 8px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.step-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* clickable circle (anchor or button) */
+.step-circle.clickable {
+  cursor: pointer;
+}
+
+.step-icon svg {
+  width: calc(var(--step-size) * 0.5);
+  height: calc(var(--step-size) * 0.5);
+  display: block;
+  /* default svg color to green; many svgs use currentColor or fill */
+  color: #1A7235;
+  fill: #1A7235;
+}
+
+/* active icon color */
+.step-circle.active .step-icon svg,
+.step-circle.active .step-icon {
+  color: #ffffff;
+  fill: #ffffff;
+}
+
+/* Force path/stroke inside svg to change even if svg/path have inline fills */
+.step-circle .step-icon svg path,
+.step-circle .step-icon svg g {
+  fill: #1A7235;
+  stroke: #1A7235;
+}
+
+.step-circle.active .step-icon svg path,
+.step-circle.active .step-icon svg g {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* status marker (top-right) shown when a step has a state like success/error/warning/info */
+.step-status {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Ensure the status marker is above connectors and does not get visually overlapped */
+.br-step-horizontal .step-status {
+  z-index: 3;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Visual for status markers when the step is active (dotted replacements or small top-right markers)
+   Keep consistent with .step-circle.active but preserve the state's color. We add a faint focus ring
+   and ensure it's above connectors. */
+.br-step-horizontal .step-status.active {
+  z-index: 4;
+  box-shadow: 0 0 0 3px rgba(26, 114, 53, 0.12) !important;
+}
+
+.br-step-horizontal.variant-dotted .step-status.active {
+  /* use same ring size as other active dots to be visually consistent */
+  box-shadow: 0 0 0 3px rgba(26, 114, 53, 0.12) !important;
+}
+
+/* Make clickable status markers show pointer cursor and focus ring like other interactive controls */
+.br-step-horizontal .step-status.clickable {
+  cursor: pointer;
+}
+.br-step-horizontal .step-status.clickable:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 114, 53, 0.12) !important;
+}
+
+.step-status svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  color: currentColor;
+  fill: currentColor;
+}
+
+.step-status--success { background-color: #ffffff; color: #168821; }
+.step-status--error { background-color: #ffffff; color: #e52207; }
+.step-status--warning { background-color: #ffcd07; color: #333333; }
+.step-status--info { background-color: #ffffff; color: #2d86d8; }
+
+.br-step-horizontal.variant-dotted .step-status {
+  /* Make the replacement marker larger and ensure it sits above connectors.
+     Use relative positioning so z-index takes effect (position: static prevents z-index).
+     Keep display inline-flex so it flows in-line where the dot would be. */
+  position: relative;
+  top: auto;
+  right: auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.br-step-horizontal.variant-dotted .step-status svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Make dotted variant step-status visually match the normal status marker but larger:
+   - use the state's color as the background of the marker
+   - force inner SVG shapes to use currentColor so they become white/dark as needed
+   - hide any background circles that are drawn inside the SVG so wrapper controls background */
+.br-step-horizontal.variant-dotted .step-status--success { background-color: #168821; color: #ffffff; }
+.br-step-horizontal.variant-dotted .step-status--error { background-color: #e52207; color: #ffffff; }
+.br-step-horizontal.variant-dotted .step-status--warning { background-color: #ffcd07; color: #333333; }
+.br-step-horizontal.variant-dotted .step-status--info { background-color: #2d86d8; color: #ffffff; }
+
+.br-step-horizontal.variant-dotted .step-status svg circle {
+  /* hide SVG-drawn background circles so the wrapper background shows through */
+  fill: transparent !important;
+  /* ensure any stroke on inner SVG circles is removed (some SVGs draw a dark ring) */
+  stroke: none !important;
+}
+.br-step-horizontal.variant-dotted .step-status svg path,
+.br-step-horizontal.variant-dotted .step-status svg g {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Remove any wrapper-level border or shadow that could create a dark ring */
+.br-step-horizontal.variant-dotted .step-status {
+  box-shadow: none !important;
+  border: none !important;
+  /* avoid negative margin which could pull the marker out of alignment with connectors */
+  margin-top: -5px;
+}
+
+
+
+/* Connector adjustments when adjacent to a 28x28 state marker (dotted variant) */
+.br-step-horizontal.variant-dotted .connector.adj-left-large {
+  /* left neighbor is 28px, move the connector to start at that marker's edge */
+  margin-left: -14px; /* half of 28 */
+}
+.br-step-horizontal.variant-dotted .connector.adj-right-large {
+  /* right neighbor is 28px, move the connector to end at that marker's edge */
+  margin-right: -14px; /* half of 28 */
+}
+.br-step-horizontal.variant-dotted .connector.adj-left-large.adj-right-large {
+  margin-left: -14px;
+  margin-right: -14px;
+}
+
+/* Replacement marker for dotted steps: centered and allowed to overflow the small dot
+   so the larger state marker is visible and replaces the dot visually. */
+.step-state-dot {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+/* state colors for the small dot when variant is dotted */
+.step-state-dot--success { background-color: #168821; border: 1px solid #168821; }
+.step-state-dot--error { background-color: #e52207; border: 1px solid #e52207; }
+.step-state-dot--warning { background-color: #ffcd07; border: 1px solid #ffcd07; }
+.step-state-dot--info { background-color: #2d86d8; border: 1px solid #2d86d8; }
+
+.connector {
+  flex: 1 1 auto;
+  height: 1px;
+  background-color: #1A7235; /* Green-rs-60 */
+  /* remove horizontal gaps so the line meets the circle edge dynamically */
+  margin-left: calc(-1 * (var(--step-size) / 1));
+  margin-right: calc(-1 * (var(--step-size) / 1));
+  /* position the connector vertically centered with the circle when label is below */
+  margin-top: calc(var(--step-size) / 2);
+  align-self: flex-start;
+}
+
+/* when labels are above, shift connector downward by the label slot so it aligns with circle center */
+.br-step-horizontal.label-above .connector {
+  /* correct: move by label slot + half the step size to reach the circle center */
+  margin-top: calc(var(--label-slot) + (var(--step-size) / 1.5));
+}
+
+/* when steps are dense, reduce margin */
+.br-step-horizontal.compact .connector {
+  margin: 0 4px;
+}
+
+/* when labels are left, connectors should not use the negative horizontal margins
+   because the layout is row-based; reset them to zero so the line doesn't
+   overflow into label area */
+.br-step-horizontal.label-left .connector {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* when labels are on the right, also avoid the negative horizontal margins
+   so connectors don't overflow into the label area */
+.br-step-horizontal.label-right .connector {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Accessibility / focus styles if step-circle becomes focusable later */
+.step-circle:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 114, 53, 0.12);
+}
+
+/* When a step is an anchor, make it display like the .step-item container */
+.step-item {
+  text-decoration: none;
+}
+
+.step-item[href] {
+  cursor: pointer;
+}
+
+.step-item[href]:hover .step-circle:not(.active) {
+  background-color: rgba(26, 114, 53, 0.16);
+}
+
+.step-item[href]:focus {
+  outline: none;
+}
