@@ -1,22 +1,18 @@
 .br-step-vertical {
   --v-step-size: 40px;
-  --v-label-slot: 120px; /* reserved width for right/left labels when measured */
-  --v-connector-gap: 6px; /* default visual gap between step edge and connector */
+  --v-label-slot: 120px;
+  --v-connector-gap: 6px;
   display: flex;
-  flex-direction: column;
-  /* center children so circle and connector share a common centerline */
-  align-items: center;
-  /* allow the vertical stepper to fill the parent's height when the parent has an explicit height */
-  height: 100%;
   width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
 }
 
 .br-step-vertical.v-variant-dotted {
   --v-step-size: 16px;
 }
 
-/* Ensure the small dot in dotted variant is explicitly sized to 16px to match horizontal
-   (use a direct rule to avoid any variable-inheritance or specificity surprises). */
 .br-step-vertical.v-variant-dotted .v-step-circle,
 .br-step-vertical.v-variant-dotted .v-step-circle.dotted {
   width: 16px;
@@ -27,42 +23,36 @@
   --v-step-size: 8px;
 }
 
-/* Plain variant: make dots perfect circles and let the vertical container
-   distribute them evenly to adapt to the parent's height (requires parent to
-   have explicit height). This mirrors the horizontal plain behavior. */
 .br-step-vertical.v-variant-plain {
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 .br-step-vertical.v-variant-plain .v-step-circle {
   display: inline-flex !important;
+  width: var(--v-step-size) !important;
+  min-width: var(--v-step-size) !important;
+  height: var(--v-step-size) !important;
+  min-height: var(--v-step-size) !important;
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
   align-items: center !important;
   justify-content: center !important;
-  flex: 0 0 auto !important;
-  min-width: var(--v-step-size) !important;
-  min-height: var(--v-step-size) !important;
-  width: var(--v-step-size) !important;
-  height: var(--v-step-size) !important;
-  line-height: 0 !important;
   padding: 0 !important;
-  box-sizing: border-box !important;
   border-radius: 50% !important;
+  line-height: 0 !important;
 }
 
 .br-step-vertical .v-step-item {
-  display: flex;
-  align-items: center;
-  padding: 6px 0;
   position: relative;
-  /* make each item span the container width so we can center the circle and position labels absolutely */
+  display: flex;
   width: 100%;
-  justify-content: center;
-  /* keep each item at its content size so connectors can expand */
   flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0;
 }
 
-/* Label positioning for vertical numbered/icon variants: support above/below like horizontal */
 .br-step-vertical.label-below .v-step-item,
 .br-step-vertical.label-above .v-step-item {
   flex-direction: column;
@@ -76,61 +66,71 @@
 }
 
 .br-step-vertical.label-above .v-step-label.above {
-  margin-bottom: 8px;
   margin-top: 0;
+  margin-bottom: 8px;
   text-align: center;
 }
 
-/* When labels are on the right or left reserve a consistent width so connectors align */
 .br-step-vertical.label-right {
   --v-label-slot: var(--v-label-slot, 120px);
 }
 
 .v-step-circle {
-  width: var(--v-step-size);
-  height: var(--v-step-size);
-  border-radius: 50%;
-  background: #ffffff;
-  border: 1px solid #1A7235;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
   position: relative;
   z-index: 2;
+  display: inline-flex;
+  width: var(--v-step-size);
+  height: var(--v-step-size);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1a7235;
+  border-radius: 50%;
+  background: #ffffff;
 }
 
 .v-step-circle::after {
-  content: '';
   position: absolute;
-  inset: 0;
+  z-index: 2;
   border-radius: 50%;
   background: transparent;
+  content: '';
+  inset: 0;
   pointer-events: none;
   transition: background-color 120ms ease;
-  z-index: 2;
 }
 
 .br-step-vertical .v-step-circle.active {
-  background-color: #1A7235;
+  background-color: #1a7235;
   color: #ffffff;
 }
 
-.v-step-number { font-size: 18px; font-weight: 500 }
-.v-step-icon { display: inline-flex }
+.v-step-number {
+  font-size: 18px;
+  font-weight: 500;
+}
+.v-step-icon {
+  display: inline-flex;
+}
 
-/* color rules to match horizontal behavior for numbered and icon steps */
-.v-step-circle { color: #1A7235; }
-.v-step-circle.active { background-color: #1A7235; color: #ffffff; }
-.v-step-circle.active .v-step-number { color: #ffffff !important; }
+.v-step-circle {
+  color: #1a7235;
+}
+.v-step-circle.active {
+  background-color: #1a7235;
+  color: #ffffff;
+}
+.v-step-circle.active .v-step-number {
+  color: #ffffff !important;
+}
 
 /* icon SVG coloring: default green, white when active */
 .v-step-icon svg {
+  display: block;
   width: calc(var(--v-step-size) * 0.5);
   height: calc(var(--v-step-size) * 0.5);
-  display: block;
-  color: #1A7235;
-  fill: #1A7235;
+  color: #1a7235;
+  fill: #1a7235;
 }
 .v-step-circle.active .v-step-icon svg,
 .v-step-circle.active .v-step-icon {
@@ -139,8 +139,8 @@
 }
 .v-step-circle .v-step-icon svg path,
 .v-step-circle .v-step-icon svg g {
-  fill: #1A7235;
-  stroke: #1A7235;
+  fill: #1a7235;
+  stroke: #1a7235;
 }
 .v-step-circle.active .v-step-icon svg path,
 .v-step-circle.active .v-step-icon svg g {
@@ -152,8 +152,8 @@
    Use measured --v-label-slot so all labels take same width and connectors align. */
 .v-step-label {
   max-width: 220px;
-  font-size: 16px;
   color: #000000;
+  font-size: 16px;
 }
 
 .br-step-vertical.label-right .v-step-label.right {
@@ -176,27 +176,23 @@
 
 /* vertical connector line between items */
 .v-connector {
-  /* use a 1px solid green border to draw the vertical connector line as requested
-     and make the connector flexible so it fills available space inside the vertical
-     container (parent must have an explicit height). */
-  flex: 1 1 auto;
-  width: 0; /* no extra width, line drawn via border */
+  width: 0;
   height: auto;
-  background: transparent;
-  border-left: 1px solid #1A7235; /* Green-rs-60 */
-  /*
-    Use the computed margins to create a visual gap between the circles and the
-    connector. The connector will expand vertically (flex) and these negative
-    offsets push it so the visible line begins/ends near the circle edges.
-  */
-  margin-top: calc(-1 * (var(--v-step-size) / 2) + var(--v-connector-gap) + 0.5px);
-  margin-bottom: calc(-1 * (var(--v-step-size) / 2) + var(--v-connector-gap) + 0.5px);
   box-sizing: border-box;
+  flex: 1 1 auto;
+  border-left: 1px solid #1a7235;
+  margin-top: calc(
+    -1 * (var(--v-step-size) / 2) + var(--v-connector-gap) + 0.5px
+  );
+  margin-bottom: calc(
+    -1 * (var(--v-step-size) / 2) + var(--v-connector-gap) + 0.5px
+  );
+  background: transparent;
 }
 
 /* when a dotted replacement marker is present and larger, nudge connector to avoid overlap */
 .br-step-vertical.v-variant-dotted .v-connector.adj-top-large {
-  margin-top: -14px; /* half of 28px replacement */
+  margin-top: -14px;
 }
 .br-step-vertical.v-variant-dotted .v-connector.adj-bottom-large {
   margin-bottom: -14px;
@@ -206,9 +202,6 @@
   margin-bottom: -14px;
 }
 
-/* For dotted variant when the dot has no state (small 16px), reduce the
-   connector offsets so the line aligns with smaller markers. We target the
-   connector that follows a top item without state (the DOM renders item then connector). */
 .br-step-vertical.v-variant-dotted .v-step-item:not(.has-state) + .v-connector {
   margin-top: calc(-1 * var(--v-step-size) + var(--v-connector-gap) + 0.5px);
   margin-bottom: calc(-1 * var(--v-step-size) + var(--v-connector-gap) + 0.5px);
@@ -216,53 +209,129 @@
 
 /* dotted replacement status marker (vertical): larger replacement circle */
 .br-step-vertical.v-variant-dotted .v-step-status {
+  z-index: 3;
+  display: inline-flex;
   width: 28px;
   height: 28px;
-  border-radius: 50%;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  z-index: 3;
+  border-radius: 50%;
 }
 
-.v-step-status--success { background-color: #ffffff; color: #168821 }
-.v-step-status--error { background-color: #ffffff; color: #e52207 }
-.v-step-status--warning { background-color: #ffffff; color: #ffcd07 }
-.v-step-status--info { background-color: #ffffff; color: #2d86d8 }
+.v-step-status--success {
+  background-color: #ffffff;
+  color: #168821;
+}
+.v-step-status--error {
+  background-color: #ffffff;
+  color: #e52207;
+}
+.v-step-status--warning {
+  background-color: #ffffff;
+  color: #ffcd07;
+}
+.v-step-status--info {
+  background-color: #ffffff;
+  color: #2d86d8;
+}
 
 /* clickable visuals */
-.v-step-circle.clickable, .v-step-status.clickable { cursor: pointer }
-.v-step-status.clickable:focus { outline: none; box-shadow: 0 0 0 3px rgba(26,114,53,0.12) }
+.v-step-circle.clickable,
+.v-step-status.clickable {
+  cursor: pointer;
+}
+.v-step-status.clickable:focus {
+  box-shadow: 0 0 0 3px rgba(26, 114, 53, 0.12);
+  outline: none;
+}
 
 /* plain variant: hide connectors and use small dots */
-.br-step-vertical.v-variant-plain .v-connector { display: none }
-.br-step-vertical.v-variant-plain .v-step-status { display: none }
-.br-step-vertical.v-variant-plain .v-step-circle { width: var(--v-step-size); height: var(--v-step-size); background: #CCCCCC; border: none }
+.br-step-vertical.v-variant-plain .v-connector {
+  display: none;
+}
+.br-step-vertical.v-variant-plain .v-step-status {
+  display: none;
+}
+.br-step-vertical.v-variant-plain .v-step-circle {
+  width: var(--v-step-size);
+  height: var(--v-step-size);
+  border: none;
+  background: #cccccc;
+}
 
 /* plain variant active styling (match horizontal plain active) */
 .br-step-vertical.v-variant-plain .v-step-circle.active {
-  background-color: #04290F; /* Green-rs-90 */
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
+  background-color: #04290f;
 }
 
 /* hover overlays similar to horizontal but scoped to v- names */
-.v-step-item:hover .v-step-circle:not(.active)::after { background-color: rgba(26,114,53,0.16) }
-.v-step-item.has-state:hover .v-step-circle:not(.active)::after { background-color: #eaf6ea }
+.v-step-item:hover .v-step-circle:not(.active)::after {
+  background-color: rgba(26, 114, 53, 0.16);
+}
+.v-step-item.has-state:hover .v-step-circle:not(.active)::after {
+  background-color: #eaf6ea;
+}
 
 /* dotted variant should use an opaque overlay so connector doesn't show through */
-.br-step-vertical.v-variant-dotted .v-step-item:hover .v-step-circle:not(.active)::after { background-color: #eaf6ea }
+.br-step-vertical.v-variant-dotted
+  .v-step-item:hover
+  .v-step-circle:not(.active)::after {
+  background-color: #eaf6ea;
+}
 
 /* ensure dotted replacement markers visually replace the small dot and use wrapper background */
-.br-step-vertical.v-variant-dotted .v-step-status svg { width: 20px; height: 20px }
+.br-step-vertical.v-variant-dotted .v-step-status svg {
+  width: 20px;
+  height: 20px;
+}
 .br-step-vertical.v-variant-dotted .v-step-status svg path,
-.br-step-vertical.v-variant-dotted .v-step-status svg g { fill: currentColor !important; stroke: currentColor !important }
+.br-step-vertical.v-variant-dotted .v-step-status svg g {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
 
 /* dotted replacement markers use the state's color as background and white icon color */
-.br-step-vertical.v-variant-dotted .v-step-status--success { background-color: #168821; color: #ffffff }
-.br-step-vertical.v-variant-dotted .v-step-status--error { background-color: #e52207; color: #ffffff }
-.br-step-vertical.v-variant-dotted .v-step-status--warning { background-color: #ffcd07; color: #333333 }
-.br-step-vertical.v-variant-dotted .v-step-status--info { background-color: #2d86d8; color: #ffffff }
+.br-step-vertical.v-variant-dotted .v-step-status--success {
+  background-color: #168821;
+  color: #ffffff;
+}
+.br-step-vertical.v-variant-dotted .v-step-status--error {
+  background-color: #e52207;
+  color: #ffffff;
+}
+.br-step-vertical.v-variant-dotted .v-step-status--warning {
+  background-color: #ffcd07;
+  color: #333333;
+}
+.br-step-vertical.v-variant-dotted .v-step-status--info {
+  background-color: #2d86d8;
+  color: #ffffff;
+}
 
-.br-step-vertical.v-variant-dotted .v-step-status svg { width: 28px; height: 28px }
+.br-step-vertical.v-variant-dotted .v-step-status--success {
+  background-color: #168821;
+  color: #ffffff;
+}
+.br-step-vertical.v-variant-dotted .v-step-status--error {
+  background-color: #e52207;
+  color: #ffffff;
+}
+.br-step-vertical.v-variant-dotted .v-step-status--warning {
+  background-color: #ffcd07;
+  color: #333333;
+}
+.br-step-vertical.v-variant-dotted .v-step-status--info {
+  background-color: #2d86d8;
+  color: #ffffff;
+}
+
+.br-step-vertical.v-variant-dotted .v-step-status svg {
+  width: 28px;
+  height: 28px;
+}
 .br-step-vertical.v-variant-dotted .v-step-status svg path,
-.br-step-vertical.v-variant-dotted .v-step-status svg g { fill: currentColor !important; stroke: currentColor !important }
+.br-step-vertical.v-variant-dotted .v-step-status svg g {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
