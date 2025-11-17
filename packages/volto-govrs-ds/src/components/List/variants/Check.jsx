@@ -50,6 +50,52 @@ export default function Check({
             <div className="list-group__header">
               <div className="list-group__header-left">
                 <span className="list-group__label-text">{group.label}</span>
+
+                {effectiveCollapsible && horizontal ? (
+                  <button
+                    type="button"
+                    className="list-group__toggle"
+                    aria-expanded={!!openMap.get(group.label)}
+                    onClick={() => toggleGroup(group.label)}
+                  >
+                    <span className="list-group__toggle-icon" aria-hidden>
+                      {openMap.get(group.label) ? (
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M6 15l6-6 6 6"
+                            stroke="#2E7D32"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M6 9l6 6 6-6"
+                            stroke="#2E7D32"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      )}
+                    </span>
+                  </button>
+                ) : null}
+
                 {labeled && multiple && (
                   <input
                     type="checkbox"
@@ -70,7 +116,7 @@ export default function Check({
                 )}
               </div>
 
-              {effectiveCollapsible ? (
+              {!horizontal && effectiveCollapsible ? (
                 <button
                   type="button"
                   className="list-group__toggle"

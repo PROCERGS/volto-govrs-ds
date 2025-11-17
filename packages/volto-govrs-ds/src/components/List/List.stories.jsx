@@ -545,6 +545,7 @@ export const CheckExample = (args) => {
     labeled,
     collapsible,
     horizontal,
+    title,
   } = args;
 
   const [items, setItems] = React.useState(
@@ -587,7 +588,7 @@ export const CheckExample = (args) => {
         items={items}
         onToggle={onToggle}
         onToggleGroup={onToggleGroup}
-        title="Título"
+        title={title}
         multiple={multiple}
         labeled={labeled}
         collapsible={collapsible}
@@ -602,6 +603,7 @@ CheckExample.story = { name: 'Check Example' };
 CheckExample.args = {
   multiple: false,
   items: [],
+  title: 'Título',
   labeled: false,
   collapsible: false,
   horizontal: false,
@@ -610,6 +612,7 @@ CheckExample.args = {
 CheckExample.argTypes = {
   multiple: { control: 'boolean' },
   items: { control: 'object' },
+  title: { control: 'text' },
   labeled: { control: 'boolean' },
   collapsible: { control: 'boolean' },
   horizontal: { control: 'boolean' },
