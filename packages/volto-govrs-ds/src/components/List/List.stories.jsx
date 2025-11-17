@@ -134,7 +134,6 @@ export const ListDefaultDocs = () => (
     <h1>Lista — Variante Padrão</h1>
 
     <section style={{ marginTop: 8 }}>
-      <h2>Exemplo: lista simples (Default)</h2>
       <div style={{ width: 360 }}>
         <List
           variant="default"
@@ -377,20 +376,241 @@ export const ListDefaultDocs = () => (
           overflowX: 'auto',
         }}
       >
-        <code>{`// item simples
-{ id: '1', title: 'Título', text: 'Descrição curta' }
-
-// com imagem
-{ id: '2', title: 'Com imagem', image: 'https://.../img.jpg', imageAlt: 'Descrição da imagem' }
-
-// com ícone (JSX)
-{ id: '3', title: 'Com ícone', icon: SampleIcon }
-
-// com label (para uso com labeled)
-{ label: 'RÓTULO 01', id: 'l1', title: 'Sub-item' }`}</code>
+        <code>{`{ id: '1', title: 'Título', text: 'Descrição curta' }
+      { id: '2', title: 'Com imagem', image: 'https://.../img.jpg', imageAlt: 'Descrição da imagem' }
+      { id: '3', title: 'Com ícone', icon: SampleIcon }
+      { label: 'RÓTULO 01', id: 'l1', title: 'Sub-item' }`}</code>
       </pre>
     </section>
   </div>
 );
 
 ListDefaultDocs.story = { name: 'List Default Docs' };
+
+export const ListCheckDocs = () => {
+  const [items, setItems] = React.useState([
+    { id: 'd1', title: 'Paragraph' },
+    { id: 'd2', title: 'Paragraph' },
+    { id: 'd3', title: 'Paragraph' },
+    { id: 'd4', title: 'Paragraph' },
+  ]);
+
+  const [labeledItems, setLabeledItems] = React.useState([
+    { label: 'GROUP 1', id: 'g1-1', title: 'Paragraph' },
+    { label: 'GROUP 1', id: 'g1-2', title: 'Paragraph' },
+    { label: 'GROUP 2', id: 'g2-1', title: 'Paragraph' },
+    { label: 'GROUP 2', id: 'g2-2', title: 'Paragraph' },
+  ]);
+
+  function onToggle(item, opts = {}) {
+    setItems((prev) =>
+      prev.map((it) =>
+        it.id === item.id ? { ...it, checked: !it.checked } : it,
+      ),
+    );
+  }
+
+  function onToggleGroup(label, checked) {
+    setLabeledItems((prev) =>
+      prev.map((it) => (it.label === label ? { ...it, checked } : it)),
+    );
+  }
+
+  function onToggleLabeled(item, opts = {}) {
+    const isMultiple = opts.multiple ?? true;
+    setLabeledItems((prev) => {
+      if (isMultiple)
+        return prev.map((it) =>
+          it.id === item.id ? { ...it, checked: !it.checked } : it,
+        );
+      return prev.map((it) =>
+        it.id === item.id
+          ? { ...it, checked: !it.checked }
+          : { ...it, checked: false },
+      );
+    });
+  }
+
+  return (
+    <div style={{ padding: 16, maxWidth: 720 }}>
+      <p>
+        <strong>Lembrete:</strong> Esta é a seção da variante Check do
+        componente Lista, caso deseje ver outras props e suas funcionalidades,
+        consulte a variante Default na seção anterior.
+      </p>
+      <h1>Lista — Variante Check</h1>
+
+      <section style={{ marginTop: 8 }}>
+        <div style={{ width: 360 }}>
+          <List
+            variant="check"
+            title="Título"
+            items={items}
+            onToggle={onToggle}
+            multiple
+          />
+        </div>
+
+        <pre
+          style={{
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 4,
+            overflowX: 'auto',
+          }}
+        >
+          <code>{`<List variant="check" title="Título" items={[...]} multiple onToggle={...} />`}</code>
+        </pre>
+
+        <p>
+          A variante <code>check</code> exibe uma lista de itens com um checkbox
+          à direita de cada item. Use a prop <code>multiple</code> para permitir
+          múltiplas seleções. Quando <code>labeled</code> for usado junto com
+          <code>multiple</code>, um checkbox de grupo aparecerá no cabeçalho do
+          rótulo para selecionar/desmarcar todos os itens do grupo.
+        </p>
+      </section>
+
+      <section style={{ marginTop: 16 }}>
+        <h2>Props importantes</h2>
+
+        <h3 style={{ marginTop: 8 }}>Title</h3>
+        <p>O título exibido acima da lista (tipografia: 24px / 400).</p>
+        <pre
+          style={{
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 4,
+            overflowX: 'auto',
+          }}
+        >
+          <code>{`<List variant="check" title="Título" items={[{ id: '1', title: 'Item' }]} />`}</code>
+        </pre>
+
+        <h3 style={{ marginTop: 8 }}>Multiple</h3>
+        <p>
+          Passar <code>multiple</code> permite selecionar mais de um item. Caso
+          contrário, a seleção é single-select.
+        </p>
+        <pre
+          style={{
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 4,
+            overflowX: 'auto',
+          }}
+        >
+          <code>{`<List variant="check" multiple items={[{ id: '1', title: 'Item' }, { id: '2', title: 'Item' }]} />`}</code>
+        </pre>
+
+        <h3 style={{ marginTop: 8 }}>Labeled + Group Checkbox</h3>
+        <p>
+          Quando <code>labeled</code> e <code>multiple</code> estiverem ativos,
+          o componente mostrará um checkbox de grupo que marca/desmarca todos os
+          itens daquele rótulo.
+        </p>
+        <pre
+          style={{
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 4,
+            overflowX: 'auto',
+          }}
+        >
+          <code>{`<List variant="check" labeled multiple items={[{ label: 'G1', id: '1', title: 'A' }, { label: 'G1', id: '2', title: 'B' }]} />`}</code>
+        </pre>
+
+        <div style={{ width: 360, margin: '8px 0' }}>
+          <List
+            variant="check"
+            title="Título"
+            labeled
+            multiple
+            items={labeledItems}
+            onToggle={onToggleLabeled}
+            onToggleGroup={onToggleGroup}
+          />
+        </div>
+      </section>
+    </div>
+  );
+};
+
+ListCheckDocs.story = { name: 'List Check Docs' };
+
+export const CheckExample = (args) => {
+  const {
+    multiple,
+    items: controlledItems,
+    labeled,
+    collapsible,
+    horizontal,
+  } = args;
+
+  const [items, setItems] = React.useState(
+    controlledItems && controlledItems.length > 0
+      ? controlledItems
+      : [
+          { id: 'c1', title: 'Paragraph', label: 'Group 1' },
+          { id: 'c2', title: 'Paragraph', label: 'Group 1' },
+          { id: 'c3', title: 'Paragraph', label: 'Group 2' },
+          { id: 'c4', title: 'Paragraph', label: 'Group 2' },
+        ],
+  );
+
+  function onToggle(item, opts = {}) {
+    const isMultiple = opts.multiple ?? multiple;
+    setItems((prev) => {
+      if (isMultiple) {
+        return prev.map((it) =>
+          it.id === item.id ? { ...it, checked: !it.checked } : it,
+        );
+      }
+      return prev.map((it) =>
+        it.id === item.id
+          ? { ...it, checked: !it.checked }
+          : { ...it, checked: false },
+      );
+    });
+  }
+
+  function onToggleGroup(label, checked) {
+    setItems((prev) =>
+      prev.map((it) => (it.label === label ? { ...it, checked } : it)),
+    );
+  }
+
+  return (
+    <div style={{ width: horizontal ? 960 : 360 }}>
+      <List
+        variant="check"
+        items={items}
+        onToggle={onToggle}
+        onToggleGroup={onToggleGroup}
+        title="Título"
+        multiple={multiple}
+        labeled={labeled}
+        collapsible={collapsible}
+        horizontal={horizontal}
+      />
+    </div>
+  );
+};
+
+CheckExample.story = { name: 'Check Example' };
+
+CheckExample.args = {
+  multiple: false,
+  items: [],
+  labeled: false,
+  collapsible: false,
+  horizontal: false,
+};
+
+CheckExample.argTypes = {
+  multiple: { control: 'boolean' },
+  items: { control: 'object' },
+  labeled: { control: 'boolean' },
+  collapsible: { control: 'boolean' },
+  horizontal: { control: 'boolean' },
+};
