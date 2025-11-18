@@ -74,61 +74,6 @@ const defaultItems = [
   },
 ];
 
-const InteractiveTemplate = (args) => {
-  const { preset, items: controlledItems, ...rest } = args;
-
-  if (controlledItems && controlledItems.length > 0) {
-    return (
-      <div style={{ width: rest.horizontal ? 960 : 640 }}>
-        <h4>Default Interativo</h4>
-        <List variant="default" items={controlledItems} {...rest} />
-      </div>
-    );
-  }
-
-  const items = defaultItems.map((it) => {
-    const copy = { ...it };
-    if (preset === 'images') {
-      copy.icon = null;
-    } else if (preset === 'icons') {
-      copy.image = null;
-      copy.imageAlt = null;
-    } else if (preset === 'none') {
-      copy.image = null;
-      copy.imageAlt = null;
-      copy.icon = null;
-    }
-    return copy;
-  });
-
-  return (
-    <div style={{ width: rest.horizontal ? 960 : 640 }}>
-      <h4>Default Interativo</h4>
-      <List variant="default" items={items} {...rest} />
-    </div>
-  );
-};
-
-export const DefaultInterativo = InteractiveTemplate.bind({});
-DefaultInterativo.storyName = 'Default Interativo';
-DefaultInterativo.args = {
-  preset: 'mixed',
-  items: defaultItems,
-  horizontal: false,
-  labeled: false,
-  collapsible: false,
-};
-DefaultInterativo.argTypes = {
-  preset: {
-    control: { type: 'inline-radio' },
-    options: ['mixed', 'images', 'icons', 'none'],
-  },
-  items: { control: 'object' },
-  horizontal: { control: 'boolean' },
-  labeled: { control: 'boolean' },
-  collapsible: { control: 'boolean' },
-};
-
 export const ListDefaultDocs = () => (
   <div style={{ padding: 16, maxWidth: 720 }}>
     <h1>Lista — Variante Padrão</h1>
@@ -538,7 +483,230 @@ export const ListCheckDocs = () => {
 
 ListCheckDocs.story = { name: 'List Check Docs' };
 
-export const CheckExample = (args) => {
+const defaultCardItems = [
+  {
+    id: 'card1',
+    title: 'Card 1',
+    description: 'Descrição do card 1',
+    image:
+      'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+    imageAlt: 'Imagem card 1',
+  },
+  {
+    id: 'card2',
+    title: 'Card 2',
+    description: 'Descrição do card 2',
+    image:
+      'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+    imageAlt: 'Imagem card 2',
+  },
+  {
+    id: 'card3',
+    title: 'Card 3',
+    description: 'Descrição do card 3',
+  },
+  {
+    id: 'card4',
+    title: 'Card 4',
+    description: 'Descrição do card 4',
+  },
+];
+
+export const ListCardDocs = () => {
+  const [items] = React.useState(defaultCardItems);
+
+  return (
+    <div style={{ padding: 16, maxWidth: 960 }}>
+      <p>
+        <strong>Lembrete:</strong> Esta é a seção da variante Card do componente
+        Lista. Para outras props e funcionalidades consulte as seções
+        anteriores.
+      </p>
+      <h1>Lista — Variante Card</h1>
+
+      <section style={{ marginTop: 8 }}>
+        <div style={{ width: '100%', maxWidth: 960 }}>
+          <List variant="card" perRow={3} items={items} />
+        </div>
+
+        <pre
+          style={{
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 4,
+            overflowX: 'auto',
+          }}
+        >
+          <code>{`<List variant="card" perRow={3} items={[{ id: 'card1', title: 'Card 1', description: '...' }]} />`}</code>
+        </pre>
+
+        <p>
+          A variante <code>card</code> exibe cada item como um cartão visual e
+          organiza os itens em uma grelha controlada por <code>perRow</code>.
+          Ajuste <code>perRow</code> para alterar o número de colunas por linha.
+        </p>
+        <p>
+          <strong>Importante:</strong> Por padrão a variante <code>Card</code>{' '}
+          vem na orientação horizontal, e o número de itens por linha é
+          controlado pela prop <code>perRow</code>. Caso a intenção seja uma
+          lista vertical, basta apenas colocar <code>perRow</code> para 1.
+        </p>
+      </section>
+
+      <section style={{ marginTop: 16 }}>
+        <h2>Props importantes</h2>
+
+        <h3 style={{ marginTop: 8 }}>perRow</h3>
+        <p>
+          Controla quantas colunas a grade deve apresentar por linha. Valor
+          padrão: <code>3</code>. Use <code>1</code> para uma lista vertical.
+        </p>
+        <pre
+          style={{
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 4,
+            overflowX: 'auto',
+          }}
+        >
+          <code>{`<List variant="card" perRow={4} items={[{ id: 'card-1', title: '...' }]} />`}</code>
+        </pre>
+
+        <h3 style={{ marginTop: 8 }}>items</h3>
+        <p>
+          Array de objetos onde cada objeto representa um componente Card com
+          suas props internas(veja formato abaixo).
+        </p>
+
+        <div style={{ margin: '8px 0' }}>
+          <List variant="card" perRow={3} items={items} />
+        </div>
+      </section>
+
+      <section style={{ marginTop: 16 }}>
+        <h2>Props do item (formato esperado)</h2>
+        <p>
+          O formato do objeto esperado por cada item é o mesmo aceito pelo
+          componente <code>Card</code>:
+        </p>
+
+        <ul>
+          <li>
+            <strong>id</strong>: identificador único.
+          </li>
+          <li>
+            <strong>title</strong>: título do card.
+          </li>
+          <li>
+            <strong>description</strong>: texto de apoio.
+          </li>
+          <li>
+            <strong>image</strong> / <strong>imageAlt</strong>: imagem do
+            cabeçalho.
+          </li>
+          <li>
+            <strong>bodyImg</strong> / <strong>bodyImgAlt</strong>: imagem do
+            corpo.
+          </li>
+          <li>
+            <strong>size</strong>, <strong>disabled</strong>,{' '}
+            <strong>href</strong>, <strong>children</strong>,{' '}
+            <strong>acao</strong>, <strong>onLike</strong>,{' '}
+            <strong>onShare</strong>, <strong>itens</strong>.
+          </li>
+        </ul>
+        <p>
+          Para maiores detalhes, visitar a documentação do componente Card para
+          saber o que deve ser passado em cada item.
+        </p>
+
+        <h3 style={{ marginTop: 8 }}>Exemplo de objeto (item)</h3>
+        <pre
+          style={{
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 4,
+            overflowX: 'auto',
+          }}
+        >
+          <code>{`{
+  id: 'card-1',
+  title: 'Título de exemplo',
+  description: 'Descrição curta do card',
+  image: 'https://.../header.jpg',
+  imageAlt: 'Imagem do card',
+  bodyImg: 'https://.../body.jpg',
+  bodyImgAlt: 'Imagem do corpo',
+  size: 'small',
+  disabled: false,
+  href: '/pagina',
+  acao: { label: 'Ler mais', url: '/pagina' },
+  itens: [{ value: 'Ponto A' }, { value: 'Ponto B' }],
+}`}</code>
+        </pre>
+      </section>
+    </div>
+  );
+};
+
+ListCardDocs.story = { name: 'List Card Docs' };
+
+const InteractiveTemplate = (args) => {
+  const { preset, items: controlledItems, ...rest } = args;
+
+  if (controlledItems && controlledItems.length > 0) {
+    return (
+      <div style={{ width: rest.horizontal ? 960 : 640 }}>
+        <h4>Default Interativo</h4>
+        <List variant="default" items={controlledItems} {...rest} />
+      </div>
+    );
+  }
+
+  const items = defaultItems.map((it) => {
+    const copy = { ...it };
+    if (preset === 'images') {
+      copy.icon = null;
+    } else if (preset === 'icons') {
+      copy.image = null;
+      copy.imageAlt = null;
+    } else if (preset === 'none') {
+      copy.image = null;
+      copy.imageAlt = null;
+      copy.icon = null;
+    }
+    return copy;
+  });
+
+  return (
+    <div style={{ width: rest.horizontal ? 960 : 640 }}>
+      <h4>Default Interativo</h4>
+      <List variant="default" items={items} {...rest} />
+    </div>
+  );
+};
+
+export const DefaultInterativo = InteractiveTemplate.bind({});
+DefaultInterativo.storyName = 'Default Interativo';
+DefaultInterativo.args = {
+  preset: 'mixed',
+  items: defaultItems,
+  horizontal: false,
+  labeled: false,
+  collapsible: false,
+};
+DefaultInterativo.argTypes = {
+  preset: {
+    control: { type: 'inline-radio' },
+    options: ['mixed', 'images', 'icons', 'none'],
+  },
+  items: { control: 'object' },
+  horizontal: { control: 'boolean' },
+  labeled: { control: 'boolean' },
+  collapsible: { control: 'boolean' },
+};
+
+export const CheckInterativo = (args) => {
   const {
     multiple,
     items: controlledItems,
@@ -548,7 +716,7 @@ export const CheckExample = (args) => {
     title,
   } = args;
 
-  const [items, setItems] = React.useState(
+  const exampleItems =
     controlledItems && controlledItems.length > 0
       ? controlledItems
       : [
@@ -556,8 +724,16 @@ export const CheckExample = (args) => {
           { id: 'c2', title: 'Paragraph', label: 'Group 1' },
           { id: 'c3', title: 'Paragraph', label: 'Group 2' },
           { id: 'c4', title: 'Paragraph', label: 'Group 2' },
-        ],
-  );
+        ];
+
+  const [items, setItems] = React.useState(exampleItems);
+
+  React.useEffect(() => {
+    // Keep internal state synced with controls: when args.items changes, update rendered items
+    if (controlledItems && controlledItems.length > 0) {
+      setItems(controlledItems);
+    }
+  }, [controlledItems]);
 
   function onToggle(item, opts = {}) {
     const isMultiple = opts.multiple ?? multiple;
@@ -598,22 +774,59 @@ export const CheckExample = (args) => {
   );
 };
 
-CheckExample.story = { name: 'Check Example' };
+CheckInterativo.story = { name: 'Check Interativo' };
 
-CheckExample.args = {
+CheckInterativo.args = {
   multiple: false,
-  items: [],
+  items: [
+    { id: 'c1', title: 'Paragraph', label: 'Group 1' },
+    { id: 'c2', title: 'Paragraph', label: 'Group 1' },
+    { id: 'c3', title: 'Paragraph', label: 'Group 2' },
+    { id: 'c4', title: 'Paragraph', label: 'Group 2' },
+  ],
   title: 'Título',
   labeled: false,
   collapsible: false,
   horizontal: false,
 };
 
-CheckExample.argTypes = {
+CheckInterativo.argTypes = {
   multiple: { control: 'boolean' },
   items: { control: 'object' },
   title: { control: 'text' },
   labeled: { control: 'boolean' },
   collapsible: { control: 'boolean' },
   horizontal: { control: 'boolean' },
+};
+
+export const CardInterativo = (args) => {
+  const { items: controlledItems, perRow } = args;
+
+  const exampleItems =
+    controlledItems && controlledItems.length > 0
+      ? controlledItems
+      : defaultCardItems;
+  const [items, setItems] = React.useState(exampleItems);
+
+  React.useEffect(() => {
+    if (controlledItems && controlledItems.length > 0)
+      setItems(controlledItems);
+  }, [controlledItems]);
+
+  return (
+    <div style={{ width: '100%', maxWidth: Math.min(1280, perRow * 340) }}>
+      <h4>Card — Interativo</h4>
+      <List variant="card" items={items} perRow={perRow} />
+    </div>
+  );
+};
+
+CardInterativo.storyName = 'Card Interativo';
+CardInterativo.args = {
+  items: defaultCardItems,
+  perRow: 3,
+};
+CardInterativo.argTypes = {
+  items: { control: 'object' },
+  perRow: { control: { type: 'number', min: 1, max: 6, step: 1 } },
 };
