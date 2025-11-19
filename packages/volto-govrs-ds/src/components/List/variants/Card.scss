@@ -8,7 +8,10 @@
 }
 
 .list-card__item {
+  display: flex;
+  min-width: 0;
   box-sizing: border-box;
+  flex-direction: column;
   padding: 24px 16px;
 }
 

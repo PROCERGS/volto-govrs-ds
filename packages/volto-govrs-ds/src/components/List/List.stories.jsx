@@ -483,6 +483,221 @@ export const ListCheckDocs = () => {
 
 ListCheckDocs.story = { name: 'List Check Docs' };
 
+export const ListLinkDocs = () => (
+  <div style={{ padding: 16, maxWidth: 720 }}>
+    <p>
+      <strong>Lembrete:</strong> Esta é a seção da variante Link do componente
+      Lista. Para outras props e funcionalidades consulte as seções anteriores.
+    </p>
+    <h1>Lista — Variante Link</h1>
+
+    <section style={{ marginTop: 8 }}>
+      <h2>Uso básico</h2>
+      <div style={{ width: 360 }}>
+        <List
+          variant="link"
+          items={[
+            {
+              id: 'l1',
+              meta: 'RECOMENDADOS',
+              title: 'Solicitar Benefício Assistencial ao Idoso',
+              href: '#',
+              icon: SampleIcon,
+            },
+            {
+              id: 'l2',
+              meta: 'RECOMENDADOS',
+              title: 'Inscrever-se no Cadastro Único',
+              href: '#',
+              icon: SampleIcon,
+            },
+          ]}
+        />
+      </div>
+
+      <pre
+        style={{
+          background: '#f7f7f7',
+          padding: 12,
+          borderRadius: 4,
+          overflowX: 'auto',
+        }}
+      >
+        <code>{`<List variant="link" items={[{ id: 'l1', meta: 'RECOMENDADOS', title: '...', href: '#' }]} />`}</code>
+      </pre>
+    </section>
+
+    <section style={{ marginTop: 16 }}>
+      <h2>Props importantes</h2>
+
+      <h3 style={{ marginTop: 8 }}>numbered</h3>
+      <p>
+        Quando <code>numbered</code> for passado, os itens são numerados
+        automaticamente (1, 2, 3...). Útil para listas de passos ou ordenação
+        visual.
+      </p>
+
+      <div style={{ width: 360, margin: '8px 0' }}>
+        <List
+          variant="link"
+          numbered
+          items={[
+            { id: 'n1', meta: 'PASSO', title: 'Primeiro passo', href: '#' },
+            { id: 'n2', meta: 'PASSO', title: 'Segundo passo', href: '#' },
+          ]}
+        />
+      </div>
+
+      <pre
+        style={{
+          background: '#f7f7f7',
+          padding: 12,
+          borderRadius: 4,
+          overflowX: 'auto',
+        }}
+      >
+        <code>{`<List variant="link" numbered items={[{ id: 'n1', meta: 'PASSO', title: 'Primeiro passo', href: '#' }]} />`}</code>
+      </pre>
+
+      <h3 style={{ marginTop: 8 }}>iconified</h3>
+      <p>
+        Quando <code>iconified</code> for passado, o componente usa a prop
+        <code>icon</code> em cada item (JSX SVG). Se o item tiver{' '}
+        <code>icon</code>e <code>numbered</code> estiver ativo, o ícone tem
+        prioridade.
+      </p>
+
+      <div style={{ width: 360, margin: '8px 0' }}>
+        <List
+          variant="link"
+          iconified
+          items={[
+            {
+              id: 'ic1',
+              meta: 'RECOMENDADOS',
+              title: 'Ação 1',
+              href: '#',
+              icon: SampleIcon,
+            },
+            {
+              id: 'ic2',
+              meta: 'RECOMENDADOS',
+              title: 'Ação 2',
+              href: '#',
+              icon: SampleIcon,
+            },
+          ]}
+        />
+      </div>
+
+      <pre
+        style={{
+          background: '#f7f7f7',
+          padding: 12,
+          borderRadius: 4,
+          overflowX: 'auto',
+        }}
+      >
+        <code>{`<List variant="link" iconified items={[{ id: 'ic1', meta: 'RECOMENDADOS', title: 'Ação 1', href: '#', icon: SampleIcon }]} />`}</code>
+      </pre>
+
+      <h3 style={{ marginTop: 8 }}>invert</h3>
+      <p>
+        Quando <code>invert</code> for passado, a ordem do meta/parágrafo e do
+        link <code>&lt;a&gt;</code> é invertida (o título/link aparece acima do
+        parágrafo/meta). Útil quando se deseja destacar o link primeiro.
+      </p>
+
+      <div style={{ width: 360, margin: '8px 0' }}>
+        <List
+          variant="link"
+          invert
+          items={[
+            {
+              id: 'iv1',
+              meta: 'INFO',
+              title: 'Leia antes',
+              href: '#',
+              icon: SampleIcon,
+            },
+            {
+              id: 'iv2',
+              meta: 'INFO',
+              title: 'Leia depois',
+              href: '#',
+              icon: SampleIcon,
+            },
+          ]}
+        />
+      </div>
+
+      <pre
+        style={{
+          background: '#f7f7f7',
+          padding: 12,
+          borderRadius: 4,
+          overflowX: 'auto',
+        }}
+      >
+        <code>{`<List variant="link" invert items={[{ id: 'iv1', meta: 'INFO', title: 'Leia antes', href: '#' }]} />`}</code>
+      </pre>
+
+      <p style={{ marginTop: 12 }}>
+        Observações: o componente prioriza ícone quando ambos <code>icon</code>e{' '}
+        <code>numbered</code> estiverem presentes. O estilo do link inclui
+        underline apenas em hover/focus e mantém a mesma cor ao interagir.
+      </p>
+    </section>
+    <section style={{ marginTop: 16 }}>
+      <h2>Estrutura do item</h2>
+      <p>
+        Cada item esperado pelo componente é um objeto com as seguintes
+        propriedades possíveis. Nem todas são obrigatórias — use conforme o caso
+        de uso.
+      </p>
+      <ul>
+        <li>
+          <strong>id</strong>: identificador único (recomendado para chaves).
+        </li>
+        <li>
+          <strong>title</strong>: título do link (string).
+        </li>
+        <li>
+          <strong>meta</strong>: texto de apoio/etiqueta acima ou abaixo do link
+          (opcional).
+        </li>
+        <li>
+          <strong>href</strong>: URL alvo do link (opcional — padrão '#').
+        </li>
+        <li>
+          <strong>icon</strong>: JSX (SVG) exibido na coluna esquerda quando
+          <code>iconified</code> estiver ativo.
+        </li>
+      </ul>
+
+      <h4 style={{ marginTop: 8 }}>Exemplo de objeto</h4>
+      <pre
+        style={{
+          background: '#f7f7f7',
+          padding: 12,
+          borderRadius: 4,
+          overflowX: 'auto',
+        }}
+      >
+        <code>{`{
+  id: 'l1',
+  meta: 'RECOMENDADOS',
+  title: 'Solicitar Benefício Assistencial ao Idoso',
+  href: '#',
+  icon: SampleIcon,
+}`}</code>
+      </pre>
+    </section>
+  </div>
+);
+
+ListLinkDocs.story = { name: 'List Link Docs' };
+
 const defaultCardItems = [
   {
     id: 'card1',
@@ -653,17 +868,12 @@ ListCardDocs.story = { name: 'List Card Docs' };
 
 const InteractiveTemplate = (args) => {
   const { preset, items: controlledItems, ...rest } = args;
+  const baseItems =
+    controlledItems && controlledItems.length > 0
+      ? controlledItems
+      : defaultItems;
 
-  if (controlledItems && controlledItems.length > 0) {
-    return (
-      <div style={{ width: rest.horizontal ? 960 : 640 }}>
-        <h4>Default Interativo</h4>
-        <List variant="default" items={controlledItems} {...rest} />
-      </div>
-    );
-  }
-
-  const items = defaultItems.map((it) => {
+  const items = baseItems.map((it) => {
     const copy = { ...it };
     if (preset === 'images') {
       copy.icon = null;
@@ -707,96 +917,120 @@ DefaultInterativo.argTypes = {
 };
 
 export const CheckInterativo = (args) => {
-  const {
-    multiple,
-    items: controlledItems,
-    labeled,
-    collapsible,
-    horizontal,
-    title,
-  } = args;
-
+  const { items: controlledItems } = args;
   const exampleItems =
     controlledItems && controlledItems.length > 0
       ? controlledItems
       : [
-          { id: 'c1', title: 'Paragraph', label: 'Group 1' },
-          { id: 'c2', title: 'Paragraph', label: 'Group 1' },
-          { id: 'c3', title: 'Paragraph', label: 'Group 2' },
-          { id: 'c4', title: 'Paragraph', label: 'Group 2' },
+          { id: 'c1', title: 'Opção A' },
+          { id: 'c2', title: 'Opção B' },
+          { id: 'c3', title: 'Opção C' },
         ];
 
   const [items, setItems] = React.useState(exampleItems);
 
   React.useEffect(() => {
-    // Keep internal state synced with controls: when args.items changes, update rendered items
-    if (controlledItems && controlledItems.length > 0) {
+    if (controlledItems && controlledItems.length > 0)
       setItems(controlledItems);
-    }
   }, [controlledItems]);
 
-  function onToggle(item, opts = {}) {
-    const isMultiple = opts.multiple ?? multiple;
-    setItems((prev) => {
-      if (isMultiple) {
-        return prev.map((it) =>
-          it.id === item.id ? { ...it, checked: !it.checked } : it,
-        );
-      }
-      return prev.map((it) =>
-        it.id === item.id
-          ? { ...it, checked: !it.checked }
-          : { ...it, checked: false },
-      );
-    });
-  }
-
-  function onToggleGroup(label, checked) {
+  function onToggle(item) {
     setItems((prev) =>
-      prev.map((it) => (it.label === label ? { ...it, checked } : it)),
+      prev.map((it) =>
+        it.id === item.id ? { ...it, checked: !it.checked } : it,
+      ),
     );
   }
 
   return (
-    <div style={{ width: horizontal ? 960 : 360 }}>
+    <div style={{ width: 360 }}>
+      <h4>Check — Interativo</h4>
       <List
         variant="check"
+        title="Título"
         items={items}
         onToggle={onToggle}
-        onToggleGroup={onToggleGroup}
-        title={title}
-        multiple={multiple}
-        labeled={labeled}
-        collapsible={collapsible}
-        horizontal={horizontal}
+        multiple
       />
     </div>
   );
 };
 
-CheckInterativo.story = { name: 'Check Interativo' };
-
+CheckInterativo.storyName = 'Check Interativo';
 CheckInterativo.args = {
-  multiple: false,
   items: [
-    { id: 'c1', title: 'Paragraph', label: 'Group 1' },
-    { id: 'c2', title: 'Paragraph', label: 'Group 1' },
-    { id: 'c3', title: 'Paragraph', label: 'Group 2' },
-    { id: 'c4', title: 'Paragraph', label: 'Group 2' },
+    { id: 'c1', title: 'Opção A' },
+    { id: 'c2', title: 'Opção B' },
+    { id: 'c3', title: 'Opção C' },
   ],
-  title: 'Título',
-  labeled: false,
-  collapsible: false,
-  horizontal: false,
+};
+CheckInterativo.argTypes = {
+  items: { control: 'object' },
 };
 
-CheckInterativo.argTypes = {
-  multiple: { control: 'boolean' },
+export const LinkInterativo = (args) => {
+  const { items: controlledItems } = args;
+  const items =
+    controlledItems && controlledItems.length > 0
+      ? controlledItems
+      : [
+          {
+            id: 'l1',
+            meta: 'RECOMENDADOS',
+            title: 'Solicitar Benefício Assistencial ao Idoso',
+            href: '#',
+            icon: SampleIcon,
+          },
+          {
+            id: 'l2',
+            meta: 'RECOMENDADOS',
+            title: 'Inscrever-se no Cadastro Único',
+            href: '#',
+            icon: SampleIcon,
+          },
+        ];
+
+  return (
+    <div style={{ width: 360 }}>
+      <h4>Link — Interativo</h4>
+      <List
+        variant="link"
+        items={items}
+        numbered={args.numbered}
+        iconified={args.iconified}
+        invert={args.invert}
+      />
+    </div>
+  );
+};
+
+LinkInterativo.storyName = 'Link Interativo';
+LinkInterativo.args = {
+  items: [
+    {
+      id: 'l1',
+      meta: 'RECOMENDADOS',
+      title: 'Solicitar Benefício Assistencial ao Idoso',
+      href: '#',
+      icon: SampleIcon,
+    },
+    {
+      id: 'l2',
+      meta: 'RECOMENDADOS',
+      title: 'Inscrever-se no Cadastro Único',
+      href: '#',
+      icon: SampleIcon,
+    },
+  ],
+  numbered: false,
+  iconified: true,
+  invert: false,
+};
+LinkInterativo.argTypes = {
   items: { control: 'object' },
-  title: { control: 'text' },
-  labeled: { control: 'boolean' },
-  collapsible: { control: 'boolean' },
-  horizontal: { control: 'boolean' },
+  numbered: { control: 'boolean' },
+  iconified: { control: 'boolean' },
+  invert: { control: 'boolean' },
 };
 
 export const CardInterativo = (args) => {
