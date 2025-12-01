@@ -1,1 +1,0 @@
-Slider customizado (@andressasias-procergs)
