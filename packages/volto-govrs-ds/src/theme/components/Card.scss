@@ -1,0 +1,13 @@
+/* Minimal Card styles to satisfy imports during Storybook build */
+.card {
+  display: block;
+  background: transparent;
+}
+
+.card__header {
+  font-weight: 600;
+}
+
+.card__body {
+  padding: 0.5rem;
+}
