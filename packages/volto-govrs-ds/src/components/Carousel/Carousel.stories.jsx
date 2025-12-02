@@ -7,11 +7,6 @@ export default {
   parameters: { layout: 'padded' },
 };
 
-const lintWarnings = [
-  "Warning: imports from '@plone/volto/*' barrel files are discouraged (no-restricted-imports)",
-  'Warning: use Image component from @plone/volto/components/theme/Image/Image instead of <img> (no-restricted-syntax)',
-];
-
 export const CarouselDocumentacao = () => (
   <div style={{ padding: 16, width: '100%', maxWidth: 1200 }}>
     <div style={{ width: '100%' }}>
@@ -257,12 +252,7 @@ export const CarouselDocumentacao = () => (
       </div>
     </div>
 
-    <div style={{ marginTop: 16 }}>
-      <h5>Lint Warnings</h5>
-      <pre style={{ background: '#fff8e1', padding: 12, borderRadius: 4 }}>
-        {lintWarnings.join('\n')}
-      </pre>
-    </div>
+    
   </div>
 );
 
