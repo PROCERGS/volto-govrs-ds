@@ -117,9 +117,6 @@ export const ListDefaultDocs = () => (
         assume o valor "default".
       </p>
     </section>
-
-    
-
     <section style={{ marginTop: 16 }}>
       <h2>Props</h2>
 

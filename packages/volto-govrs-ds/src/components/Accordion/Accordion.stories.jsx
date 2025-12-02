@@ -82,6 +82,10 @@ export default {
   parameters: { layout: 'padded' },
 };
 
+const lintWarnings = [
+  "Warning: imports from '@plone/volto/*' barrel files are discouraged",
+];
+
 export const AccordionDocumentacao = () => (
   <div style={{ padding: 16, maxWidth: 1200 }}>
     <h3 style={{ marginTop: 0 }}>Accordion</h3>
@@ -113,9 +117,7 @@ export const AccordionDocumentacao = () => (
         painéis. Suporta múltiplos modos de exibição, temas de cores,
         busca/filtro e controle de estado dos painéis.
       </p>
-    </section>
-
-    
+    </section>    
 
     <section style={{ marginBottom: 24 }}>
       <h4 style={{ margin: '6px 0' }}>Propriedades</h4>
