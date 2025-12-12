@@ -61,16 +61,6 @@ function SelectionExample() {
   );
 }
 
-export const DefaultDocs = () => (
-  <div style={{ padding: 16 }}>
-    <Table
-      variant="default"
-      title="Tabela — Variante Default"
-      columns={columns}
-      items={makeItems(200)}
-    />
-  </div>
-);
 export const TableDefaultDocumentacao = () => (
   <div style={{ padding: 16, maxWidth: 1045 }}>
     <h3 style={{ marginTop: 0 }}>Tabela — Variante Padrão</h3>
@@ -220,7 +210,7 @@ export const TableDefaultDocumentacao = () => (
   </div>
 );
 
-TableDefaultDocumentacao.storyName = 'Documentação';
+TableDefaultDocumentacao.storyName = 'Documentação Default';
 
 export const DefaultInterativo = ({ title, showCheckbox, count }) => (
   <div style={{ padding: 16 }}>
@@ -247,25 +237,367 @@ DefaultInterativo.args = {
   count: 200,
 };
 
-export const IrregularDocs = () => {
-  const irregularItems = [
-    { id: 'r1', cells: ['A1', 'B1', 'C1'] },
-    { id: 'r2', cells: ['A2', 'B2'] },
-    { id: 'r3', cells: ['A3', 'B3', 'C3', 'D3'] },
-  ];
-  return (
-    <div style={{ padding: 16 }}>
-      <Table
-        variant="irregular"
-        title="Tabela — Variante Irregular"
-        items={irregularItems.concat(
-          makeItems(120).map((it) => ({
-            id: it.id,
-            cells: [it.col1, it.col2, it.col3],
-          })),
-        )}
-      />
+export const IrregularDocumentacao = () => (
+  <div style={{ padding: 16, maxWidth: 1045 }}>
+    <h3 style={{ marginTop: 0 }}>Tabela — Variante Irregular (Documentação)</h3>
+
+    <section style={{ marginBottom: 12 }}>
+      <p style={{ color: '#444' }}>
+        A variação <code>irregular</code> é aplicada via classes CSS em uma
+        marcação <code>&lt;table&gt;</code> sem um componente React específico.
+        Essa abordagem segue o padrão gov.br: você usa a estrutura semântica de
+        tabelas HTML (com <code>thead</code>, <code>tbody</code> e
+        <code>th</code> com <code>rowspan</code>/<code>colspan</code>) e aplica
+        classes utilitárias para obter o visual. Abaixo explicamos as classes
+        principais e as customizações realizadas.
+      </p>
+      <p>
+        Por motivos de ser alterações de css e estrutura html basicamente, a
+        parte de pesquisa fica a cargo do desenvolvedor, visto que criar um
+        padrão de busca para um conjunto irregular de dados sem ter conhecimento
+        deles e formando um padrão a ser seguido, seria complexo demais e muito
+        engessado.
+      </p>
+    </section>
+
+    <section style={{ marginBottom: 12 }}>
+      <h4 style={{ margin: '6px 0' }}>Estrutura e classes</h4>
+
+      <div style={{ marginBottom: 10 }}>
+        <h5 style={{ margin: '6px 0' }}>Principais classes e elementos</h5>
+        <p style={{ color: '#444' }}>
+          Abaixo há o mapeamento das classes/elementos mais usados e como eles
+          se relacionam com colunas, linhas e variações (subcolunas /
+          sublinhas):
+        </p>
+
+        <ul style={{ color: '#444' }}>
+          <li>
+            <strong>`.table-component.table-irregular`</strong>: wrapper geral
+            (aplica contexto visual, fonte e espaçamento).
+          </li>
+          <li>
+            <strong>`.table-header`</strong>: área superior com título e ações
+            (mesmo comportamento do Default).
+          </li>
+          <li>
+            <strong>`table thead` / `thead th`</strong>: <em>colunas</em> — use
+            para declarar os títulos das colunas. Essas células recebem fundo
+            cinza <code>#f0f0f0</code>, cor do rótulo <code>#1a7235</code> e
+            efeitos de hover/active;
+          </li>
+          <li>
+            <strong>`thead tr` (segunda linha de cabeçalho)</strong>:
+            <em> subcolunas</em> — quando você precisa dividir um grupo de
+            colunas (usando <code>colSpan</code> no primeiro <code>tr</code>),
+            declare os rótulos das subcolunas na segunda linha do
+            <code> thead</code>.
+          </li>
+          <li>
+            <strong>`tbody tr`</strong>: <em>linhas</em> regulares — cada
+            <code> tr</code> representa uma linha de dados dentro do grupo.
+          </li>
+          <li>
+            <strong>
+              `tbody th` (com <code>rowSpan</code>)
+            </strong>
+            :<em> sublinhas</em> / cabeçalhos de grupo de linhas — são usados
+            para rótulos como <em>Zodiac</em> ou <em>Angels</em>. Recebem o
+            mesmo estilo visual dos cabeçalhos de coluna (cor, fundo,
+            hover/active) e normalmente têm <code>rowSpan</code> para englobar
+            várias linhas de detalhe.
+          </li>
+          <li>
+            <strong>Utilitários de borda:</strong> <code>.border-left</code>,
+            <code>.border-right</code> e <code>.border-bottom</code> — aplique
+            manualmente em <code>th</code> / <code>td</code> quando precisar
+            forçar divisórias ao redor de células que usam
+            <code> colspan/rowspan</code>. Regras como <code>td + td</code> e
+            <code>th + th</code> também desenham bordas automaticamente entre
+            células adjacentes.
+          </li>
+        </ul>
+
+        <p style={{ color: '#444' }}>
+          Em resumo: use elementos semânticos HTML (<code>thead</code>,
+          <code>tbody</code>, <code>th</code>, <code>td</code>) para estruturar
+          colunas, linhas, subcolunas e sublinhas; complemente com as classes
+          utilitárias para ajustes finos de borda e agrupamento visual.
+        </p>
+      </div>
+    </section>
+
+    <section style={{ marginBottom: 12 }}>
+      <h4 style={{ margin: '6px 0' }}>Customizações implementadas</h4>
+      <ul style={{ color: '#444' }}>
+        <li>
+          Header e subheaders usam a mesma cor verde <code>#1a7235</code>.
+        </li>
+        <li>
+          Hover e estado ativo replicados para <code>tbody th</code>.
+        </li>
+        <li>
+          Bordas verticais entre subcolunas e horizontais entre sublinhas.
+        </li>
+        <li>
+          Separador entre grupos de linhas (<code>tbody + tbody</code>).
+        </li>
+      </ul>
+    </section>
+
+    <section style={{ marginBottom: 12 }}>
+      <h4 style={{ margin: '6px 0' }}>Exemplo de marcação</h4>
+      <div style={{ background: '#fff', padding: 12, borderRadius: 6 }}>
+        <div className="table-component table-irregular">
+          <div className="table-header">
+            <div className="top-bar">
+              <div className="table-title">Tabela irregular — exemplo</div>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th className="border-bottom" scope="col">
+                  Poster name
+                </th>
+                <th className="border-bottom border-left" scope="col">
+                  Color
+                </th>
+                <th
+                  className="border-bottom border-left"
+                  colSpan={3}
+                  scope="colgroup"
+                >
+                  Sizes available
+                </th>
+              </tr>
+              <tr>
+                <th className="border-bottom" scope="col">
+                  &nbsp;
+                </th>
+                <th className="border-bottom border-left" scope="col">
+                  &nbsp;
+                </th>
+                <th className="border-bottom" scope="col">
+                  A2
+                </th>
+                <th className="border-bottom" scope="col">
+                  A3
+                </th>
+                <th className="border-bottom" scope="col">
+                  A4
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th className="border-right" rowSpan={3} scope="rowgroup">
+                  Zodiac
+                </th>
+                <td>Full color</td>
+                <td>A2</td>
+                <td>A3</td>
+                <td>A4</td>
+              </tr>
+              <tr>
+                <td>Black and white</td>
+                <td>A1</td>
+                <td>A2</td>
+                <td>A3</td>
+              </tr>
+              <tr>
+                <td>Sepia</td>
+                <td>A3</td>
+                <td>A4</td>
+                <td>A5</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th className="border-right" rowSpan={2} scope="rowgroup">
+                  Angels
+                </th>
+                <td>Black and white</td>
+                <td>A1</td>
+                <td>A3</td>
+                <td>A4</td>
+              </tr>
+              <tr>
+                <td>Sepia</td>
+                <td>A2</td>
+                <td>A3</td>
+                <td>A5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h5 style={{ margin: '12px 0 6px 0' }}>Código HTML como base</h5>
+        <pre
+          style={{
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 4,
+            overflowX: 'auto',
+          }}
+        >
+          <code>{`<div className="table-component table-irregular">
+          <div className="table-header">
+            <div className="top-bar">
+              <div className="table-title">Tabela irregular — exemplo</div>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th className="border-bottom" scope="col">Poster name</th>
+                <th className="border-bottom border-left" scope="col">Color</th>
+                <th className="border-bottom border-left" colSpan={3} scope="colgroup">Sizes available</th>
+              </tr>
+              <tr>
+                <th className="border-bottom" scope="col">&nbsp;</th>
+                <th className="border-bottom border-left" scope="col">&nbsp;</th>
+                <th className="border-bottom" scope="col">A2</th>
+                <th className="border-bottom" scope="col">A3</th>
+                <th className="border-bottom" scope="col">A4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th className="border-right" rowSpan={3} scope="rowgroup">Zodiac</th>
+                <td>Full color</td>
+                <td>A2</td>
+                <td>A3</td>
+                <td>A4</td>
+              </tr>
+              <tr>
+                <td>Black and white</td>
+                <td>A1</td>
+                <td>A2</td>
+                <td>A3</td>
+              </tr>
+              <tr>
+                <td>Sepia</td>
+                <td>A3</td>
+                <td>A4</td>
+                <td>A5</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th className="border-right" rowSpan={2} scope="rowgroup">Angels</th>
+                <td>Black and white</td>
+                <td>A1</td>
+                <td>A3</td>
+                <td>A4</td>
+              </tr>
+              <tr>
+                <td>Sepia</td>
+                <td>A2</td>
+                <td>A3</td>
+                <td>A5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>`}</code>
+        </pre>
+      </div>
+    </section>
+  </div>
+);
+
+IrregularDocumentacao.storyName = 'Documentação Irregular';
+
+export const IrregularInterativo = () => (
+  <div style={{ padding: 16 }}>
+    <div className="table-component table-irregular">
+      <div className="table-header">
+        <div className="top-bar">
+          <div className="table-title">Tabela irregular 1</div>
+          <div className="actions-trigger">Ações</div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th className="border-bottom" scope="col">
+              Poster name
+            </th>
+            <th className="border-bottom border-left" scope="col">
+              Color
+            </th>
+            <th
+              className="border-bottom border-left"
+              colSpan={3}
+              scope="colgroup"
+            >
+              Sizes available
+            </th>
+          </tr>
+          <tr>
+            <th className="border-bottom" scope="col">
+              &nbsp;
+            </th>
+            <th className="border-bottom border-left" scope="col">
+              &nbsp;
+            </th>
+            <th className="border-bottom" scope="col">
+              A2
+            </th>
+            <th className="border-bottom" scope="col">
+              A3
+            </th>
+            <th className="border-bottom" scope="col">
+              A4
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th className="border-right" rowSpan={3} scope="rowgroup">
+              Zodiac
+            </th>
+            <td>Full color</td>
+            <td>A2</td>
+            <td>A3</td>
+            <td>A4</td>
+          </tr>
+          <tr>
+            <td>Black and white</td>
+            <td>A1</td>
+            <td>A2</td>
+            <td>A3</td>
+          </tr>
+          <tr>
+            <td>Sepia</td>
+            <td>A3</td>
+            <td>A4</td>
+            <td>A5</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th className="border-right" rowSpan={2} scope="rowgroup">
+              Angels
+            </th>
+            <td>Black and white</td>
+            <td>A1</td>
+            <td>A3</td>
+            <td>A4</td>
+          </tr>
+          <tr>
+            <td>Sepia</td>
+            <td>A2</td>
+            <td>A3</td>
+            <td>A5</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  );
-};
-IrregularDocs.story = { name: 'Table Irregular Docs' };
+  </div>
+);
+IrregularInterativo.story = { name: 'Irregular Interativo' };
