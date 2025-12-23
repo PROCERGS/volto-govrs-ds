@@ -14,6 +14,12 @@
   --yellow-vivid-20: #fff5c2;
   --yellow-vivid-5: #ffcd07;
   --green-rs-60: #1a7235;
+  --background-green-rs: #0E4C21;
+  --background-dark-green-rs: #04290F;
+  --green-rs-90: #04290f;
+  --green-rs-10: #1a723430;
+  --green-rs-50: #279b4a;
+  --green-rs-05: #ddf9e3;
 
   /* Neutral Colors */
   --pure-0: #ffffff;
@@ -129,6 +135,8 @@
   --spacing-scale-6x: 48px;
   --spacing-scale-7x: 56px;
   --spacing-scale-8x: 64px;
+  --layout-container-width: 1200px;
+  --padding-default: 15px;
 
   /* ==========================================================================
      TYPOGRAPHY

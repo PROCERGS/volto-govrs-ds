@@ -1,0 +1,117 @@
+#footer {
+  background-color: var(--background-green-rs);
+  font-family: 'Noto Sans', sans-serif;
+}
+
+@media screen and (max-width: 834px) {
+  #footer {
+    background-color: var(--background-dark-green-rs);
+  }
+}
+
+.footer-container {
+  max-width: var(--layout-container-width);
+  padding: 0 var(--padding-default);
+  margin: 0 auto;
+}
+
+.footer-container > * {
+  margin-bottom: 40px;
+}
+
+.footer-site-nome {
+  padding: 30px 0 0.125em 0;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: start;
+  text-transform: uppercase;
+}
+
+.footer-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 30px;
+  padding-bottom: 40px;
+  color: white;
+  gap: 40px;
+  text-align: start;
+}
+
+.footer-info > p {
+  width: 250px;
+}
+
+.footer-selo-governo {
+  width: 250px;
+}
+
+.footer-logo {
+  height: 50px;
+  align-content: center;
+  padding: 0 var(--padding-default);
+  background-color: var(--background-dark-green-rs);
+  border-top: 1px solid var(--pure-0);
+}
+
+.footer-logo > p > a {
+  color: white;
+  font-weight: 800;
+
+  &:hover {
+    color: var(--background-green-rs);
+  }
+}
+
+.footer-logo > p {
+  color: white;
+  font-size: 11px;
+  font-weight: 400;
+  justify-self: center;
+  text-align: center;
+}
+
+.rodape__mapa-site__item > a:hover,
+.rodape__mapa-site__item > ul > li > a:hover {
+  color: var(--background-dark-green-rs) !important;
+  text-decoration: none !important;
+}
+
+.footer-redes-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-site-map-local {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+
+  > * {
+    flex: 1;
+  }
+}
+
+.footer-separator {
+  width: 1px;
+  max-width: 1px;
+  background-color: white;
+  align-self: stretch;
+}
+
+/* Mobile responsivo */
+@media screen and (max-width: 834px) {
+  .footer-site-map-local {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-separator {
+    display: none;
+  }
+}
