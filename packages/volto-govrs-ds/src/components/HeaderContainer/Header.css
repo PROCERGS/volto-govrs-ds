@@ -1,0 +1,64 @@
+.btn-scroll {
+  animation-name: appear;
+  animation-timeline: scroll(y);
+  &:hover {
+    border-color: #fff !important;
+    background-color: var(--green-rs-60) !important;
+  }
+}
+
+/* Posição fixa do botão scroll */
+.btn-scroll {
+  position: fixed;
+  z-index: 9999;
+  right: 10%;
+  bottom: 45px;
+}
+
+body.has-sidebar .btn-scroll {
+  right: 385px;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+}
+
+.header-wrapper {
+  position: relative;
+}
+
+.header-wrapper .header .tools-wrapper {
+  flex-direction: row !important;
+}
+
+.header {
+  max-width: var(--layout-container-width) !important;
+  padding: 0 var(--padding-default);
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.header-wrapper .header .logo-nav-wrapper {
+  align-items: center;
+}
+
+.logo-nav-wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Hide simbolo on mobile when search is active */
+@media (max-width: 768px) {
+  .simbolo.hidden {
+    display: none;
+  }
+  .search-wrapper.navigation-desktop.active {
+    flex: 1;
+  }
+}
