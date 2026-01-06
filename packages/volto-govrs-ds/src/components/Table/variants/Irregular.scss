@@ -1,0 +1,178 @@
+.table-irregular {
+  background: var(--background);
+}
+
+.table-irregular .table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px;
+  border-bottom: 1px solid #eeeeee;
+  background: #ffffff;
+}
+
+.table-irregular .table-title {
+  color: #1a7235;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.table-irregular table {
+  width: 100%;
+  border: none;
+  border-collapse: collapse;
+  font-family: inherit;
+}
+
+.table-irregular table th,
+.table-irregular table td {
+  padding: 10px 12px;
+}
+
+.table-irregular table thead th {
+  border-bottom: 1px solid #cccccc;
+  background: #f0f0f0;
+  font-weight: 600;
+}
+
+.table-irregular .table-default__headrow th.table-head-cell {
+  vertical-align: middle;
+}
+
+.table-irregular table thead th.table-head-cell .table-head-label {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin: 0;
+  color: #1a7235;
+}
+
+.table-irregular table thead th.table-head-cell {
+  position: relative;
+  cursor: pointer;
+}
+
+.table-irregular table thead th.table-head-cell:hover {
+  background-color: rgba(26, 114, 53, 0.14);
+}
+
+.table-irregular table thead th.table-head-cell:active,
+.table-irregular table thead th.table-head-cell.is-sorted {
+  background-color: rgba(26, 114, 53, 0.45);
+}
+
+/* Ensure plain <th> headers (used in irregular tables) follow Default variant
+   visual pattern: green title color and same hover/active backgrounds. */
+.table-irregular table thead th {
+  position: relative;
+  color: #1a7235;
+  cursor: pointer;
+}
+
+.table-irregular table thead th:hover {
+  background-color: rgba(26, 114, 53, 0.14);
+}
+
+.table-irregular table thead th:active,
+.table-irregular table thead th.is-sorted {
+  background-color: rgba(26, 114, 53, 0.45);
+}
+
+.table-irregular .table-sort-icon {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  transform: translateY(-50%);
+}
+
+.table-irregular .table-row {
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.table-irregular tbody th {
+  padding-left: 12px;
+  font-weight: 700;
+  text-align: left;
+}
+
+/* Make rowgroup headers (sublinhas) visually match column headers */
+.table-irregular table tbody th {
+  position: relative;
+  background: transparent;
+  color: #1a7235;
+  cursor: pointer;
+}
+
+/* Make the rowgroup header background match thead headers */
+.table-irregular table tbody th {
+  border-bottom: 1px solid #cccccc;
+  background: #f0f0f0;
+}
+
+.table-irregular table tbody th:hover {
+  background-color: rgba(26, 114, 53, 0.14);
+}
+
+.table-irregular table tbody th:active,
+.table-irregular table tbody th.is-sorted {
+  background-color: rgba(26, 114, 53, 0.45);
+}
+
+.table-irregular table tbody tr + tr td {
+  border-top: 1px solid #cccccc;
+}
+
+/* Vertical borders between subcolumns: apply left border to all th/td except
+   the first cell in a row to visually separate subcolumns (works with colspan). */
+.table-irregular table thead th + th,
+.table-irregular table thead th + td,
+.table-irregular table tbody th + th,
+.table-irregular table tbody td + td {
+  border-left: 1px solid #cccccc;
+}
+
+/* Ensure header cells that span multiple cols still show separators for
+   adjacent subcolumn headers by using border-right on header grouping cells. */
+.table-irregular table thead th.border-right {
+  border-right: 1px solid #cccccc;
+}
+
+/* Stronger horizontal separators for subrows: keep tbody rows separated */
+.table-irregular table tbody tr + tr td {
+  border-top: 1px solid #cccccc;
+}
+
+.table-irregular .border-bottom {
+  border-bottom: 1px solid #cccccc;
+}
+.table-irregular .border-left {
+  border-left: 1px solid #cccccc;
+}
+.table-irregular .border-right {
+  border-right: 1px solid #cccccc;
+}
+
+/* Visible separator between tbody groups (rowgroups like 'Zodiac' and 'Angels') */
+.table-irregular table tbody + tbody {
+  border-top: 1px solid #cccccc;
+}
+
+/* Ensure the first row cells in the following tbody show the border */
+.table-irregular table tbody + tbody tr:first-child td,
+.table-irregular table tbody + tbody tr:first-child th {
+  border-top: 1px solid #cccccc;
+}
+
+@media (max-width: 480px) {
+  .table-irregular table th,
+  .table-irregular table td {
+    padding: 8px 10px;
+  }
+  .table-irregular .table-header {
+    flex-wrap: wrap;
+  }
+}
