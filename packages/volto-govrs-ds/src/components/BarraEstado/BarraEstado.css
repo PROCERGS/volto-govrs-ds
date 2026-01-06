@@ -80,7 +80,7 @@
   padding: 14px 0 20px;
   border-top: 1px solid #fff;
   margin-top: 0;
-  background: #F8F8F8;
+  background: #f8f8f8;
   font-family: Roboto, Arial, sans-serif;
   /*text-transform: uppercase;*/
 }
@@ -156,7 +156,7 @@
     padding: 0;
     border-top: none;
     margin-top: 0;
-    background: #F8F8F8;
+    background: #f8f8f8;
   }
   .barra-estado__menu > li > a {
     padding: 9px 13px;

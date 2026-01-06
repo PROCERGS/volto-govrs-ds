@@ -4,9 +4,9 @@
 }
 
 .simboloRS svg {
+  display: block;
   width: 46px;
   height: 60px;
-  display: block;
 }
 
 .simboloRS.high-contrast svg {

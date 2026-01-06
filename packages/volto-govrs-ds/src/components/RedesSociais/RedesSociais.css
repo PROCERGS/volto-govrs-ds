@@ -7,10 +7,10 @@
 
 .redes-titulo {
   color: white;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 14px;
-  font-family: 'Noto Sans', sans-serif;
 }
 
 .redes-container {

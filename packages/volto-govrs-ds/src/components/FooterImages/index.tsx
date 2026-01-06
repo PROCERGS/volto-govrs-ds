@@ -21,7 +21,7 @@ function FooterImages({ images }: Props) {
         <img
           key={index}
           src={src}
-          alt={`Footer image ${index + 1}`}
+          alt={`Footer logo ${index + 1}`}
           onError={(e) => {}}
         />
       ))}

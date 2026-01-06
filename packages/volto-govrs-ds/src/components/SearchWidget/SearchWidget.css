@@ -4,19 +4,19 @@
   height: 54px;
   align-items: center;
   padding: 0 15px;
+  border: 2px solid #ccc;
   border-radius: 8px;
-  background-color: #F3F3F3;
-  border: 2px solid #CCC;
+  background-color: #f3f3f3;
   place-content: space-between;
   transition: opacity 0.5s ease-in-out;
 }
 
 #s-logo {
-  color: #1a7235;
+  flex-shrink: 0;
   border: none;
   background-color: transparent;
+  color: #1a7235;
   cursor: pointer;
-  flex-shrink: 0;
 }
 
 #s-logo > svg {
@@ -41,18 +41,18 @@
 @media (max-width: 768px) {
   .s-wrapper {
     width: 54px;
-    padding: 0;
     justify-content: center;
-    background: transparent;
+    padding: 0;
     border: none;
+    background: transparent;
   }
 
   .s-wrapper.active {
     width: 100%;
-    padding: 0 15px;
     justify-content: space-between;
-    background-color: #F3F3F3;
-    border: 2px solid #CCC;
+    padding: 0 15px;
+    border: 2px solid #ccc;
+    background-color: #f3f3f3;
   }
 
   .s-input {

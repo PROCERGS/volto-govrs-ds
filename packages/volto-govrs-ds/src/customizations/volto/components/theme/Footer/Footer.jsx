@@ -25,7 +25,7 @@ const Footer = ({ images, url }) => {
       <div className="footer-logo">
         <p>
           Texto destinado a exibição das informações relacionadas à{' '}
-          <a href="#">licença de uso</a>.
+          <a href="/licenca-de-uso">licença de uso</a>.
         </p>
       </div>
     </div>

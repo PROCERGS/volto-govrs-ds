@@ -1,6 +1,6 @@
 .local-data {
-  color: #FFFFFF;
   max-width: fit-content;
+  color: #ffffff;
 }
 
 .local-data__title {
@@ -15,20 +15,20 @@
 }
 
 .local-data-loading {
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 1rem;
 }
 
 /* Mobile responsivo */
 @media screen and (max-width: 834px) {
   .local-data {
-    max-width: 100%;
     width: 100%;
+    max-width: 100%;
   }
 
   .local-data__title {
-    font-size: 1.25rem;
     margin-bottom: 10px;
+    font-size: 1.25rem;
   }
 
   .local-data__logradouro {

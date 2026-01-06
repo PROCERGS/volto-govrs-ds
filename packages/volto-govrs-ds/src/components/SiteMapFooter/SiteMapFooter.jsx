@@ -27,7 +27,7 @@ function SitemapFooter({ lang, intl }) {
           setItems(data.items);
         }
       })
-      .catch((error) => {});
+      .catch(() => {});
   }, [lang]);
 
   const toggleAccordion = (itemTitle) => {
@@ -55,7 +55,6 @@ function SitemapFooter({ lang, intl }) {
           {item.items && item.items.length > 0 && (
             <li
               className={`rodape__mapa-site__item ${openItems.includes(item.title) ? 'accordion-open' : ''}`}
-              onClick={() => toggleAccordion(item.title)}
             >
               <div className="rodape__mapa-site__header">
                 <Link
@@ -65,6 +64,7 @@ function SitemapFooter({ lang, intl }) {
                   {item.title}
                 </Link>
                 <button
+                  type="button"
                   className="accordion-toggle"
                   onClick={(e) => {
                     e.preventDefault();
@@ -73,10 +73,7 @@ function SitemapFooter({ lang, intl }) {
                   aria-expanded={openItems.includes(item.title)}
                   aria-label={`Toggle ${item.title} menu`}
                 >
-                  <span
-                    className="accordion-icon"
-                    onClick={() => toggleAccordion(item.title)}
-                  >
+                  <span className="accordion-icon">
                     {openItems.includes(item.title) ? (
                       <FontAwesomeIcon icon={faChevronUp} />
                     ) : (
