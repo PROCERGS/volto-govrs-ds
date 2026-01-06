@@ -44,7 +44,8 @@ function LocalData({ url }) {
           <h2 className="local-data__title">{localData.title}</h2>
         )}
         {localData.logradouro && (
-          <div className="local-data__logradouro">{localData.logradouro}, {localData.numero} 
+          <div className="local-data__logradouro">
+            {localData.logradouro}, {localData.numero}
             {localData.numero && localData.complemento ? ' - ' : ''}
             {localData.complemento}
           </div>

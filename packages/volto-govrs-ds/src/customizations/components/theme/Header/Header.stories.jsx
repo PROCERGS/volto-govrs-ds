@@ -14,20 +14,37 @@ export const HeaderDocumentacao = () => (
       Header - Cabeçalho Governamental
     </h3>
 
-    <section style={{ marginBottom: 24 , backgroundColor: '#fff' }}>
+    <section style={{ marginBottom: 24, backgroundColor: '#fff' }}>
       <Header pathname="/" />
     </section>
 
-    <div style={{ padding: 16, maxWidth: 1045, backgroundColor: '#fff', margin: '0 auto' }}>
+    <div
+      style={{
+        padding: 16,
+        maxWidth: 1045,
+        backgroundColor: '#fff',
+        margin: '0 auto',
+      }}
+    >
       <section style={{ marginBottom: 12 }}>
         <p style={{ color: '#444' }}>
-          O componente <code>Header</code> é o cabeçalho padrão do sistema governamental do Rio Grande do Sul.
-          Ele integra três componentes principais:
+          O componente <code>Header</code> é o cabeçalho padrão do sistema
+          governamental do Rio Grande do Sul. Ele integra três componentes
+          principais:
         </p>
         <ul style={{ color: '#444' }}>
-          <li><strong>BarraEstado</strong>: Barra superior com links para serviços do governo estadual (rs.gov.br)</li>
-          <li><strong>BarraAcessibilidade</strong>: Barra de acessibilidade com atalhos de teclado e opções de contraste</li>
-          <li><strong>HeaderContainer</strong>: Cabeçalho principal com logo, título do site, menu e busca</li>
+          <li>
+            <strong>BarraEstado</strong>: Barra superior com links para serviços
+            do governo estadual (rs.gov.br)
+          </li>
+          <li>
+            <strong>BarraAcessibilidade</strong>: Barra de acessibilidade com
+            atalhos de teclado e opções de contraste
+          </li>
+          <li>
+            <strong>HeaderContainer</strong>: Cabeçalho principal com logo,
+            título do site, menu e busca
+          </li>
         </ul>
       </section>
 
@@ -85,8 +102,8 @@ export const HeaderDocumentacao = () => (
         <div style={{ marginBottom: 10 }}>
           <h5 style={{ margin: '6px 0' }}>pathname</h5>
           <p style={{ color: '#444', marginTop: 6 }}>
-            <strong>Obrigatório</strong>. String que representa o caminho atual da página.
-            Utilizado para controle de navegação e breadcrumbs.
+            <strong>Obrigatório</strong>. String que representa o caminho atual
+            da página. Utilizado para controle de navegação e breadcrumbs.
           </p>
           <pre
             style={{
@@ -103,24 +120,26 @@ export const HeaderDocumentacao = () => (
         <div style={{ marginBottom: 10 }}>
           <h5 style={{ margin: '6px 0' }}>token (via Redux)</h5>
           <p style={{ color: '#444', marginTop: 6 }}>
-            Token de autenticação do usuário, obtido automaticamente via Redux store.
-            Controla a exibição de elementos relacionados ao login.
+            Token de autenticação do usuário, obtido automaticamente via Redux
+            store. Controla a exibição de elementos relacionados ao login.
           </p>
         </div>
 
         <div style={{ marginBottom: 10 }}>
           <h5 style={{ margin: '6px 0' }}>siteTitle (via Redux)</h5>
           <p style={{ color: '#444', marginTop: 6 }}>
-            Título do site obtido via Redux store (<code>state.site.data['plone.site_title']</code>).
-            Exibido ao lado do símbolo do RS no cabeçalho.
+            Título do site obtido via Redux store (
+            <code>state.site.data['plone.site_title']</code>). Exibido ao lado
+            do símbolo do RS no cabeçalho.
           </p>
         </div>
 
         <div style={{ marginBottom: 10 }}>
           <h5 style={{ margin: '6px 0' }}>siteLabel (via config)</h5>
           <p style={{ color: '#444', marginTop: 6 }}>
-            Rótulo opcional do site, configurado via <code>config.settings.siteLabel</code>.
-            Pode ser usado para identificar diferentes portais ou intranet.
+            Rótulo opcional do site, configurado via{' '}
+            <code>config.settings.siteLabel</code>. Pode ser usado para
+            identificar diferentes portais ou intranet.
           </p>
         </div>
       </section>
@@ -128,14 +147,30 @@ export const HeaderDocumentacao = () => (
       <section style={{ marginBottom: 12 }}>
         <h4 style={{ margin: '6px 0' }}>Recursos de Acessibilidade</h4>
         <p style={{ color: '#444' }}>
-          O Header implementa diversos recursos de acessibilidade seguindo as diretrizes WCAG:
+          O Header implementa diversos recursos de acessibilidade seguindo as
+          diretrizes WCAG:
         </p>
         <ul style={{ color: '#444' }}>
-          <li><strong>Atalhos de teclado</strong>: Alt+1 (conteúdo), Alt+2 (menu), Alt+3 (busca)</li>
-          <li><strong>Modo de alto contraste</strong>: Alternância via botão ou localStorage persistente</li>
-          <li><strong>Navegação por teclado</strong>: Todos os elementos interativos são acessíveis via Tab</li>
-          <li><strong>ARIA labels</strong>: Elementos semânticos com rótulos apropriados</li>
-          <li><strong>Skip links</strong>: Links para pular direto ao conteúdo principal</li>
+          <li>
+            <strong>Atalhos de teclado</strong>: Alt+1 (conteúdo), Alt+2 (menu),
+            Alt+3 (busca)
+          </li>
+          <li>
+            <strong>Modo de alto contraste</strong>: Alternância via botão ou
+            localStorage persistente
+          </li>
+          <li>
+            <strong>Navegação por teclado</strong>: Todos os elementos
+            interativos são acessíveis via Tab
+          </li>
+          <li>
+            <strong>ARIA labels</strong>: Elementos semânticos com rótulos
+            apropriados
+          </li>
+          <li>
+            <strong>Skip links</strong>: Links para pular direto ao conteúdo
+            principal
+          </li>
         </ul>
       </section>
 
@@ -143,26 +178,28 @@ export const HeaderDocumentacao = () => (
         <h4 style={{ margin: '6px 0' }}>Comportamentos importantes</h4>
         <div style={{ marginTop: 8 }}>
           <p style={{ color: '#444' }}>
-            - O <strong>modo de alto contraste</strong> é persistente via localStorage e aplica
-            classes CSS tanto no elemento <code>#main</code> quanto no <code>.header-wrapper</code>
+            - O <strong>modo de alto contraste</strong> é persistente via
+            localStorage e aplica classes CSS tanto no elemento{' '}
+            <code>#main</code> quanto no <code>.header-wrapper</code>
           </p>
         </div>
         <div style={{ marginTop: 8 }}>
           <p style={{ color: '#444' }}>
-            - O <strong>widget de busca</strong> pode expandir e ocultar outros elementos do header
-            quando ativado, otimizando o espaço em telas menores
+            - O <strong>widget de busca</strong> pode expandir e ocultar outros
+            elementos do header quando ativado, otimizando o espaço em telas
+            menores
           </p>
         </div>
         <div style={{ marginTop: 8 }}>
           <p style={{ color: '#444' }}>
-            - O <strong>botão de scroll</strong> utiliza scroll suave (smooth scrolling) e foca
-            no elemento <code>#main</code> da página
+            - O <strong>botão de scroll</strong> utiliza scroll suave (smooth
+            scrolling) e foca no elemento <code>#main</code> da página
           </p>
         </div>
         <div style={{ marginTop: 8 }}>
           <p style={{ color: '#444' }}>
-            - A <strong>BarraEstado</strong> possui um menu responsivo que se adapta a diferentes
-            tamanhos de tela
+            - A <strong>BarraEstado</strong> possui um menu responsivo que se
+            adapta a diferentes tamanhos de tela
           </p>
         </div>
       </section>
@@ -207,7 +244,10 @@ export const HeaderInterativo = ({ pathname }) => (
       <p>Experimente também:</p>
       <ul style={{ listStyle: 'none', padding: 0 }}>
         <li>🔍 Clique no ícone de busca para expandir o campo de pesquisa</li>
-        <li>🎨 Clique no ícone de contraste (círculo meio preenchido) para alternar o modo de alto contraste</li>
+        <li>
+          🎨 Clique no ícone de contraste (círculo meio preenchido) para
+          alternar o modo de alto contraste
+        </li>
         <li>⌨️ Use Alt+1, Alt+2, Alt+3 para navegar por atalhos de teclado</li>
         <li>☰ Clique no menu hambúrguer para abrir a navegação móvel</li>
         <li>⬆️ Clique no botão verde com seta para voltar ao topo</li>
@@ -231,41 +271,76 @@ HeaderInterativo.args = {
 export const HeaderComConteudo = () => (
   <div style={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
     <Header pathname="/" />
-    <main id="main" style={{ padding: '40px 20px', maxWidth: 1200, margin: '0 auto' }}>
+    <main
+      id="main"
+      style={{ padding: '40px 20px', maxWidth: 1200, margin: '0 auto' }}
+    >
       <h1>Página de exemplo</h1>
       <p>
-        Este é um exemplo de como o Header aparece em uma página real com conteúdo.
-        O cabeçalho fica fixo no topo e o conteúdo fica abaixo.
+        Este é um exemplo de como o Header aparece em uma página real com
+        conteúdo. O cabeçalho fica fixo no topo e o conteúdo fica abaixo.
       </p>
-      <div style={{ marginTop: 40, padding: 20, backgroundColor: '#fff', borderRadius: 8 }}>
+      <div
+        style={{
+          marginTop: 40,
+          padding: 20,
+          backgroundColor: '#fff',
+          borderRadius: 8,
+        }}
+      >
         <h2>Teste de acessibilidade</h2>
         <p>Use os seguintes atalhos de teclado:</p>
         <ul>
-          <li><kbd>Alt</kbd> + <kbd>1</kbd> - Ir para o conteúdo (este elemento)</li>
-          <li><kbd>Alt</kbd> + <kbd>2</kbd> - Ir para o menu de navegação</li>
-          <li><kbd>Alt</kbd> + <kbd>3</kbd> - Ir para o campo de busca</li>
+          <li>
+            <kbd>Alt</kbd> + <kbd>1</kbd> - Ir para o conteúdo (este elemento)
+          </li>
+          <li>
+            <kbd>Alt</kbd> + <kbd>2</kbd> - Ir para o menu de navegação
+          </li>
+          <li>
+            <kbd>Alt</kbd> + <kbd>3</kbd> - Ir para o campo de busca
+          </li>
         </ul>
       </div>
-      <div style={{ marginTop: 40, padding: 20, backgroundColor: '#fff', borderRadius: 8 }}>
+      <div
+        style={{
+          marginTop: 40,
+          padding: 20,
+          backgroundColor: '#fff',
+          borderRadius: 8,
+        }}
+      >
         <h2>Contraste</h2>
         <p>
-          Clique no ícone de contraste (círculo meio preenchido) na barra de acessibilidade
-          para alternar entre o modo normal e alto contraste. A preferência é salva no
-          localStorage do navegador.
+          Clique no ícone de contraste (círculo meio preenchido) na barra de
+          acessibilidade para alternar entre o modo normal e alto contraste. A
+          preferência é salva no localStorage do navegador.
         </p>
       </div>
       {Array.from({ length: 5 }).map((_, i) => (
-        <div key={i} style={{ marginTop: 40, padding: 20, backgroundColor: '#fff', borderRadius: 8 }}>
+        <div
+          key={i}
+          style={{
+            marginTop: 40,
+            padding: 20,
+            backgroundColor: '#fff',
+            borderRadius: 8,
+          }}
+        >
           <h3>Seção {i + 1}</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
           </p>
         </div>
       ))}
       <div style={{ marginTop: 40, textAlign: 'center' }}>
-        <p>Role até o topo e clique no botão verde com seta ⬆️ para testar o scroll suave</p>
+        <p>
+          Role até o topo e clique no botão verde com seta ⬆️ para testar o
+          scroll suave
+        </p>
       </div>
     </main>
   </div>

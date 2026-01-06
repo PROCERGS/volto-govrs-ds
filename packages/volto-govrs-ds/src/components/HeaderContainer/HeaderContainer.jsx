@@ -1,30 +1,14 @@
 // SemanticUI-free pre-@plone/components
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import SimboloRS from '../SimboloRS/SimboloRS';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Header.css';
 
-import {
-  Anontools,
-  LanguageSelector,
-  UniversalLink,
-} from '@plone/volto/components';
-
-import SecretariaNome from '../SecretariaNome/SecretariaNome';
 import SearchWidget from '../SearchWidget/SearchWidget';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import MenuHamburger from '../MenuHamburguer/MenuHamburger';
 
-const HeaderContainer = ({
-  pathname,
-  siteLabel,
-  token,
-  siteAction,
-  siteTitle,
-  normalImg,
-  contrastImg,
-}) => {
+const HeaderContainer = ({ siteLabel, siteTitle }) => {
   const [searchActive, setSearchActive] = useState(false);
 
   const handleScrollToTop = (e) => {
@@ -48,17 +32,16 @@ const HeaderContainer = ({
         <div className="logo-nav-wrapper">
           <div className={`simbolo ${searchActive ? 'hidden' : ''}`}>
             <MenuHamburger />
-            <SimboloRS normalImg={normalImg} contrastImg={contrastImg} />
+            <SimboloRS />
             <a className="header-titulo" href="/">
               {siteTitle}
             </a>
           </div>
-          <div className={`search-wrapper navigation-desktop ${searchActive ? 'active' : ''}`}>
+          <div
+            className={`search-wrapper navigation-desktop ${searchActive ? 'active' : ''}`}
+          >
             <div className="search">
-              <SearchWidget
-                active={searchActive}
-                onToggle={setSearchActive}
-              />
+              <SearchWidget active={searchActive} onToggle={setSearchActive} />
             </div>
           </div>
         </div>

@@ -7,7 +7,6 @@ import LocalData from 'volto-govrs-ds/components/LocalData/LocalData';
 import './Footer.css';
 
 const Footer = ({ images, url }) => {
-
   return (
     <div id="footer" color="grey">
       <div className="footer-container">
@@ -16,7 +15,7 @@ const Footer = ({ images, url }) => {
         </div>
         <div className="footer-site-map-local">
           <SiteMapFooter location={{ pathname: '/' }} />
-          <LocalData url={url || "/local-1"} />
+          <LocalData url={url || '/local-1'} />
         </div>
         <div className="footer-redes-images">
           <RedesSociais />
@@ -25,7 +24,8 @@ const Footer = ({ images, url }) => {
       </div>
       <div className="footer-logo">
         <p>
-          Texto destinado a exibição das informações relacionadas à <a href="#">licença de uso</a>.
+          Texto destinado a exibição das informações relacionadas à{' '}
+          <a href="/licenca-de-uso">licença de uso</a>.
         </p>
       </div>
     </div>

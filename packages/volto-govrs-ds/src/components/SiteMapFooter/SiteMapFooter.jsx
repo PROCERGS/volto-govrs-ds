@@ -18,25 +18,23 @@ function SitemapFooter({ lang, intl }) {
     const { settings } = config;
     const language = settings.isMultilingual ? toBackendLang(lang) : null;
     const path = language || '';
-   
+
     const apiPath = path ? `/${path}` : '';
     fetch(`${apiPath}/++api++/@navigation?expand.navigation.depth=4`)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.items) {
           setItems(data.items);
         }
       })
-      .catch(error => {
-        console.error('SiteMapFooter: Error fetching navigation:', error);
-      });
+      .catch(() => {});
   }, [lang]);
 
   const toggleAccordion = (itemTitle) => {
     setOpenItems((prevOpenItems) =>
       prevOpenItems.includes(itemTitle)
         ? prevOpenItems.filter((title) => title !== itemTitle)
-        : [...prevOpenItems, itemTitle]
+        : [...prevOpenItems, itemTitle],
     );
   };
 
@@ -55,12 +53,18 @@ function SitemapFooter({ lang, intl }) {
       {items.map((item) => (
         <React.Fragment key={item.title}>
           {item.items && item.items.length > 0 && (
-            <li className={`rodape__mapa-site__item ${openItems.includes(item.title) ? 'accordion-open' : ''}`} onClick={() => toggleAccordion(item.title)}>
+            <li
+              className={`rodape__mapa-site__item ${openItems.includes(item.title) ? 'accordion-open' : ''}`}
+            >
               <div className="rodape__mapa-site__header">
-                <Link to={getRelativePath(item.url || item['@id'])} className="rodape-titulo">
+                <Link
+                  to={getRelativePath(item.url || item['@id'])}
+                  className="rodape-titulo"
+                >
                   {item.title}
                 </Link>
                 <button
+                  type="button"
                   className="accordion-toggle"
                   onClick={(e) => {
                     e.preventDefault();
@@ -69,13 +73,23 @@ function SitemapFooter({ lang, intl }) {
                   aria-expanded={openItems.includes(item.title)}
                   aria-label={`Toggle ${item.title} menu`}
                 >
-                  <span className="accordion-icon" onClick={()=> toggleAccordion(item.title)}>{openItems.includes(item.title) ? <FontAwesomeIcon icon={faChevronUp} /> : <FontAwesomeIcon icon={faChevronDown} />}</span>
+                  <span className="accordion-icon">
+                    {openItems.includes(item.title) ? (
+                      <FontAwesomeIcon icon={faChevronUp} />
+                    ) : (
+                      <FontAwesomeIcon icon={faChevronDown} />
+                    )}
+                  </span>
                 </button>
               </div>
               <ul className="accordion-content">
                 {item.items.map((innerItem) => (
                   <li key={innerItem.title}>
-                    <Link to={getRelativePath(innerItem.url || innerItem['@id'])}>{innerItem.title}</Link>
+                    <Link
+                      to={getRelativePath(innerItem.url || innerItem['@id'])}
+                    >
+                      {innerItem.title}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -86,11 +100,7 @@ function SitemapFooter({ lang, intl }) {
     </ul>
   );
 
-  return (
-    <div className="view-wrapper">
-      {items && renderItems(items)}
-    </div>
-  );
+  return <div className="view-wrapper">{items && renderItems(items)}</div>;
 }
 
 SitemapFooter.propTypes = {

@@ -1,5 +1,4 @@
-import './style.css'
-
+import './style.css';
 
 type Props = {
   images?: string[];
@@ -7,7 +6,6 @@ type Props = {
 
 function FooterImages({ images }: Props) {
   if (!images || !Array.isArray(images)) {
-    console.warn('[FooterImages] Invalid images prop:', images);
     return null;
   }
 
@@ -23,11 +21,8 @@ function FooterImages({ images }: Props) {
         <img
           key={index}
           src={src}
-          alt={`Footer image ${index + 1}`}
-          onError={(e) => {
-            console.error('[FooterImages] Failed to load image:', src);
-            e.currentTarget.style.display = 'none';
-          }}
+          alt={`Footer logo ${index + 1}`}
+          onError={(e) => {}}
         />
       ))}
     </div>

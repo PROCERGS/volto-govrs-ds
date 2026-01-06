@@ -1,6 +1,7 @@
 //Variables
-@import './variables.css';
 @import './variables.scss';
+//Contraste
+@import './Contraste.scss';
 
 //components
 @import './components/Button.scss';
@@ -9,7 +10,6 @@
 @import './components/Links.scss';
 @import './components/Search.scss';
 @import './components/Textarea.scss';
-@import './components/Contraste.scss';
 @import './components/Modal.scss';
 @import './components/Avatar.scss';
 @import './components/Accordion.scss';

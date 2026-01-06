@@ -6,8 +6,6 @@ import config from '@plone/volto/registry';
 import HeaderContainer from '../../../../components/HeaderContainer/HeaderContainer';
 import BarraEstado from '../../../../components/BarraEstado/BarraEstado';
 import BarraAcessibilidade from '../../../../components/BarraAcessibilidade/BarraAcessibilidade';
-import normalImg from '../../../../../public/normal.png';
-import contrastImg from '../../../../../public/contraste.png';
 
 const messages = defineMessages({
   siteLabel: {
@@ -45,8 +43,6 @@ const Header = (props) => {
         token={token}
         siteAction={siteAction}
         siteTitle={siteTitle}
-        normalImg={normalImg}
-        contrastImg={contrastImg}
       />
     </header>
   );

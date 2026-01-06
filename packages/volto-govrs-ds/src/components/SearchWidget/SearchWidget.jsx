@@ -3,9 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { PropTypes } from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
-
-import Icon from '@plone/volto/components/theme/Icon/Icon';
-import zoomSVG from '@plone/volto/icons/zoom.svg';
 import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import './SearchWidget.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -148,7 +145,10 @@ class SearchWidget extends Component {
   render() {
     return (
       <form action="/search" onSubmit={this.onSubmit}>
-        <div className={`s-wrapper ${this.props.active ? 'active' : ''}`}>
+        <div
+          ref={this.searchbar}
+          className={`s-wrapper ${this.props.active ? 'active' : ''}`}
+        >
           <input
             id="buscageralTextBox"
             className="s-input"
@@ -175,11 +175,11 @@ class SearchWidget extends Component {
             <FontAwesomeIcon icon={faSearch} />
           </button>
 
-          {this.props.active && 
-          <button id="s-logo" onClick={() => this.props.onToggle(false)}>
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
-          }
+          {this.props.active && (
+            <button id="s-logo" onClick={() => this.props.onToggle(false)}>
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+          )}
         </div>
       </form>
     );

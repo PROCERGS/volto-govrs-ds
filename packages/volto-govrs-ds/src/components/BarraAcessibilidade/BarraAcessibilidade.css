@@ -1,4 +1,4 @@
-@import '../../theme/variables.css';
+@import '../../theme/variables.scss';
 
 @media (max-width: 767px) {
   .acess-wrapper {
@@ -27,12 +27,12 @@
 }
 
 .acess-ul > * > * {
-  color: var(--green-matriz-link);
+  color: #1a7235;
   font-size: 12px;
 }
 
 .acess-ul > li :hover {
-  color: var(--green-matriz-link-activated);
+  color: #1a7235;
   cursor: pointer;
 }
 

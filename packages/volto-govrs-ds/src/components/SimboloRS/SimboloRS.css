@@ -1,5 +1,16 @@
 .simboloRS {
-  width: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.simboloRS svg {
+  display: block;
+  width: 46px;
+  height: 60px;
+}
+
+.simboloRS.high-contrast svg {
+  filter: invert(1) brightness(1.1);
 }
 
 .simbolo {
@@ -22,17 +33,15 @@
 }
 
 @media (min-width: 768px) {
-  .simboloRS {
-    width: 60px;
+  .simboloRS svg {
+    width: 61px;
+    height: 79px;
   }
 }
+
 @media (min-width: 992px) {
-  .simboloRS {
-    width: 80px;
-  }
-}
-@media (min-width: 1200px) {
-  .simboloRS {
-    width: 80px;
+  .simboloRS svg {
+    width: 84.7px;
+    height: 111px;
   }
 }
