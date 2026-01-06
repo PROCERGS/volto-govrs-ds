@@ -64,7 +64,10 @@ const mockLocalData = {
   CEP: '90010-340',
 };
 
-const createMockStore = (navigationItems = mockNavigationItems, localData = mockLocalData) => {
+const createMockStore = (
+  navigationItems = mockNavigationItems,
+  localData = mockLocalData,
+) => {
   return mockStore({
     navigation: {
       items: navigationItems,
@@ -88,9 +91,10 @@ const createMockStore = (navigationItems = mockNavigationItems, localData = mock
 // Mock fetch for Storybook
 const mockFetch = () => {
   return Promise.resolve({
-    json: () => Promise.resolve({
-      items: mockNavigationItems,
-    }),
+    json: () =>
+      Promise.resolve({
+        items: mockNavigationItems,
+      }),
   });
 };
 
@@ -117,7 +121,8 @@ const meta = {
   argTypes: {
     images: {
       control: 'object',
-      description: 'Array de URLs de imagens a serem exibidas no footer (máximo de 2 imagens). Se não fornecido, usa imagens padrão.',
+      description:
+        'Array de URLs de imagens a serem exibidas no footer (máximo de 2 imagens). Se não fornecido, usa imagens padrão.',
     },
   },
 };
@@ -148,19 +153,19 @@ export const FooterDocumentacao = () => (
 
     <p>
       O componente Footer é o rodapé padrão da aplicação, composto por quatro
-      elementos principais: mapa do site (SiteMapFooter), dados locais (LocalData),
-      redes sociais (RedesSociais) e imagens customizáveis (FooterImages).
+      elementos principais: mapa do site (SiteMapFooter), dados locais
+      (LocalData), redes sociais (RedesSociais) e imagens customizáveis
+      (FooterImages).
     </p>
 
     <h4 style={{ marginTop: 20 }}>Estrutura do Footer</h4>
     <ul style={{ lineHeight: 1.8 }}>
       <li>
-        <strong>Brasão RS:</strong> Imagem do brasão do Rio Grande do Sul
-        (fixa)
+        <strong>Brasão RS:</strong> Imagem do brasão do Rio Grande do Sul (fixa)
       </li>
       <li>
-        <strong>SiteMapFooter:</strong> Mapa do site com navegação em
-        accordion (apenas itens com subitems são exibidos)
+        <strong>SiteMapFooter:</strong> Mapa do site com navegação em accordion
+        (apenas itens com subitems são exibidos)
       </li>
       <li>
         <strong>LocalData:</strong> Exibe informações de endereço/localização
@@ -200,13 +205,13 @@ export const FooterDocumentacao = () => (
 
     <h4 style={{ marginTop: 30 }}>Comportamento do SiteMapFooter</h4>
     <p>
-      O mapa do site é renderizado dinamicamente com base nos dados de
-      navegação do Redux. Características:
+      O mapa do site é renderizado dinamicamente com base nos dados de navegação
+      do Redux. Características:
     </p>
     <ul style={{ lineHeight: 1.8 }}>
       <li>
-        <strong>Filtragem automática:</strong> Apenas itens que possuem
-        subitems são exibidos
+        <strong>Filtragem automática:</strong> Apenas itens que possuem subitems
+        são exibidos
       </li>
       <li>
         <strong>Accordion mobile:</strong> Em telas menores que 835px, os itens
@@ -263,7 +268,9 @@ export const FooterDocumentacao = () => (
     <h4 style={{ marginTop: 30 }}>Exemplos de Uso</h4>
 
     <div style={{ marginTop: 20 }}>
-      <h5 style={{ margin: '8px 0' }}>1. Footer Padrão (sem imagens customizadas)</h5>
+      <h5 style={{ margin: '8px 0' }}>
+        1. Footer Padrão (sem imagens customizadas)
+      </h5>
       <CodeSnippet code={`<Footer />`} />
       <p style={{ fontSize: '14px', color: '#666', marginTop: 4 }}>
         Renderiza o footer sem imagens customizadas. FooterImages retorna null.
@@ -272,9 +279,7 @@ export const FooterDocumentacao = () => (
 
     <div style={{ marginTop: 20 }}>
       <h5 style={{ margin: '8px 0' }}>2. Footer com 1 imagem</h5>
-      <CodeSnippet
-        code={`<Footer images={['/logo_branca.svg']} />`}
-      />
+      <CodeSnippet code={`<Footer images={['/logo_branca.svg']} />`} />
     </div>
 
     <div style={{ marginTop: 20 }}>
@@ -338,9 +343,7 @@ export const FooterDocumentacao = () => (
     />
 
     <h4 style={{ marginTop: 30 }}>Requisitos de Dados</h4>
-    <p>
-      O Footer depende do Redux store com a seguinte estrutura:
-    </p>
+    <p>O Footer depende do Redux store com a seguinte estrutura:</p>
     <CodeSnippet
       code={`{
   navigation: {
@@ -390,12 +393,11 @@ export const FooterDocumentacao = () => (
         separador)
       </li>
       <li>
-        <strong>LocalData URL:</strong> Por padrão busca de <code>/local-1</code>.
-        Pode ser customizada passando a prop <code>url</code> para LocalData
+        <strong>LocalData URL:</strong> Por padrão busca de{' '}
+        <code>/local-1</code>. Pode ser customizada passando a prop{' '}
+        <code>url</code> para LocalData
       </li>
-      <li>
-        Imagens quebradas são automaticamente ocultadas (onError handler)
-      </li>
+      <li>Imagens quebradas são automaticamente ocultadas (onError handler)</li>
       <li>
         O CSS limita a exibição a 4 categorias principais via{' '}
         <code>:nth-child(n + 5)</code>
@@ -425,7 +427,9 @@ export const FooterComImagensCustomizadas = () => {
     <div style={{ padding: 16 }}>
       <h4 style={{ marginBottom: 16 }}>Footer com 2 imagens customizadas</h4>
       <Provider store={store}>
-        <FooterComponent images={['/brasao-RS-contraste.svg', '/facebook.svg']} />
+        <FooterComponent
+          images={['/brasao-RS-contraste.svg', '/facebook.svg']}
+        />
       </Provider>
       <CodeSnippet
         code={`<Footer images={['/brasao-RS-contraste.svg', '/facebook.svg']} />`}
@@ -441,7 +445,9 @@ export const FooterSemImagens = () => {
 
   return (
     <div style={{ padding: 16 }}>
-      <h4 style={{ marginBottom: 16 }}>Footer sem imagens (prop images vazia)</h4>
+      <h4 style={{ marginBottom: 16 }}>
+        Footer sem imagens (prop images vazia)
+      </h4>
       <Provider store={store}>
         <FooterComponent images={[]} />
       </Provider>
@@ -458,7 +464,9 @@ export const FooterMobile = () => {
   return (
     <div style={{ maxWidth: '375px', margin: '0 auto' }}>
       <Provider store={store}>
-        <FooterComponent images={['/brasao-RS-contraste.svg', '/facebook.svg']} />
+        <FooterComponent
+          images={['/brasao-RS-contraste.svg', '/facebook.svg']}
+        />
       </Provider>
     </div>
   );
@@ -477,7 +485,9 @@ export const FooterTablet = () => {
   return (
     <div>
       <Provider store={store}>
-        <FooterComponent images={['/brasao-RS-contraste.svg', '/logo_branca.svg']} />
+        <FooterComponent
+          images={['/brasao-RS-contraste.svg', '/logo_branca.svg']}
+        />
       </Provider>
     </div>
   );
@@ -499,7 +509,9 @@ export const FooterSemLocalData = () => {
         Footer sem dados locais (LocalData não aparece)
       </h4>
       <Provider store={store}>
-        <FooterComponent images={['/brasao-RS-contraste.svg', '/facebook.svg']} />
+        <FooterComponent
+          images={['/brasao-RS-contraste.svg', '/facebook.svg']}
+        />
       </Provider>
       <p style={{ marginTop: 16, fontSize: 14, color: '#666' }}>
         ℹ️ Quando não há dados locais disponíveis, o componente LocalData não é

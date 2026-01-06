@@ -2,7 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark, faChevronRight, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faXmark,
+  faChevronRight,
+  faChevronDown,
+} from '@fortawesome/free-solid-svg-icons';
 import './MenuHamburger.css';
 
 const MenuHamburger = () => {
@@ -10,7 +15,6 @@ const MenuHamburger = () => {
   const [activeLevels, setActiveLevels] = useState([]);
   const [expandedItems, setExpandedItems] = useState({});
   const [isMobile, setIsMobile] = useState(false);
-  const [toolbarWidth, setToolbarWidth] = useState(0);
   const navigationItems = useSelector((state) => state.navigation?.items || []);
   const menuRef = useRef(null);
 
@@ -47,19 +51,6 @@ const MenuHamburger = () => {
   }, []);
 
   useEffect(() => {
-    const toolbarElement = document.getElementById('toolbar');
-    if (toolbarElement) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        for (let entry of entries) {
-          setToolbarWidth(entry.contentRect.width);
-        }
-      });
-      resizeObserver.observe(toolbarElement);
-      return () => resizeObserver.unobserve(toolbarElement);
-    }
-  }, []);
-
-  useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setIsOpen(false);
@@ -74,7 +65,8 @@ const MenuHamburger = () => {
   const renderMobileMenuItem = (item, level = 0) => {
     const hasChildren = item.items && item.items.length > 0;
     const isExpanded = expandedItems[item.url];
-    const levelClass = level === 0 ? '' : level % 2 === 0 ? 'level-even' : 'level-odd';
+    const levelClass =
+      level === 0 ? '' : level % 2 === 0 ? 'level-even' : 'level-odd';
 
     return (
       <li key={item.url} className="menu-hamburger-item">
@@ -90,13 +82,17 @@ const MenuHamburger = () => {
                 toggleExpanded(item.url);
               }}
             >
-              <FontAwesomeIcon icon={isExpanded ? faChevronDown : faChevronRight} />
+              <FontAwesomeIcon
+                icon={isExpanded ? faChevronDown : faChevronRight}
+              />
             </button>
           )}
         </div>
         {hasChildren && isExpanded && (
           <ul className="menu-hamburger-submenu">
-            {item.items.map((subItem) => renderMobileMenuItem(subItem, level + 1))}
+            {item.items.map((subItem) =>
+              renderMobileMenuItem(subItem, level + 1),
+            )}
           </ul>
         )}
       </li>
