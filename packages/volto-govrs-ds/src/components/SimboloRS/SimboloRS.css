@@ -1,0 +1,47 @@
+.simboloRS {
+  display: flex;
+  align-items: center;
+}
+
+.simboloRS svg {
+  display: block;
+  width: 46px;
+  height: 60px;
+}
+
+.simboloRS.high-contrast svg {
+  filter: invert(1) brightness(1.1);
+}
+
+.simbolo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-titulo {
+  margin-left: 10px;
+  color: black;
+  font-size: 24px;
+  font-weight: 375;
+  text-align: left;
+}
+
+.header-titulo:hover {
+  color: var(--green-matriz-link-activated);
+}
+
+@media (min-width: 768px) {
+  .simboloRS svg {
+    width: 61px;
+    height: 79px;
+  }
+}
+
+@media (min-width: 992px) {
+  .simboloRS svg {
+    width: 84.7px;
+    height: 111px;
+  }
+}
