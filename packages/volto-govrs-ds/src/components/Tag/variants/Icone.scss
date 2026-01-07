@@ -1,0 +1,15 @@
+@import '../../../theme/variables.scss';
+
+.govrs-tag-icon{
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  max-width: 40px;
+  min-height: 40px;
+  border-radius: 50%;
+  background-color: Magenta;
+  color: #fff;
+  padding: 12px;
+  border: 1px solid #fff;
+}

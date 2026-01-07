@@ -1,0 +1,21 @@
+/* Styles específicos para a variante Persistente */
+
+/* Layout para grupos de tags (ex.: Persistente.Group) */
+.govrs-tag-group{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Estado visual quando a tag está marcada */
+.govrs-tag.checked{
+  background-color: #279B4A;
+  
+}
+
+/* Foco visível para acessibilidade (aplicável a tags persistentes) */
+.govrs-tag:focus-visible{
+  outline: none;
+  border-color: rgba(10,97,41,0.9);
+  box-shadow: 0 0 0 6px rgba(10,97,41,0.12);
+}
