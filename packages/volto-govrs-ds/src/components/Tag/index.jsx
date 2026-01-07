@@ -16,8 +16,8 @@ export default function Tag({
   ...rest
 }) {
   const v = variant || 'default';
-    const Variant = VARIANTS[v] || DefaultVariant;
-    return (
-      <Variant items={items} itemKey={itemKey} className={className} {...rest} />
-    );
+  const Variant = VARIANTS[v] || Default;
+  return (
+    <Variant items={items} itemKey={itemKey} className={className} {...rest} />
+  );
 }
