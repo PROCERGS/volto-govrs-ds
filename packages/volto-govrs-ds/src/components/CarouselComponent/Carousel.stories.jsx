@@ -440,17 +440,95 @@ export const CardDocs = {
     showArrows: true,
   },
   render: (args) => (
-    <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      <p style={{ marginBottom: '1rem' }}>
-        Esta variante reutiliza o componente de <code>Card</code> existente.
-        Ajuste
-        <code>cardsPerView</code> e os breakpoints para controlar quantos cards
-        aparecem em cada slide. O array <code>items</code> aceita as props do
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '12px 0' }}>
+      <h1>Carousel — Variante Card</h1>
+
+      <div style={{ marginTop: 12 }}>
+        <Carousel {...args} />
+      </div>
+
+      <p style={{ margin: '12px 0' }}>
+        Controle quantos cards aparecem em cada slide com{' '}
+        <code>cardsPerView</code>. O array <code>items</code> aceita as props do
         Card (variant, description, image, href, itens etc.).
       </p>
-      <Carousel {...args} />
+
+      <section style={{ margin: '12px 0' }}>
+        <h3>Props de controle (top-level)</h3>
+        <ul>
+          <li>
+            <code>cardVariant</code>: força todas as cartas a usarem uma
+            variante especifica (<code>post</code>, <code>list</code>,
+            <code>news</code> ou <code>icon</code>).
+          </li>
+          <li>
+            <code>cardsPerView</code>, <code>cardsPerViewTablet</code>,
+            <code>cardsPerViewMobile</code>: quantidade de cards por slide em
+            cada breakpoint.
+          </li>
+          <li>
+            <code>gap</code>: espaco em pixels entre os cards.
+          </li>
+          <li>
+            <code>showIndicators</code> e <code>showArrows</code>: exibe ou
+            oculta indicadores e setas de navegacao.
+          </li>
+        </ul>
+      </section>
+
+      <section style={{ margin: '12px 0' }}>
+        <h3>Estrutura de items (Card)</h3>
+        <p>
+          <code>items</code> deve ser um array de objetos aceitos pelo
+          componente <code>Card</code>. Exemplos:
+        </p>
+        <pre
+          style={{
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 4,
+            overflowX: 'auto',
+          }}
+        >
+          <code>{`items=[
+  { title: 'Noticia', description: 'Resumo', image: 'https://...', variant: 'news', href: '#' },
+  { title: 'Lista', description: 'Com itens', image: 'https://...', variant: 'list', itens: [{ value: 'Item 1' }, { value: 'Item 2' }] },
+]`}</code>
+        </pre>
+        <p>
+          Quando <code>cardVariant</code> é fornecido, ele sobrescreve o
+          <code> variant</code> interno de cada item.
+        </p>
+      </section>
+
+      <section style={{ margin: '12px 0' }}>
+        <h3>Exemplo rapido</h3>
+        <pre
+          style={{
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 4,
+            overflowX: 'auto',
+          }}
+        >
+          <code>{`<Carousel
+  variante="card"
+  cardVariant="news"
+  items={cardItemsNews}
+  cardsPerView={3}
+  cardsPerViewTablet={2}
+  cardsPerViewMobile={1}
+  gap={16}
+  showIndicators
+  showArrows
+/>`}</code>
+        </pre>
+      </section>
     </div>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 export const CardInterativo = {
