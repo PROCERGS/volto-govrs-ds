@@ -1,11 +1,16 @@
 import Default from './variants/Default.jsx';
+import Persistente from './variants/Persistente';
+import Status from './variants/Status';
+import Icone from './variants/Icone';
+import Contagem from './variants/Contagem';
 
 const VARIANTS = {
   default: Default,
-  persistente: require('./variants/Persistente').default,
-  status: require('./variants/Status').default,
-  icon: require('./variants/Icone').default,
-  contagem: require('./variants/Contagem').default,
+  persistente: Persistente,
+  persistenteGroup: Persistente.Group,
+  status: Status,
+  icone: Icone,
+  contagem: Contagem,
 };
 
 export default function Tag({
