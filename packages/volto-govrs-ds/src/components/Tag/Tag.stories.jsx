@@ -1,10 +1,5 @@
 import Tag from './index';
-import Default from './variants/Default';
 import Persistente from './variants/Persistente';
-import Status from './variants/Status';
-import Icone from './variants/Icone';
-import Contagem from './variants/Contagem';
-
 export default {
   title: 'Components/Tag',
   component: Tag,
@@ -15,10 +10,10 @@ export const TagDocs = () => (
     <div style={{ padding: 16, maxWidth: 720 }}>
       <h1>Tag - Documentação</h1>
       <p>
-      O componente <code>Tag</code> permite escolher a variante através da prop{' '}
-      <code>variant</code>. Isso facilita a utilização quando se deseja alternar
-      entre diferentes tipos de tags dinamicamente.
-    </p>
+        O componente <code>Tag</code> permite escolher a variante através da
+        prop <code>variant</code>. Isso facilita a utilização quando se deseja
+        alternar entre diferentes tipos de tags dinamicamente.
+      </p>
     </div>
     <h2>Tag de Interação</h2>
     <p>
@@ -58,25 +53,40 @@ export const TagDocs = () => (
     </div>
 
     <pre className="showCode">
-      <code>{`<Tag variant="default" showIcon={false} content="Label 1" />`}</code> <br />
+      <code>{`<Tag variant="default" showIcon={false} content="Label 1" />`}</code>{' '}
+      <br />
       <code>{`<Tag variant="default" showIcon={false} disabled content="Label" />`}</code>
     </pre>
 
     <h3>Texto</h3>
     <p>
-      A tag pode não possuir nenhum tipo de interação, serrvindo apenas para exibição de um texto, nesse caso, pode possuir icone e texto ou somente texto. Optando pela segunda
-      opção utilizasse a prop <code>showClose</code> como <code>false</code>.
+      A tag pode não possuir nenhum tipo de interação, serrvindo apenas para
+      exibição de um texto, nesse caso, pode possuir icone e texto ou somente
+      texto. Optando pela segunda opção utilizasse a prop <code>showClose</code>{' '}
+      como <code>false</code>.
     </p>
 
     <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
       <Tag variant="default" showClose={false} content="Label 1" />
-      <Tag variant="default" showClose={false} showIcon={false} content="Label 1" />
+      <Tag
+        variant="default"
+        showClose={false}
+        showIcon={false}
+        content="Label 1"
+      />
       <Tag variant="default" showClose={false} disabled content="Label" />
-      <Tag variant="default" showIcon={false} showClose={false} disabled content="Label" />
+      <Tag
+        variant="default"
+        showIcon={false}
+        showClose={false}
+        disabled
+        content="Label"
+      />
     </div>
 
     <pre className="showCode">
-      <code>{`<Tag variant="default" showClose={false} content="Label 1" />`}</code> <br />
+      <code>{`<Tag variant="default" showClose={false} content="Label 1" />`}</code>{' '}
+      <br />
       <code>{`<Tag variant="default" showClose={false} showIcon={false} content="Label 1" />`}</code>
       <br />
       <code>{`<Tag variant="default" showClose={false} disabled content="Label" />`}</code>
@@ -103,7 +113,12 @@ export const TagDocs = () => (
     <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
       <Tag variant="persistente" content="Label 1" />
       <Tag variant="persistente" content="Label 2" showIcon={false} />
-      <Tag variant="persistente" disabled content="Label" defaultChecked={true} />
+      <Tag
+        variant="persistente"
+        disabled
+        content="Label"
+        defaultChecked={true}
+      />
     </div>
 
     <pre className="showCode">
@@ -125,15 +140,15 @@ export const TagDocs = () => (
     </p>
 
     <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
-
       <Tag variant="persistenteGroup" radio defaultSelected="null">
         <Persistente id="tag1" content="Tag 1" />
         <Persistente id="tag2" content="Tag 2" />
         <Persistente id="tag3" content="Tag 3" />
-      </Tag >
+      </Tag>
     </div>
     <pre className="showCode">
-      <code>{`<Tag variant="persistenteGroup" radio defaultSelected="null">`}</code> <br />
+      <code>{`<Tag variant="persistenteGroup" radio defaultSelected="null">`}</code>{' '}
+      <br />
       <code>{`  <Persistente id="tag1" content="Tag 1" />`}</code>
       <br />
       <code>{`  <Persistente id="tag2" content="Tag 2" />`}</code>
@@ -154,7 +169,8 @@ export const TagDocs = () => (
       <Tag variant="status" status="Ausente" Label="Ausente" />
     </div>
     <pre className="showCode">
-      <code>{`<Tag variant="status" status="Online" Label="Online" />`}</code> <br />
+      <code>{`<Tag variant="status" status="Online" Label="Online" />`}</code>{' '}
+      <br />
       <code>{`<Tag variant="status" status="Offline" Label="Offline" />`}</code>
       <br />
       <code>{`<Tag variant="status" status="Ausente" Label="Ausente" />`}</code>
@@ -218,6 +234,5 @@ export const TagDocs = () => (
       <code>{`<Tag variant="contagem" label="999" />`}</code>
       <code>{`<Tag variant="contagem" label="2000" />`}</code>
     </pre>
-
   </>
 );
