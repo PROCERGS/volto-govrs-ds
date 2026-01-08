@@ -58,7 +58,7 @@ const CarouselCard = ({
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const contentWidth = useMemo(() => {
-    const baseCardWidth = 320; // approximate card width to guide arrow/padding layout
+    const baseCardWidth = 320;
     const cardsWidth = perView * baseCardWidth;
     const gapsWidth = Math.max(perView - 1, 0) * gap;
     return cardsWidth + gapsWidth;
