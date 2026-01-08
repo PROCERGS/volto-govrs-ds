@@ -10,7 +10,6 @@
 }
 
 .footer-container {
-  max-width: var(--layout-container-width);
   padding: 40px;
   margin: 0 auto;
   background-color: #0e4c21;
@@ -55,6 +54,10 @@
   padding: 0 var(--padding-default);
   border-top: 1px solid var(--pure-0);
   background-color: #0e4c21;
+}
+
+#footer .footer-logo {
+  max-width: 100% !important;
 }
 
 .footer-logo > p > a {
