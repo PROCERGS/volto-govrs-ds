@@ -1,0 +1,27 @@
+@import '../../../theme/variables.scss';
+
+.govrs-tag-status {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gray-2);
+  border-radius: 50%;
+  font-family: $font-family-base;
+  gap: 8px;
+}
+.govrs-tag-status--Online {
+  background-color: var(--green-cool-vivid-50);
+  color: #fcfcfc;
+}
+
+.govrs-tag-status--Offline {
+  background-color: var(--red-vivid-50);
+  color: #fcfcfc;
+}
+
+.govrs-tag-status--Ausente {
+  background-color: var(--gold-vivid-20);
+  color: #fcfcfc;
+}
