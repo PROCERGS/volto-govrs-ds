@@ -6,7 +6,7 @@ import {
   faChevronLeft, 
   faChevronRight, 
   faBars, 
-  faExternalLinkAlt 
+  faExternalLinkSquareAlt 
 } from '@fortawesome/free-solid-svg-icons';
 import './Menu.scss';
 
@@ -137,7 +137,7 @@ const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main
                         {link.label}
                         {external && (
                           <FontAwesomeIcon 
-                            icon={faExternalLinkAlt} 
+                            icon={faExternalLinkSquareAlt} 
                             className="external-icon" 
                           />
                         )}
@@ -148,7 +148,7 @@ const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main
               </div>
 
               <div className="social-network">
-                <div className="social-network-title">Mídias Sociais</div>
+                <div className="social-network-title">Redes Sociais</div>
                 <div className="sharegroup">
                   {socialIcons?.map((social, idx) => (
                     <a key={idx} href={social.url || '#'} target="_blank" rel="noreferrer">
