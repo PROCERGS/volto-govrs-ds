@@ -1,0 +1,86 @@
+.govrs-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1a7235;
+  color: #fff;
+  gap: 8px;
+
+  &:not(.disable):hover {
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.3) 100%
+      ),
+      #1a7235;
+  }
+  &:not(.disable):active {
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.65) 0%,
+        rgba(255, 255, 255, 0.65) 100%
+      ),
+      #1a7235;
+  }
+
+  > button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+.disable {
+  cursor: not-allowed;
+  opacity: 0.45;
+  > button {
+    pointer-events: none;
+
+    &:hover,
+    &:active {
+      background-color: #1a7235;
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* Layout para grupos de tags (ex.: Persistente.Group) */
+.govrs-tag-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Foco visível para acessibilidade */
+.govrs-tag:focus-visible {
+  border-color: rgba(10, 97, 41, 0.9);
+  box-shadow: 0 0 0 6px rgba(10, 97, 41, 0.12);
+  outline: none;
+}
+
+.checked {
+  background-color: #279b4a;
+}
+
+// Estilo para exibir utilização dos blocos de código nos stories
+.showCode {
+  padding: 12px;
+  border-radius: 4px;
+  margin-top: 8px;
+  background: #f7f7f7;
+  overflow-x: auto;
+}
