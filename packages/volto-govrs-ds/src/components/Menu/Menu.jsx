@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faXmark, 
-  faChevronLeft, 
-  faChevronRight, 
-  faBars, 
-  faExternalLinkSquareAlt 
+import {
+  faXmark,
+  faChevronLeft,
+  faChevronRight,
+  faBars,
+  faExternalLinkSquareAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import './Menu.scss';
 
-const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main-menu" }) => {
+const Menu = ({
+  items,
+  logo,
+  footerLinks,
+  socialIcons,
+  copyrightText,
+  id = 'main-menu',
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  
-  const [activeStack, setActiveStack] = useState([{ title: null, links: items }]);
+
+  const [activeStack, setActiveStack] = useState([
+    { title: null, links: items },
+  ]);
 
   const toggleMenu = () => {
     const nextState = !isOpen;
@@ -26,7 +35,10 @@ const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main
   const handleNextLevel = (e, item) => {
     e.preventDefault();
     if (item.links && item.links.length > 0) {
-      setActiveStack([...activeStack, { title: item.title || item.label, links: item.links }]);
+      setActiveStack([
+        ...activeStack,
+        { title: item.title || item.label, links: item.links },
+      ]);
     }
   };
 
@@ -48,10 +60,10 @@ const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main
   return (
     <>
       <div className="menu-trigger-container">
-        <button 
-          className="br-button circle secondary medium" 
-          type="button" 
-          aria-label="Menu" 
+        <button
+          className="br-button circle secondary medium"
+          type="button"
+          aria-label="Menu"
           onClick={toggleMenu}
         >
           <FontAwesomeIcon icon={faBars} />
@@ -66,9 +78,9 @@ const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main
                 {logo && <img src={logo} alt="Logo" />}
               </div>
               <div className="menu-close">
-                <button 
-                  className="br-button circle small" 
-                  type="button" 
+                <button
+                  className="br-button circle small"
+                  type="button"
                   onClick={toggleMenu}
                   aria-label="Fechar menu"
                 >
@@ -81,9 +93,9 @@ const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main
               <ul>
                 {isSubLevel && (
                   <li className="menu-back">
-                    <button 
-                      type="button" 
-                      onClick={handlePrevLevel} 
+                    <button
+                      type="button"
+                      onClick={handlePrevLevel}
                       className="menu-item back-button"
                     >
                       <span className="icon">
@@ -96,26 +108,46 @@ const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main
 
                 {currentLevel.links?.map((item, index) => {
                   const hasChildren = item.links && item.links.length > 0;
-                  
+
                   return (
                     <li key={`${activeStack.length}-${index}`}>
-                      <a 
-                        className="menu-item" 
-                        href={hasChildren ? undefined : (item.url || '#')}
-                        onClick={(e) => hasChildren ? handleNextLevel(e, item) : null}
-                      >
-                        <span className="icon">
-                          {item.leftIcon && <FontAwesomeIcon icon={item.leftIcon} />}
-                        </span>
-                        <span className="content">
-                          {item.title || item.label}
-                        </span>
-                        {hasChildren && (
+                      {hasChildren ? (
+                        /* Se tem filhos, usamos um BUTTON para o Lint não reclamar de href */
+                        <button
+                          type="button"
+                          className="menu-item"
+                          onClick={(e) => handleNextLevel(e, item)}
+                        >
+                          <span className="icon">
+                            {item.leftIcon && (
+                              <FontAwesomeIcon icon={item.leftIcon} />
+                            )}
+                          </span>
+                          <span className="content">
+                            {item.title || item.label}
+                          </span>
                           <span className="support">
                             <FontAwesomeIcon icon={faChevronRight} />
                           </span>
-                        )}
-                      </a>
+                        </button>
+                      ) : (
+                        /* Se não tem filhos, é um link real */
+                        <a
+                          className="menu-item"
+                          href={item.url || '#'}
+                          target={isExternal(item.url) ? '_blank' : undefined}
+                          rel={isExternal(item.url) ? 'noreferrer' : undefined}
+                        >
+                          <span className="icon">
+                            {item.leftIcon && (
+                              <FontAwesomeIcon icon={item.leftIcon} />
+                            )}
+                          </span>
+                          <span className="content">
+                            {item.title || item.label}
+                          </span>
+                        </a>
+                      )}
                     </li>
                   );
                 })}
@@ -127,18 +159,18 @@ const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main
                 {footerLinks?.map((link, idx) => {
                   const external = isExternal(link.url);
                   return (
-                    <a 
-                      href={link.url || '#'} 
-                      key={idx} 
-                      target={external ? "_blank" : undefined}
-                      rel={external ? "noreferrer" : undefined}
+                    <a
+                      href={link.url || '#'}
+                      key={idx}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noreferrer' : undefined}
                     >
                       <span>
                         {link.label}
                         {external && (
-                          <FontAwesomeIcon 
-                            icon={faExternalLinkSquareAlt} 
-                            className="external-icon" 
+                          <FontAwesomeIcon
+                            icon={faExternalLinkSquareAlt}
+                            className="external-icon"
                           />
                         )}
                       </span>
@@ -151,7 +183,12 @@ const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main
                 <div className="social-network-title">Redes Sociais</div>
                 <div className="sharegroup">
                   {socialIcons?.map((social, idx) => (
-                    <a key={idx} href={social.url || '#'} target="_blank" rel="noreferrer">
+                    <a
+                      key={idx}
+                      href={social.url || '#'}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <FontAwesomeIcon icon={social.icon} />
                     </a>
                   ))}
@@ -163,7 +200,14 @@ const Menu = ({ items, logo, footerLinks, socialIcons, copyrightText, id = "main
               </div>
             </div>
           </div>
-          <div className="menu-scrim" onClick={toggleMenu} tabIndex="0"></div>
+          {/* SCRIM CORRIGIDO: Agora como um botão invisível para acessibilidade */}
+          <button
+            className="menu-scrim"
+            onClick={toggleMenu}
+            onKeyDown={(e) => e.key === 'Escape' && toggleMenu()}
+            aria-label="Fechar menu"
+            type="button"
+          />
         </div>
       </div>
     </>

@@ -6,24 +6,26 @@ class BRMenu {
    * @param {object} component - Objeto referenciando a raiz do componente DOM
    */
   constructor(name, component) {
-    this.name = name
-    this.component = component
-    this.id = this.component.id
+    this.name = name;
+    this.component = component;
+    this.id = this.component.id;
     this.breakpoints = this.component.dataset.breakpoints
       ? this.component.dataset.breakpoints.split(' ')
-      : ['col-sm-4', 'col-lg-3']
-    this.pushShadow = 'shadow-lg-right'
-    this.trigger = document.querySelector(`[data-target="#${this.id}"]`)
-    this.contextual = this.component.querySelector('[data-toggle="contextual"]')
-    this.dismiss = this.component.querySelectorAll('[data-dismiss="menu"]')
-    this.scrim = this.component.querySelector('.menu-scrim')
-    this.componentFolders = this.component.querySelectorAll('.menu-folder')
-    this.componentSiders = this.component.querySelectorAll('.side-menu')
-    this.componentItems = this.component.querySelectorAll('.menu-item')
-    this.elementOpenMenu = HTMLElement
-    this.inSubmenu = false
-    this.triggerParent = HTMLElement
-    this._setBehavior()
+      : ['col-sm-4', 'col-lg-3'];
+    this.pushShadow = 'shadow-lg-right';
+    this.trigger = document.querySelector(`[data-target="#${this.id}"]`);
+    this.contextual = this.component.querySelector(
+      '[data-toggle="contextual"]',
+    );
+    this.dismiss = this.component.querySelectorAll('[data-dismiss="menu"]');
+    this.scrim = this.component.querySelector('.menu-scrim');
+    this.componentFolders = this.component.querySelectorAll('.menu-folder');
+    this.componentSiders = this.component.querySelectorAll('.side-menu');
+    this.componentItems = this.component.querySelectorAll('.menu-item');
+    this.elementOpenMenu = HTMLElement;
+    this.inSubmenu = false;
+    this.triggerParent = HTMLElement;
+    this._setBehavior();
   }
 
   /**
@@ -31,16 +33,16 @@ class BRMenu {
    * @private
    */
   _setBehavior() {
-    this._toggleMenu()
-    this._setDropMenu()
-    this._setSideMenu()
-    this._setKeyboardBehaviors()
-    this._setBreakpoints()
-    this._setView()
-    this._addARIAAttributes()
+    this._toggleMenu();
+    this._setDropMenu();
+    this._setSideMenu();
+    this._setKeyboardBehaviors();
+    this._setBreakpoints();
+    this._setView();
+    this._addARIAAttributes();
     window.addEventListener('resize', () => {
-      this._setView()
-    })
+      this._setView();
+    });
   }
 
   /**
@@ -48,13 +50,13 @@ class BRMenu {
    * @private
    */
   _setView() {
-    const template = document.querySelector('body')
-    const menuContextual = document.querySelector('.menu-trigger')
+    const template = document.querySelector('body');
+    const menuContextual = document.querySelector('.menu-trigger');
     // const panel = document.querySelector('.menu-panel')
     if (menuContextual && window.innerWidth < 992) {
-      template.classList.add('mb-5')
+      template.classList.add('mb-5');
     } else {
-      template.classList.remove('mb-5')
+      template.classList.remove('mb-5');
     }
   }
 
@@ -64,7 +66,9 @@ class BRMenu {
    */
   _setBreakpoints() {
     if (!this.component.classList.contains('push') && !this.contextual) {
-      this.component.querySelector('.menu-panel').classList.add(...this.breakpoints)
+      this.component
+        .querySelector('.menu-panel')
+        .classList.add(...this.breakpoints);
     }
   }
 
@@ -77,28 +81,28 @@ class BRMenu {
     this.component.addEventListener('keydown', (event) => {
       // Código da tecla
 
-      const keyCode = event.code
+      const keyCode = event.code;
       switch (keyCode) {
         case 'Escape':
-          event.preventDefault()
+          event.preventDefault();
 
           if (this.trigger) {
-            this._closeMenu()
+            this._closeMenu();
           }
 
-          break
+          break;
         case 'ArrowDown':
-          event.preventDefault()
-          this._navigateToNextElment(event.target, 1)
-          break
+          event.preventDefault();
+          this._navigateToNextElment(event.target, 1);
+          break;
         case 'ArrowUp':
-          event.preventDefault()
-          this._navigateToNextElment(event.target, -1)
-          break
+          event.preventDefault();
+          this._navigateToNextElment(event.target, -1);
+          break;
         default:
-          break
+          break;
       }
-    })
+    });
     // Fechar com Tab fora do menu
     if (this.scrim) {
       // this.scrim.addEventListener('keyup', () => {
@@ -119,38 +123,44 @@ class BRMenu {
     // Obtém o contêiner pai com base na hierarquia
     const parentFolder = element.parentNode.closest('.side-menu.active')
       ? element.parentNode.closest('.side-menu.active')
-      : element.closest('.br-menu')
+      : element.closest('.br-menu');
     // Obtém todos os elementos irmãos relacionados ao elemento de referência dentro do contêiner pai
     const elementSiblings =
-      parentFolder.classList.contains('br-menu') || parentFolder.classList.contains('menu-body')
+      parentFolder.classList.contains('br-menu') ||
+      parentFolder.classList.contains('menu-body')
         ? parentFolder.querySelectorAll(
-            '.menu-body > .menu-item, .menu-body > .menu-folder > .menu-item,.menu-body > .menu-folder.active > .side-menu.active, .menu-body > .menu-folder.active > ul > li > .menu-item'
+            '.menu-body > .menu-item, .menu-body > .menu-folder > .menu-item,.menu-body > .menu-folder.active > .side-menu.active, .menu-body > .menu-folder.active > ul > li > .menu-item',
           )
-        : parentFolder.querySelectorAll('.side-menu.active > .menu-item,.side-menu.active > ul > li > .menu-item')
+        : parentFolder.querySelectorAll(
+            '.side-menu.active > .menu-item,.side-menu.active > ul > li > .menu-item',
+          );
     // Determina a posição do elemento de referência na lista de elementos irmãos
     const posicao = Array.from(elementSiblings).findIndex((el) => {
-      return el === element
-    })
+      return el === element;
+    });
 
     // Calcula a nova posição na lista com base no operador
-    const soma = posicao + operator
+    const soma = posicao + operator;
 
     // Foca no próximo elemento na lista, ajustando para o início ou o final da lista se necessário
     if (soma >= 0 && soma < elementSiblings.length) {
-      const nextElement = elementSiblings[soma]
+      const nextElement = elementSiblings[soma];
 
-      if (nextElement.getAttribute('role') === 'group' || nextElement.getAttribute('role') === 'tree') {
-        const nextSibling = elementSiblings[soma + operator]
-        nextSibling.focus()
+      if (
+        nextElement.getAttribute('role') === 'group' ||
+        nextElement.getAttribute('role') === 'tree'
+      ) {
+        const nextSibling = elementSiblings[soma + operator];
+        nextSibling.focus();
       } else {
-        nextElement.focus()
+        nextElement.focus();
       }
     } else {
       // Se a nova posição estiver fora dos limites, foca no primeiro ou no último elemento da lista, dependendo do operador
-      const lastIndex = elementSiblings.length - 1
-      const targetElement = operator === 1 ? 0 : lastIndex
-      const target = elementSiblings[targetElement]
-      target.focus()
+      const lastIndex = elementSiblings.length - 1;
+      const targetElement = operator === 1 ? 0 : lastIndex;
+      const target = elementSiblings[targetElement];
+      target.focus();
     }
   }
 
@@ -159,39 +169,39 @@ class BRMenu {
    * @private
    */
   _toggleMenu() {
-    const trigger = this.contextual ? this.contextual : this.trigger
+    const trigger = this.contextual ? this.contextual : this.trigger;
     // Clicar no trigger
     if (trigger) {
       trigger.addEventListener('keydown', (event) => {
         if (event.code === 'Enter' || event.code === 'Space') {
-          event.preventDefault() // Impede o comportamento padrão do botão Enter ou Space
+          event.preventDefault(); // Impede o comportamento padrão do botão Enter ou Space
           // Fechar Menu caso esteja aberto
           if (this.component.classList.contains('active')) {
-            this._closeMenu()
+            this._closeMenu();
           } else {
             // Abre Menu
-            this._openMenu()
+            this._openMenu();
 
-            this._focusOnFirstVisibleItem()
+            this._focusOnFirstVisibleItem();
           }
         }
-      })
+      });
 
       trigger.addEventListener('click', () => {
         // Fechar Menu caso esteja aberto
         if (this.component.classList.contains('active')) {
-          this._closeMenu()
+          this._closeMenu();
         } else {
-          this._openMenu()
-          this._focusOnFirstVisibleItem()
+          this._openMenu();
+          this._focusOnFirstVisibleItem();
         }
-      })
+      });
     }
     // Clicar no dismiss
     for (const close of this.dismiss) {
       close.addEventListener('click', () => {
-        return this._closeMenu()
-      })
+        return this._closeMenu();
+      });
     }
   }
 
@@ -200,18 +210,22 @@ class BRMenu {
    * @private
    */
   _focusOnFirstVisibleItem() {
-    const activeMenu = this.component.querySelector('.menu-body .menu-item:not([hidden]):not(.inactive)')
+    const activeMenu = this.component.querySelector(
+      '.menu-body .menu-item:not([hidden]):not(.inactive)',
+    );
     if (activeMenu) {
-      activeMenu.focus()
-      activeMenu.scrollIntoView({ block: 'nearest' }) // Foca e traz para a visualização se necessário
-      return
+      activeMenu.focus();
+      activeMenu.scrollIntoView({ block: 'nearest' }); // Foca e traz para a visualização se necessário
+      return;
     }
 
-    const firstVisibleItem = this.component.querySelector('.menu-body > .menu-item:not([hidden]):not(.inactive)')
+    const firstVisibleItem = this.component.querySelector(
+      '.menu-body > .menu-item:not([hidden]):not(.inactive)',
+    );
 
     if (firstVisibleItem) {
-      firstVisibleItem.focus()
-      firstVisibleItem.scrollIntoView({ block: 'nearest' }) // Foca e traz para a visualização se necessário
+      firstVisibleItem.focus();
+      firstVisibleItem.scrollIntoView({ block: 'nearest' }); // Foca e traz para a visualização se necessário
     }
   }
 
@@ -220,12 +234,12 @@ class BRMenu {
    * @private
    */
   _openMenu() {
-    this.elementOpenMenu = document.activeElement
-    this.component.classList.add('active')
-    this.component.setAttribute('aria-expanded', 'true')
+    this.elementOpenMenu = document.activeElement;
+    this.component.classList.add('active');
+    this.component.setAttribute('aria-expanded', 'true');
 
     if (this.component.classList.contains('push')) {
-      this.component.classList.add(...this.breakpoints, 'px-0')
+      this.component.classList.add(...this.breakpoints, 'px-0');
     }
   }
 
@@ -234,9 +248,9 @@ class BRMenu {
    * @private
    */
   _closeMenu() {
-    this.component.classList.remove('active')
+    this.component.classList.remove('active');
     if (this.component.classList.contains('push')) {
-      this.component.classList.remove(...this.breakpoints, 'px-0')
+      this.component.classList.remove(...this.breakpoints, 'px-0');
     }
   }
 
@@ -245,15 +259,17 @@ class BRMenu {
    * @private
    */
   _setDropMenu() {
-    for (const item of this.component.querySelectorAll('.menu-folder > a.menu-item')) {
+    for (const item of this.component.querySelectorAll(
+      '.menu-folder > a.menu-item',
+    )) {
       // Inclui ícone de Drop Menu
-      this._createIcon(item, 'fa-chevron-down')
+      this._createIcon(item, 'fa-chevron-down');
       // Configura como Drop Menu
-      item.parentNode.classList.add('drop-menu')
+      item.parentNode.classList.add('drop-menu');
       //Configura aria indicando que submenu está fechado
-      item.setAttribute('aria-expanded', 'false')
+      item.setAttribute('aria-expanded', 'false');
       // Inicializa Drop Menu
-      this._handleMenuInteraction(item)
+      this._handleMenuInteraction(item);
     }
   }
 
@@ -264,15 +280,22 @@ class BRMenu {
   _focusNextElement() {
     //lista de elementos que desejamos focar
     const focussableElements =
-      'a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])'
+      'a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
     if (document.activeElement) {
-      const focussable = Array.prototype.filter.call(this.component.querySelectorAll(focussableElements), (element) => {
-        // testa a visibilidade e inclui o elemento ativo
-        return element.offsetWidth > 0 || element.offsetHeight > 0 || element === document.activeElement
-      })
-      const index = focussable.indexOf(document.activeElement)
-      const nextElement = focussable[index + 1] || focussable[0]
-      nextElement.focus()
+      const focussable = Array.prototype.filter.call(
+        this.component.querySelectorAll(focussableElements),
+        (element) => {
+          // testa a visibilidade e inclui o elemento ativo
+          return (
+            element.offsetWidth > 0 ||
+            element.offsetHeight > 0 ||
+            element === document.activeElement
+          );
+        },
+      );
+      const index = focussable.indexOf(document.activeElement);
+      const nextElement = focussable[index + 1] || focussable[0];
+      nextElement.focus();
     }
   }
 
@@ -284,12 +307,12 @@ class BRMenu {
     for (const ul of this.component.querySelectorAll('a.menu-item + ul')) {
       if (!ul.parentNode.classList.contains('menu-folder')) {
         // Inclui ícone de Side Menu
-        this._createIcon(ul.previousElementSibling, 'fa-angle-right')
+        this._createIcon(ul.previousElementSibling, 'fa-angle-right');
         // Configura como Side Menu
-        ul.parentNode.classList.add('side-menu')
-        ul.parentNode.setAttribute('role', 'none')
+        ul.parentNode.classList.add('side-menu');
+        ul.parentNode.setAttribute('role', 'none');
         // Inicializa Side Menu
-        this._handleSideMenuInteraction(ul.previousElementSibling)
+        this._handleSideMenuInteraction(ul.previousElementSibling);
       }
     }
   }
@@ -302,29 +325,29 @@ class BRMenu {
   _handleMenuInteraction(element) {
     if (!element.hasAttribute('data-click-listener')) {
       element.addEventListener('click', () => {
-        this._toggleDropMenu(element)
-      })
+        this._toggleDropMenu(element);
+      });
 
       element.addEventListener('keydown', (event) => {
-        const menuFolder = element.closest('.menu-folder')
-        const menuItem = menuFolder.querySelector('a.menu-item')
+        const menuFolder = element.closest('.menu-folder');
+        const menuItem = menuFolder.querySelector('a.menu-item');
 
         if (menuFolder) {
           if (event.key === ' ' || event.key === 'Spacebar') {
             if (menuItem && menuItem.classList.contains('focus-visible')) {
-              event.preventDefault()
-              this._toggleDropMenu(element)
+              event.preventDefault();
+              this._toggleDropMenu(element);
             }
           }
           if (event.key === '2') {
             // event.preventDefault()
 
-            this._toggleDropMenu(element)
+            this._toggleDropMenu(element);
           }
         }
-      })
+      });
 
-      element.setAttribute('data-click-listener', 'true')
+      element.setAttribute('data-click-listener', 'true');
     }
   }
 
@@ -336,48 +359,50 @@ class BRMenu {
   _toggleDropMenu(element) {
     if (element.parentNode.classList.contains('active')) {
       // this.inSubmenu = false
-      this._closeMenuElement(element)
+      this._closeMenuElement(element);
     } else {
-      element.parentNode.classList.add('active')
-      element.setAttribute('aria-expanded', 'true')
+      element.parentNode.classList.add('active');
+      element.setAttribute('aria-expanded', 'true');
 
-      this.inSubmenu = true
-      element.parentElement.querySelectorAll('ul li ul a').forEach((menuItem) => {
-        this.triggerParent = menuItem.parentElement
-        menuItem.addEventListener('keydown', (event) => {
-          const { parentElement } = menuItem.parentElement
-          const keyCode = event.code
+      this.inSubmenu = true;
+      element.parentElement
+        .querySelectorAll('ul li ul a')
+        .forEach((menuItem) => {
+          this.triggerParent = menuItem.parentElement;
+          menuItem.addEventListener('keydown', (event) => {
+            const { parentElement } = menuItem.parentElement;
+            const keyCode = event.code;
 
-          switch (keyCode) {
-            case 'Escape':
-              event.preventDefault()
-              this._backMenu(parentElement)
-              break
-            case 'Backspace':
-              event.preventDefault()
-              this._backMenu(parentElement)
-              break
-            case 'ArrowLeft':
-              event.preventDefault()
-              this._backMenu(parentElement)
-              break
-            default:
-              break
-          }
-        })
-      })
+            switch (keyCode) {
+              case 'Escape':
+                event.preventDefault();
+                this._backMenu(parentElement);
+                break;
+              case 'Backspace':
+                event.preventDefault();
+                this._backMenu(parentElement);
+                break;
+              case 'ArrowLeft':
+                event.preventDefault();
+                this._backMenu(parentElement);
+                break;
+              default:
+                break;
+            }
+          });
+        });
     }
   }
 
   _backMenu(parentElement) {
     //
 
-    parentElement.parentElement.querySelector('[data-click-listener]').click()
+    parentElement.parentElement.querySelector('[data-click-listener]').click();
   }
 
   _closeMenuElement(element) {
-    element.parentNode.classList.remove('active')
-    element.setAttribute('aria-expanded', 'false')
+    element.parentNode.classList.remove('active');
+    element.setAttribute('aria-expanded', 'false');
   }
 
   /**
@@ -389,25 +414,25 @@ class BRMenu {
     // Verifica se o elemento já possui click listener através de um atributo especial
     if (!element.hasAttribute('data-click-listener')) {
       element.addEventListener('click', () => {
-        this.inSubmenu = false
-        this._toggleSideMenu(element)
-      })
+        this.inSubmenu = false;
+        this._toggleSideMenu(element);
+      });
 
       element.addEventListener('keydown', (event) => {
-        const sideMenu = element.closest('.side-menu')
-        const menuItem = sideMenu.querySelector('a.menu-item')
+        const sideMenu = element.closest('.side-menu');
+        const menuItem = sideMenu.querySelector('a.menu-item');
 
         if (sideMenu) {
           if (event.key === ' ' || event.key === 'Spacebar') {
             if (menuItem && menuItem.classList.contains('focus-visible')) {
-              event.preventDefault()
-              this._toggleSideMenu(element)
+              event.preventDefault();
+              this._toggleSideMenu(element);
             }
           }
         }
-      })
+      });
 
-      element.setAttribute('data-click-listener', 'true')
+      element.setAttribute('data-click-listener', 'true');
     }
   }
 
@@ -417,28 +442,28 @@ class BRMenu {
    * @param {object} element - referência ao Objeto que fará a ação
    */
   _toggleSideMenu(element) {
-    this._hideItems(element)
+    this._hideItems(element);
 
     // Mostra itens do Side Menu ativo
-    element.setAttribute('aria-expanded', 'true')
-    this._showItems(element.parentNode)
+    element.setAttribute('aria-expanded', 'true');
+    this._showItems(element.parentNode);
 
     // Fecha Side Menu caso esteja aberto
     if (element.parentNode.classList.contains('active')) {
-      this._closeSideMenu(element)
-      element.focus()
-      return
+      this._closeSideMenu(element);
+      element.focus();
+      return;
     }
 
     // Abre Side Menu
-    element.parentNode.classList.add('active')
+    element.parentNode.classList.add('active');
 
     // Foca no primeiro item do Side Menu
-    const submenu = element.nextElementSibling
+    const submenu = element.nextElementSibling;
     if (submenu) {
-      const firstMenuItem = submenu.querySelector('.menu-item')
+      const firstMenuItem = submenu.querySelector('.menu-item');
       if (firstMenuItem) {
-        firstMenuItem.focus()
+        firstMenuItem.focus();
       }
     }
   }
@@ -449,13 +474,13 @@ class BRMenu {
    * @param {object} element - referência ao Objeto que fará a ação
    */
   _closeSideMenu(element) {
-    element.parentNode.classList.remove('active')
-    element.setAttribute('aria-expanded', 'false')
+    element.parentNode.classList.remove('active');
+    element.setAttribute('aria-expanded', 'false');
     // Verifica se existe Side Menu anterior, caso contrário mostra todos os itens de volta
     const parentFolder = element.parentNode.closest('.side-menu.active')
       ? element.parentNode.closest('.side-menu.active')
-      : element.closest('.menu-body')
-    this._showItems(parentFolder)
+      : element.closest('.menu-body');
+    this._showItems(parentFolder);
   }
 
   /**
@@ -464,8 +489,10 @@ class BRMenu {
    * @param {object} element - referencia ao Objeto que fará a ação
    */
   _hideItems(element) {
-    for (const item of element.closest('.menu-body').querySelectorAll('.menu-item')) {
-      item.setAttribute('hidden', '')
+    for (const item of element
+      .closest('.menu-body')
+      .querySelectorAll('.menu-item')) {
+      item.setAttribute('hidden', '');
     }
   }
 
@@ -476,7 +503,7 @@ class BRMenu {
    */
   _showItems(element) {
     for (const item of element.querySelectorAll('.menu-item')) {
-      item.removeAttribute('hidden')
+      item.removeAttribute('hidden');
     }
   }
 
@@ -489,16 +516,16 @@ class BRMenu {
   _createIcon(element, icon) {
     // Verifica se já existe container para o ícone
     if (!element.querySelectorAll('span.support').length) {
-      const menuIconContainer = document.createElement('span')
-      menuIconContainer.classList.add('support')
+      const menuIconContainer = document.createElement('span');
+      menuIconContainer.classList.add('support');
 
-      const menuIcon = document.createElement('i')
-      menuIcon.classList.add('fas')
-      menuIcon.classList.add(icon)
-      menuIcon.setAttribute('aria-hidden', 'true')
+      const menuIcon = document.createElement('i');
+      menuIcon.classList.add('fas');
+      menuIcon.classList.add(icon);
+      menuIcon.setAttribute('aria-hidden', 'true');
 
-      menuIconContainer.appendChild(menuIcon)
-      element.appendChild(menuIconContainer)
+      menuIconContainer.appendChild(menuIcon);
+      element.appendChild(menuIconContainer);
     }
   }
 
@@ -508,65 +535,74 @@ class BRMenu {
    */
   _addARIAAttributes() {
     // Adiciona atributo role="menubar" à classe .menu-body
-    const menuBody = this.component.querySelector('.menu-body')
+    const menuBody = this.component.querySelector('.menu-body');
     // menuBody.setAttribute('role', 'menubar')
-    menuBody.setAttribute('role', 'tree')
+    menuBody.setAttribute('role', 'tree');
     if (this.contextual) {
-      menuBody.setAttribute('role', 'menubar')
+      menuBody.setAttribute('role', 'menubar');
     }
 
     // Adiciona atributo role="group" nos elementos .menu-item que são filhos de .menu-folder e não são drop-down
-    const nonDropdownItems = this.component.querySelectorAll('.menu-folder:not(.drop-menu) > .menu-item')
+    const nonDropdownItems = this.component.querySelectorAll(
+      '.menu-folder:not(.drop-menu) > .menu-item',
+    );
     nonDropdownItems.forEach((item) => {
-      item.setAttribute('role', 'tree')
+      item.setAttribute('role', 'tree');
       if (this.contextual) {
-        item.setAttribute('role', 'menubar')
+        item.setAttribute('role', 'menubar');
       }
-    })
+    });
 
     // Adiciona atributo role="menuitem" somente aos elementos <a> com a classe .menu-item que não têm .menu-folder como pai
-    const menuItems = this.component.querySelectorAll('.menu-folder.drop-menu > a.menu-item, li > a.menu-item')
+    const menuItems = this.component.querySelectorAll(
+      '.menu-folder.drop-menu > a.menu-item, li > a.menu-item',
+    );
     menuItems.forEach((item) => {
-      item.setAttribute('role', 'treeitem')
+      item.setAttribute('role', 'treeitem');
       if (this.contextual) {
-        item.setAttribute('role', 'menuitem')
+        item.setAttribute('role', 'menuitem');
       }
-    })
+    });
 
     // Adiciona atributo role="menu" e aria-label nos elementos <ul> que são filhos de .side-menu
-    const sideMenuLists = this.component.querySelectorAll('.side-menu > ul')
+    const sideMenuLists = this.component.querySelectorAll('.side-menu > ul');
     sideMenuLists.forEach((list) => {
-      const menuItem = list.parentNode.querySelector('.menu-item .content')
-      const menuItemText = menuItem.textContent.trim()
+      const menuItem = list.parentNode.querySelector('.menu-item .content');
+      const menuItemText = menuItem.textContent.trim();
 
-      list.setAttribute('role', 'group')
-      list.setAttribute('aria-label', menuItemText)
-    })
+      list.setAttribute('role', 'group');
+      list.setAttribute('aria-label', menuItemText);
+    });
 
     // Adiciona atributo role="menu" e aria-label nos elementos <ul> que são filhos de .menu-folder
-    const menuFolderLists = this.component.querySelectorAll('.menu-folder > ul')
+    const menuFolderLists =
+      this.component.querySelectorAll('.menu-folder > ul');
     menuFolderLists.forEach((list) => {
-      const menuItem = list.parentNode.querySelector('.menu-item .content')
-      const menuItemText = menuItem.textContent.trim()
-      list.setAttribute('role', 'tree')
+      const menuItem = list.parentNode.querySelector('.menu-item .content');
+      const menuItemText = menuItem.textContent.trim();
+      list.setAttribute('role', 'tree');
       if (this.contextual) {
-        list.setAttribute('role', 'menubar')
+        list.setAttribute('role', 'menubar');
       }
-      list.setAttribute('aria-label', menuItemText)
-    })
+      list.setAttribute('aria-label', menuItemText);
+    });
 
-    const sideMenuItems = this.component.querySelectorAll('li.side-menu > .menu-item')
+    const sideMenuItems = this.component.querySelectorAll(
+      'li.side-menu > .menu-item',
+    );
     for (const submenu of sideMenuItems) {
-      submenu.setAttribute('aria-haspopup', 'true')
-      submenu.setAttribute('aria-expanded', 'false')
+      submenu.setAttribute('aria-haspopup', 'true');
+      submenu.setAttribute('aria-expanded', 'false');
     }
 
-    const folderMenuItems = this.component.querySelectorAll('.menu-folder.drop-menu > .menu-item')
+    const folderMenuItems = this.component.querySelectorAll(
+      '.menu-folder.drop-menu > .menu-item',
+    );
     for (const submenu of folderMenuItems) {
-      submenu.setAttribute('aria-haspopup', 'true')
-      submenu.setAttribute('aria-expanded', 'false')
+      submenu.setAttribute('aria-haspopup', 'true');
+      submenu.setAttribute('aria-expanded', 'false');
     }
   }
 }
 
-export default BRMenu
+export default BRMenu;
