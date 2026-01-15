@@ -1,0 +1,1 @@
+Criação do componente Banner com variações de exibição via prop(@Gabriel-SAbreu)
