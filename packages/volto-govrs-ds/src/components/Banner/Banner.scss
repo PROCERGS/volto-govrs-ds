@@ -1,0 +1,18 @@
+.banner-fixo {
+  display: flex;
+  width: 1150px;
+  height: 168;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 40px;
+  background-color: #ccc;
+
+  &__quadrado {
+    width: 368px;
+    height: 368px;
+  }
+  &__variant4 {
+    width: 1150px;
+    height: 250px;
+  }
+}
